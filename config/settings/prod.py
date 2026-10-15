@@ -3,11 +3,13 @@ import os
 from .base import *  # noqa
 
 DEBUG = False
-if not ALLOWED_HOSTS:
-    raise RuntimeError("ALLOWED_HOSTS doit être défini en production.")
-_render_host = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
+if len(SECRET_KEY) < 40:
+    raise RuntimeError("SECRET_KEY manquante ou trop courte en production (min. 40 caractères).")
+_render_host = os.environ.get('RENDER_EXTERNAL_HOSTNAME')   # fourni automatiquement par Render
 if _render_host and _render_host not in ALLOWED_HOSTS:
     ALLOWED_HOSTS.append(_render_host)
+if not ALLOWED_HOSTS:
+    raise RuntimeError("ALLOWED_HOSTS doit être défini en production.")
 CSRF_TRUSTED_ORIGINS = [f'https://{h}' for h in ALLOWED_HOSTS if '.' in h and not h.startswith('.')]
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')   # Render termine le TLS
