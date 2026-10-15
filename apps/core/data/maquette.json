@@ -1,0 +1,770 @@
+{
+ "filieres": [
+  {
+   "slug": "management",
+   "nom": "Gestion & Management",
+   "icone": "💼",
+   "resume": "Administration des entreprises, stratégie et leadership pour les futurs décideurs.",
+   "description": "En Gestion & Management à l'UIC, on apprend à diriger une équipe, lire un bilan comptable, monter un projet et convaincre un investisseur — pas dans les livres, mais en faisant. Nos intervenants sont des directeurs, des DRH et des entrepreneurs qui enseignent ce qu'ils pratiquent au quotidien à Abidjan et ailleurs.",
+   "badge": "Licence · Master",
+   "badge_color": "#C8922A",
+   "sous_titre": "Administration des entreprises, stratégie et leadership pour les futurs décideurs.",
+   "duree": "3 ans Licence / 5 ans Master",
+   "niveau_requis": "Baccalauréat ou équivalent",
+   "mode": "Présentiel + Hybride",
+   "langue": "Français",
+   "debouches": [
+    "Directeur d'entreprise",
+    "Consultant en management",
+    "Chef de projet",
+    "Responsable RH",
+    "Entrepreneur"
+   ],
+   "modules": [
+    [
+     1,
+     "Introduction à la gestion"
+    ],
+    [
+     1,
+     "Comptabilité générale"
+    ],
+    [
+     1,
+     "Droit des affaires"
+    ],
+    [
+     1,
+     "Économie générale"
+    ],
+    [
+     2,
+     "Management des organisations"
+    ],
+    [
+     2,
+     "Marketing fondamental"
+    ],
+    [
+     2,
+     "Finance d'entreprise"
+    ],
+    [
+     2,
+     "Statistiques"
+    ],
+    [
+     3,
+     "Stratégie d'entreprise"
+    ],
+    [
+     3,
+     "GRH avancée"
+    ],
+    [
+     3,
+     "Contrôle de gestion"
+    ],
+    [
+     3,
+     "Entrepreneuriat"
+    ],
+    [
+     4,
+     "Management international"
+    ],
+    [
+     4,
+     "Business Plan"
+    ],
+    [
+     4,
+     "Stage professionnel"
+    ],
+    [
+     4,
+     "Projet de fin d'études"
+    ]
+   ],
+   "image_url": "https://images.unsplash.com/photo-1552664730-d307ca884978?w=900&q=80",
+   "ordre": 0,
+   "licence": true,
+   "master": true
+  },
+  {
+   "slug": "informatique",
+   "nom": "Informatique & Réseaux",
+   "icone": "💻",
+   "resume": "Développement logiciel, cybersécurité et infrastructure réseau pour les technologies de demain.",
+   "description": "En Informatique & Réseaux à l'UIC, on code, on installe, on répare et on sécurise dès la première année. Pas de théorie sans pratique : les salles informatiques restent ouvertes le soir, et les projets de fin d'études sont des solutions réelles commandées par des entreprises partenaires.",
+   "badge": "Licence · Master",
+   "badge_color": "#2563eb",
+   "sous_titre": "Développement logiciel, cybersécurité et infrastructure réseau pour les technologies de demain.",
+   "duree": "3 ans Licence / 5 ans Master",
+   "niveau_requis": "Baccalauréat scientifique ou équivalent",
+   "mode": "Présentiel + Hybride",
+   "langue": "Français",
+   "debouches": [
+    "Développeur full-stack",
+    "Ingénieur réseau",
+    "Expert cybersécurité",
+    "DevOps",
+    "CTO / DSI"
+   ],
+   "modules": [
+    [
+     1,
+     "Algorithmique"
+    ],
+    [
+     1,
+     "Programmation Python/Java"
+    ],
+    [
+     1,
+     "Architecture des systèmes"
+    ],
+    [
+     1,
+     "Mathématiques discrètes"
+    ],
+    [
+     2,
+     "Bases de données"
+    ],
+    [
+     2,
+     "Réseaux informatiques"
+    ],
+    [
+     2,
+     "Développement web"
+    ],
+    [
+     2,
+     "Sécurité informatique"
+    ],
+    [
+     3,
+     "Cloud computing"
+    ],
+    [
+     3,
+     "DevOps & CI/CD"
+    ],
+    [
+     3,
+     "Intelligence artificielle"
+    ],
+    [
+     3,
+     "Administration Linux"
+    ],
+    [
+     4,
+     "Cybersécurité avancée"
+    ],
+    [
+     4,
+     "Big Data"
+    ],
+    [
+     4,
+     "Stage en entreprise"
+    ],
+    [
+     4,
+     "Projet de fin d'études"
+    ]
+   ],
+   "image_url": "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=900&q=80",
+   "ordre": 1,
+   "licence": true,
+   "master": true
+  },
+  {
+   "slug": "droit",
+   "nom": "Droit des Affaires",
+   "icone": "⚖️",
+   "resume": "Droit commercial, fiscalité et régulation pour conseiller les entreprises et institutions ivoiriens.",
+   "description": "Le Droit des Affaires à l'UIC, c'est concret : on travaille sur des contrats réels, on simule des procès, on analyse des litiges ivoiriens actuels. Le droit OHADA est enseigné par des avocats et juristes d'entreprise qui le pratiquent chaque semaine devant les tribunaux.",
+   "badge": "Licence · Master",
+   "badge_color": "#7c3aed",
+   "sous_titre": "Droit commercial, fiscalité et régulation pour conseiller les entreprises et institutions ivoiriens.",
+   "duree": "3 ans Licence / 5 ans Master",
+   "niveau_requis": "Baccalauréat toutes séries",
+   "mode": "Présentiel + Hybride",
+   "langue": "Français",
+   "debouches": [
+    "Avocat d'affaires",
+    "Juriste d'entreprise",
+    "Notaire",
+    "Magistrat",
+    "Consultant juridique"
+   ],
+   "modules": [
+    [
+     1,
+     "Introduction au droit"
+    ],
+    [
+     1,
+     "Droit civil"
+    ],
+    [
+     1,
+     "Droit constitutionnel"
+    ],
+    [
+     1,
+     "Histoire du droit"
+    ],
+    [
+     2,
+     "Droit des sociétés"
+    ],
+    [
+     2,
+     "Droit fiscal"
+    ],
+    [
+     2,
+     "Procédure civile"
+    ],
+    [
+     2,
+     "Économie du droit"
+    ],
+    [
+     3,
+     "Droit OHADA"
+    ],
+    [
+     3,
+     "Droit du travail"
+    ],
+    [
+     3,
+     "Droit bancaire"
+    ],
+    [
+     3,
+     "Arbitrage commercial"
+    ],
+    [
+     4,
+     "Contentieux des affaires"
+    ],
+    [
+     4,
+     "Droit international privé"
+    ],
+    [
+     4,
+     "Stage juridique"
+    ],
+    [
+     4,
+     "Mémoire de recherche"
+    ]
+   ],
+   "image_url": "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=900&q=80",
+   "ordre": 2,
+   "licence": true,
+   "master": true
+  },
+  {
+   "slug": "finance",
+   "nom": "Finance & Comptabilité",
+   "icone": "📊",
+   "resume": "Finance d'entreprise, audit et comptabilité pour piloter la performance des organisations.",
+   "description": "En Finance & Comptabilité à l'UIC, on apprend à lire une liasse fiscale, construire un budget prévisionnel et passer un audit sans trembler. Le SYSCOHADA et l'IFRS sont enseignés par des experts-comptables et auditeurs qui travaillent pour de vraies entreprises ivoiriennes et multinationales.",
+   "badge": "Licence · Master",
+   "badge_color": "#059669",
+   "sous_titre": "Finance d'entreprise, audit et comptabilité pour piloter la performance des organisations.",
+   "duree": "3 ans Licence / 5 ans Master",
+   "niveau_requis": "Baccalauréat série D ou G",
+   "mode": "Présentiel + Hybride",
+   "langue": "Français",
+   "debouches": [
+    "Expert-comptable",
+    "Auditeur financier",
+    "Analyste financier",
+    "DAF",
+    "Contrôleur de gestion"
+   ],
+   "modules": [
+    [
+     1,
+     "Comptabilité générale"
+    ],
+    [
+     1,
+     "Mathématiques financières"
+    ],
+    [
+     1,
+     "Analyse économique"
+    ],
+    [
+     1,
+     "Droit des sociétés"
+    ],
+    [
+     2,
+     "Comptabilité analytique"
+    ],
+    [
+     2,
+     "Finance de marché"
+    ],
+    [
+     2,
+     "Fiscalité des entreprises"
+    ],
+    [
+     2,
+     "SYSCOHADA"
+    ],
+    [
+     3,
+     "Audit et contrôle"
+    ],
+    [
+     3,
+     "Gestion de trésorerie"
+    ],
+    [
+     3,
+     "Évaluation d'entreprise"
+    ],
+    [
+     3,
+     "IFRS"
+    ],
+    [
+     4,
+     "Finance internationale"
+    ],
+    [
+     4,
+     "Conseil en gestion"
+    ],
+    [
+     4,
+     "Stage en cabinet"
+    ],
+    [
+     4,
+     "Mémoire professionnel"
+    ]
+   ],
+   "image_url": "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=900&q=80",
+   "ordre": 3,
+   "licence": true,
+   "master": true
+  },
+  {
+   "slug": "commerce",
+   "nom": "Commerce International",
+   "icone": "🌍",
+   "resume": "Échanges mondiaux, logistique et marketing international quand les marchés africains s'ouvrent au monde.",
+   "description": "Le Commerce International à l'UIC, c'est apprendre à vendre à l'étranger, négocier un contrat en anglais, gérer une douane et optimiser une supply chain. On travaille sur des cas réels d'import-export entre l'Afrique de l'Ouest, l'Europe et l'Asie.",
+   "badge": "Licence · Master",
+   "badge_color": "#dc2626",
+   "sous_titre": "Échanges mondiaux, logistique et marketing international quand les marchés africains s'ouvrent au monde.",
+   "duree": "3 ans Licence / 5 ans Master",
+   "niveau_requis": "Baccalauréat toutes séries",
+   "mode": "Présentiel + Hybride",
+   "langue": "Français",
+   "debouches": [
+    "Export manager",
+    "Responsable logistique",
+    "Chargé d'affaires international",
+    "Trader",
+    "Douanier expert"
+   ],
+   "modules": [
+    [
+     1,
+     "Commerce international"
+    ],
+    [
+     1,
+     "Techniques d'import/export"
+    ],
+    [
+     1,
+     "Géographie économique"
+    ],
+    [
+     1,
+     "Anglais commercial"
+    ],
+    [
+     2,
+     "Logistique internationale"
+    ],
+    [
+     2,
+     "Incoterms & douanes"
+    ],
+    [
+     2,
+     "Marketing international"
+    ],
+    [
+     2,
+     "Négociation commerciale"
+    ],
+    [
+     3,
+     "Marchés émergents"
+    ],
+    [
+     3,
+     "Financement du commerce"
+    ],
+    [
+     3,
+     "Supply chain"
+    ],
+    [
+     3,
+     "Droit international"
+    ],
+    [
+     4,
+     "Stratégie d'internationalisation"
+    ],
+    [
+     4,
+     "Veille concurrentielle"
+    ],
+    [
+     4,
+     "Stage à l'international"
+    ],
+    [
+     4,
+     "Mémoire"
+    ]
+   ],
+   "image_url": "https://images.unsplash.com/photo-1521791136064-7986c2920216?w=900&q=80",
+   "ordre": 4,
+   "licence": true,
+   "master": true
+  },
+  {
+   "slug": "communication",
+   "nom": "Communication & Médias",
+   "icone": "📡",
+   "resume": "Communication institutionnelle, journalisme et stratégie de marque aujourd'hui.",
+   "description": "En Communication & Médias à l'UIC, on apprend à écrire pour la presse, tourner une vidéo, gérer une crise sur les réseaux et défendre l'image d'une marque. Le campus dispose d'une rédaction et d'un studio de production que les étudiants utilisent dès le premier semestre.",
+   "badge": "Licence · Master",
+   "badge_color": "#d97706",
+   "sous_titre": "Communication institutionnelle, journalisme et stratégie de marque aujourd'hui.",
+   "duree": "3 ans Licence / 5 ans Master",
+   "niveau_requis": "Baccalauréat toutes séries",
+   "mode": "Présentiel + Hybride",
+   "langue": "Français",
+   "debouches": [
+    "Directeur de communication",
+    "Journaliste",
+    "Community manager",
+    "Chef de projet digital",
+    "Chargé de relations presse"
+   ],
+   "modules": [
+    [
+     1,
+     "Introduction à la communication"
+    ],
+    [
+     1,
+     "Techniques rédactionnelles"
+    ],
+    [
+     1,
+     "Sociologie des médias"
+    ],
+    [
+     1,
+     "Photographie & image"
+    ],
+    [
+     2,
+     "Relations presse"
+    ],
+    [
+     2,
+     "Communication digitale"
+    ],
+    [
+     2,
+     "Création graphique"
+    ],
+    [
+     2,
+     "Prise de parole publique"
+    ],
+    [
+     3,
+     "Stratégie de marque"
+    ],
+    [
+     3,
+     "Réseaux sociaux & SEO"
+    ],
+    [
+     3,
+     "Production audiovisuelle"
+    ],
+    [
+     3,
+     "Communication de crise"
+    ],
+    [
+     4,
+     "Communication institutionnelle"
+    ],
+    [
+     4,
+     "Influence & lobbying"
+    ],
+    [
+     4,
+     "Stage en agence/médias"
+    ],
+    [
+     4,
+     "Projet final"
+    ]
+   ],
+   "image_url": "https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=900&q=80",
+   "ordre": 5,
+   "licence": true,
+   "master": true
+  }
+ ],
+ "articles": [
+  {
+   "slug": "rentree-2025",
+   "titre": "Rentrée académique 2025–2026 : UIC accueille sa plus grande promotion",
+   "categorie": "Événement",
+   "date": "12 Septembre 2025",
+   "chapeau": "L'UIC a célébré l'ouverture de l'année académique 2025-2026 avec l'accueil de sa plus grande promotion.",
+   "contenu": "Lundi 8 septembre 2025, les couloirs de l'UIC n'avaient jamais été aussi animés. Cette rentrée marque un tournant pour l'université : pour la première fois, plus de 300 nouveaux étudiants ont franchi les portes du campus de Cocody en une seule journée d'accueil. Un chiffre qui surprend même les administrateurs qui avaient tablé sur 280 inscrits.\n\nDans son allocution, le fondateur a choisi de ne pas faire de grand discours. Il a demandé aux étudiants de lever la main s'ils avaient déjà entendu parler de l'UIC par un diplômé. Presque tous les bras se sont levés. « C'est ça, notre vraie publicité », a-t-il dit simplement.\n\nNouveauté cette année : une plateforme en ligne permet aux étudiants de retrouver leurs cours, exercices et notes sur leur téléphone. Plusieurs professeurs ont déjà commencé à publier des ressources complémentaires la veille des cours. Les étudiants du soir apprécient particulièrement.\n\nDeux nouvelles salles informatiques ont été ouvertes côté est du bâtiment principal. 40 postes supplémentaires entièrement renouvelés, disponibles jusqu'à 20h les jours de semaine. Pour la filière Informatique, c'est un changement concret qui s'était fait attendre.",
+   "image_url": "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=1200&q=80",
+   "temps_lecture": 3,
+   "ordre": 0
+  },
+  {
+   "slug": "partenariat-entreprises",
+   "titre": "Convention de partenariat avec plusieurs entreprises leaders en Côte d'Ivoire",
+   "categorie": "Partenariat",
+   "date": "3 Octobre 2025",
+   "chapeau": "L'UIC signe des conventions avec 8 entreprises majeures pour faciliter les stages et l'insertion professionnelle.",
+   "contenu": "Le 3 octobre dernier, l'UIC a signé des conventions avec 8 entreprises ivoiriennes, devant leurs représentants et les étudiants concernés. Ce n'est pas la première fois que l'UIC travaille avec des partenaires professionnels — mais c'est la première fois que les engagements sont formalisés dans des contrats écrits avec des obligations précises des deux côtés.\n\nConcrètement, ces entreprises s'engagent à prendre des stagiaires de l'UIC, à intervenir dans certains cours, et à participer à la révision des programmes une fois par an. Certaines ont déjà proposé des sujets de projets de fin d'études tirés de leurs vrais problèmes opérationnels.\n\n« On ne veut pas faire des conventions pour les encadrer et les afficher », a précisé le directeur des partenariats lors de la cérémonie. « Chaque accord a une clause d'évaluation à 12 mois. Si les stages ne se font pas, si les intervenants ne viennent pas, on en parle. »\n\nPlusieurs cadres des entreprises signataires ont d'ores et déjà accepté d'intervenir dans les cours dès janvier 2026. Pas pour remplacer les enseignants permanents — mais pour apporter le point de vue de quelqu'un qui vit les sujets étudiés chaque jour au bureau.",
+   "image_url": "https://images.unsplash.com/photo-1521791136064-7986c2920216?w=1200&q=80",
+   "temps_lecture": 3,
+   "ordre": 1
+  },
+  {
+   "slug": "resultats-master",
+   "titre": "Résultats exceptionnels aux examens : 97% de réussite en Master 2",
+   "categorie": "Académique",
+   "date": "20 Octobre 2025",
+   "chapeau": "La promotion Master 2 affiche un taux de réussite historique de 97%, confirmant l'excellence du corps enseignant.",
+   "contenu": "Les résultats de juin 2025 viennent de tomber pour les Master 2, et ils sont difficiles à ignorer : 97% de taux de réussite toutes filières confondues. À titre de comparaison, le taux moyen des universités privées agréées en Côte d'Ivoire tournait autour de 78% la même année.\n\nCes chiffres ne sont pas tombés du ciel. En 2023, l'UIC a instauré un système de tutorat entre étudiants de Master 1 et Master 2, deux séries d'examens blancs par semestre, et des séances de rattrapage personnalisées pour les étudiants en difficulté. Les résultats ont progressé chaque année depuis.\n\nFilière par filière : Finance & Comptabilité affiche 100% de réussite, Gestion & Management 98%, Informatique & Réseaux 98%. Les filières Droit et Communication sont à 96%, et Commerce International à 94% — son taux le plus élevé depuis l'ouverture du programme.\n\nPour les familles qui hésitent encore, ces chiffres sont peut-être la réponse la plus concrète qu'on puisse donner. Les inscriptions pour 2025-2026 sont ouvertes, et les places se remplissent plus vite que d'habitude cette année.",
+   "image_url": "https://images.unsplash.com/photo-1606761568499-6d2451b23c66?w=1200&q=80",
+   "temps_lecture": 3,
+   "ordre": 2
+  }
+ ],
+ "alumni": [
+  {
+   "nom": "Konan Stéphane",
+   "promotion": "Master Management 2022",
+   "poste": "Directeur Commercial — Orange CI",
+   "texte": "Honnêtement, j'avais des doutes avant d'entrer à l'UIC. Deux ans après mon diplôme, je suis à Orange CI et je manage une équipe de cinq personnes. Je n'aurais pas parié là-dessus en quittant le lycée."
+  },
+  {
+   "nom": "Adjoua Marie",
+   "promotion": "Licence Finance 2021",
+   "poste": "Auditrice Senior — Ernst & Young Abidjan",
+   "texte": "Mon premier audit chez EY, je connaissais le SYSCOHADA mieux que certains collègues qui sortaient d'écoles françaises. Je leur ai expliqué deux ou trois choses. C'était inattendu."
+  },
+  {
+   "nom": "Bamba Karim",
+   "promotion": "Master Informatique 2023",
+   "poste": "Lead Developer — Startup Fintech",
+   "texte": "Mon projet de fin d'études, c'est devenu ma vraie startup. On a trouvé nos premiers clients avant même la soutenance. L'UIC nous a mis en contact avec un incubateur local — ça, c'était pas dans le programme officiel."
+  },
+  {
+   "nom": "Dosso Fatoumata",
+   "promotion": "Master Droit des Affaires 2022",
+   "poste": "Juriste — Cabinet Kouadio & Associés",
+   "texte": "Lors de mon premier stage au cabinet, le patron m'a demandé de rédiger un contrat commercial. Je l'avais déjà fait six fois à l'UIC. Il n'a fait que deux corrections. C'est ce jour-là que j'ai compris pourquoi les cas pratiques comptaient."
+  }
+ ],
+ "stats_barre": [
+  {
+   "icone": "🎓",
+   "valeur": 1200,
+   "suffixe": "+",
+   "libelle": "diplômés depuis 2004"
+  },
+  {
+   "icone": "📚",
+   "valeur": 20,
+   "suffixe": " ans",
+   "libelle": "D'expérience"
+  },
+  {
+   "icone": "🏆",
+   "valeur": 95,
+   "suffixe": "%",
+   "libelle": "Taux de réussite"
+  },
+  {
+   "icone": "🌍",
+   "valeur": 12,
+   "suffixe": "+",
+   "libelle": "Nationalités"
+  }
+ ],
+ "stats_section": [
+  {
+   "valeur": 1200,
+   "suffixe": "+",
+   "libelle": "Étudiants inscrits"
+  },
+  {
+   "valeur": 95,
+   "suffixe": "%",
+   "libelle": "Taux de réussite"
+  },
+  {
+   "valeur": 60,
+   "suffixe": "+",
+   "libelle": "Enseignants experts"
+  },
+  {
+   "valeur": 20,
+   "suffixe": " ans",
+   "libelle": "D'expérience"
+  }
+ ],
+ "valeurs_accueil": [
+  {
+   "icone": "🎯",
+   "titre": "Excellence académique",
+   "texte": "Des cours dispensés par des pros en activité, pas seulement des théoriciens."
+  },
+  {
+   "icone": "🤝",
+   "titre": "Accompagnement personnalisé",
+   "texte": "On connaît nos étudiants par leur prénom. Les promos restent petites exprès."
+  },
+  {
+   "icone": "🌐",
+   "titre": "Ouverture internationale",
+   "texte": "Des liens réels avec des entreprises et des écoles hors de Côte d'Ivoire."
+  }
+ ],
+ "valeurs_apropos": [
+  {
+   "icone": "🎯",
+   "titre": "Excellence",
+   "texte": "Un cours raté se reprend. Un travail bâclé se refait. On ne valide pas ce qui n'est pas au niveau — parce que dehors, on ne vous donnera pas de deuxième chance."
+  },
+  {
+   "icone": "🤝",
+   "titre": "Intégrité",
+   "texte": "L'UIC ne forme pas des gens qui savent tricher proprement. On forme des gens à qui on peut faire confiance avec un budget, un client ou une équipe."
+  },
+  {
+   "icone": "🌍",
+   "titre": "Ouverture",
+   "texte": "On accueille des étudiants de plus de 12 nationalités. Les profs viennent aussi de l'extérieur de la Côte d'Ivoire. Cette diversité n'est pas un argument marketing — c'est notre quotidien."
+  },
+  {
+   "icone": "💡",
+   "titre": "Innovation",
+   "texte": "Les programmes sont révisés chaque année avec les entreprises partenaires. Si un outil change dans le secteur, on l'intègre. Si une matière n'est plus utile, on l'enlève."
+  }
+ ],
+ "avantages": [
+  {
+   "icone": "🏛️",
+   "titre": "Corps enseignant qualifié",
+   "texte": "Des professeurs du monde académique et professionnel pour une formation ancrée dans la réalité."
+  },
+  {
+   "icone": "💻",
+   "titre": "Cours en ligne & hybrides",
+   "texte": "Des formations flexibles accessibles à distance, sans compromis sur la qualité."
+  },
+  {
+   "icone": "📚",
+   "titre": "Médiathèque moderne",
+   "texte": "Bibliothèque physique + accès à des bases de données académiques numériques sur le campus."
+  },
+  {
+   "icone": "🌐",
+   "titre": "Réseau Alumni actif",
+   "texte": "Rejoignez une communauté de diplômés actifs dans les secteurs clés de l'économie."
+  }
+ ],
+ "jalons": [
+  {
+   "annee": "2004",
+   "titre": "Fondation de l'UIC",
+   "texte": "L'UIC ouvre ses portes à Cocody avec deux filières : Gestion et Droit. 45 étudiants s'inscrivent cette première année — certains encore présents comme enseignants aujourd'hui."
+  },
+  {
+   "annee": "2007",
+   "titre": "Agrément ministériel",
+   "texte": "Après trois ans d'activité, le Ministère de l'Enseignement Supérieur accorde son agrément officiel à l'UIC. Un cap qui rassure les familles et ouvre la voie aux diplômes reconnus."
+  },
+  {
+   "annee": "2010",
+   "titre": "Ouverture du campus actuel",
+   "texte": "Le campus actuel ouvre à Cocody Deux-Plateaux. Premier amphi vrai, première vraie bibliothèque, premiers labos informatiques. Les étudiants qui passaient d'un local à l'autre depuis 2004 ont enfin un vrai campus."
+  },
+  {
+   "annee": "2014",
+   "titre": "Lancement des Masters",
+   "texte": "L'UIC lance les Masters. Les étudiants peuvent désormais aller jusqu'au Bac+5 sans quitter leur université. Beaucoup qui avaient prévu de partir vers d'autres établissements restent finalement."
+  },
+  {
+   "annee": "2018",
+   "titre": "500ème diplômé",
+   "texte": "Le 500ème diplômé de l'UIC reçoit son titre lors d'une cérémonie marquante. On retrouve désormais des anciens de l'UIC dans presque toutes les grandes entreprises d'Abidjan — et certains les gèrent."
+  },
+  {
+   "annee": "2024",
+   "titre": "20 ans d'excellence",
+   "texte": "20 ans. Plus de 1 200 étudiants actifs, un taux d'insertion professionnelle à 92% dans les 6 mois après le diplôme, et une réputation qui se construit par le travail de chaque promotion — pas par la communication."
+  }
+ ],
+ "faq": [
+  {
+   "question": "Quand ouvrent les inscriptions ?",
+   "reponse": "Les inscriptions 2025-2026 sont ouvertes. Plus vous vous inscrivez tôt, mieux c'est — les places par filière sont limitées."
+  },
+  {
+   "question": "Quels documents fournir ?",
+   "reponse": "Relevé de notes du bac ou du dernier diplôme, pièce d'identité, 2 photos récentes. C'est tout. Pas besoin d'un dossier de 15 pièces."
+  },
+  {
+   "question": "Y a-t-il des bourses disponibles ?",
+   "reponse": "Oui — pour les dossiers solides et les familles qui en ont besoin. Venez en discuter directement, chaque situation est traitée individuellement."
+  }
+ ],
+ "president": {
+  "citation": "À l'UIC, nous favorisons la culture de l'exigence et encourageons le dépassement de soi, la créativité, le leadership et l'amour du défi.",
+  "texte": "Nous forgeons dans leur esprit le respect de la compétence, le partage des connaissances et le sens de la responsabilité. Ce n'est pas un métier qu'on enseigne ici — c'est une façon de penser. Quelqu'un qui sort de l'UIC sait analyser une situation, prendre une décision et en assumer les conséquences."
+ }
+}

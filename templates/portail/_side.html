@@ -1,0 +1,14 @@
+<aside class="portal-side">
+  <div class="ps-head">
+    {% if profil.photo %}<img class="ps-av" src="{{ profil.photo.url }}" alt="">{% else %}<div class="ps-av">{{ profil.user.first_name|default:profil.user.username|first|upper }}</div>{% endif %}
+    <strong>{{ profil.user.get_full_name|default:profil.user.username }}</strong><span>{{ profil.matricule }}</span>
+  </div>
+  <nav class="ps-nav">
+    <a href="{% url 'portail:tableau_de_bord' %}" {% if actif == 'dash' %}class="on"{% endif %}>🏠 Tableau de bord</a>
+    <a href="{% url 'portail:resultats' %}" {% if actif == 'res' %}class="on"{% endif %}>📊 Résultats d'examens</a>
+    <a href="{% url 'portail:cartes' %}" {% if actif == 'cartes' %}class="on"{% endif %}>🎫 Cartes d'admission</a>
+    <a href="{% url 'portail:certificats' %}" {% if actif == 'certs' %}class="on"{% endif %}>📄 Certificats</a>
+    <a href="{% url 'portail:mot_de_passe' %}" {% if actif == 'mdp' %}class="on"{% endif %}>🔑 Mot de passe</a>
+    <form method="post" action="{% url 'portail:deconnexion' %}">{% csrf_token %}<button type="submit" class="out">🚪 Déconnexion</button></form>
+  </nav>
+</aside>

@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %}Enseignants – UIC{% endblock %}
+{% block content %}
+<div class="page">
+  <div class="list-hero"><div class="container"><span class="eyebrow">Corps enseignant</span><h1 class="stitle">Ceux qui vous forment</h1>
+    <p class="sbody">Des professionnels en activité et des universitaires qui enseignent ce qu'ils pratiquent.</p></div></div>
+  <div class="list-body"><div class="container"><div class="prof-grid">
+    {% for p in professeurs %}
+    <div class="prof-card">
+      {% if p.photo %}<img class="prof-photo" src="{{ p.photo.url }}" alt="{{ p }}" loading="lazy">{% else %}<div class="prof-ph">{{ p.prenom|first }}</div>{% endif %}
+      <h3>{{ p }}</h3>{% if p.titre %}<div class="t">{{ p.titre }}</div>{% endif %}{% if p.specialite %}<p>{{ p.specialite }}</p>{% endif %}
+    </div>
+    {% empty %}<p class="empty" style="grid-column:1/-1">La liste des enseignants sera bientôt disponible.</p>{% endfor %}
+  </div></div></div>
+</div>
+{% endblock %}

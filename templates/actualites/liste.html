@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %}Actualités – UIC{% endblock %}
+{% block content %}
+<div class="page">
+  <div class="list-hero"><div class="container">
+    <span class="eyebrow">Actualités</span><h1 class="stitle">Vie du campus</h1>
+    <p class="sbody">Événements, partenariats, résultats : ce qui se passe à l'UIC.</p>
+  </div></div>
+  <section class="actualites list-body"><div class="container">
+    <div class="actu-grid" style="grid-template-columns:repeat(3,1fr)">
+      {% for a in page %}
+      <a class="actu-card" href="{{ a.get_absolute_url }}">
+        <div class="actu-img wide" style="background-image:url('{{ a.image_src }}');background-size:cover;background-position:center;"><span class="actu-cat">{{ a.categorie.nom }}</span></div>
+        <div class="actu-body"><p class="actu-date">{{ a.date_publication|date:"j F Y" }}</p><h3 class="actu-title">{{ a.titre }}</h3><span class="actu-link">Lire la suite →</span></div>
+      </a>
+      {% empty %}<p class="empty" style="grid-column:1/-1">Aucune actualité publiée pour le moment.</p>{% endfor %}
+    </div>
+    {% if page.has_other_pages %}
+    <div class="pager">
+      {% if page.has_previous %}<a class="btn-outline" href="?page={{ page.previous_page_number }}">← Précédent</a>{% endif %}
+      {% if page.has_next %}<a class="btn-outline" href="?page={{ page.next_page_number }}">Suivant →</a>{% endif %}
+    </div>
+    {% endif %}
+  </div></section>
+</div>
+{% endblock %}

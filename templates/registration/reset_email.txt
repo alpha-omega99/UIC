@@ -1,0 +1,11 @@
+{% autoescape off %}Bonjour,
+
+Vous avez demandé la réinitialisation du mot de passe de votre espace étudiant UIC.
+Cliquez sur ce lien (valable quelques heures) :
+
+{{ protocol }}://{{ domain }}{% url 'portail:reset_confirm' uidb64=uid token=token %}
+
+Si vous n'êtes pas à l'origine de cette demande, ignorez ce message.
+
+L'équipe UIC
+{% endautoescape %}

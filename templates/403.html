@@ -1,0 +1,6 @@
+{% extends 'base.html' %}
+{% block title %}Accès refusé – UIC{% endblock %}
+{% block content %}
+<div class="state-page"><div class="state-card"><div class="ico">⛔</div><h1>Accès refusé</h1><p>Trop de tentatives ou accès non autorisé. Patientez quelques minutes avant de réessayer.</p>
+<a class="btn-accent" href="{% url 'core:home' %}">Retour à l'accueil</a></div></div>
+{% endblock %}

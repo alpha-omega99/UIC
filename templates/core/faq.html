@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %}Questions fréquentes – UIC{% endblock %}
+{% block content %}
+<div class="page">
+  <div class="list-hero"><div class="container"><span class="eyebrow">FAQ</span><h1 class="stitle">Questions fréquentes</h1>
+    <p class="sbody">Admission, documents, bourses… les réponses aux questions qu'on nous pose le plus.</p></div></div>
+  <div class="list-body"><div class="container" style="max-width:820px">
+    <div class="contact-faq" style="border:none;padding:0;background:none">
+      {% for f in faqs %}<div class="faq-item"><button type="button" class="faq-q" aria-expanded="false">{{ f.question }} <span>+</span></button><div class="faq-a">{{ f.reponse }}</div></div>
+      {% empty %}<p class="empty">Aucune question pour le moment.</p>{% endfor %}
+    </div>
+    <p style="margin-top:2rem;text-align:center"><a class="btn-outline" href="{% url 'contact:contact' %}">Une autre question ? Écrivez-nous</a></p>
+  </div></div>
+</div>
+{% endblock %}

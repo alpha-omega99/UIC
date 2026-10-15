@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %}Nouveau mot de passe – UIC{% endblock %}
+{% block content %}
+<div class="state-page"><div class="state-card" style="text-align:left;max-width:440px;width:100%">
+{% if validlink %}
+  <h1 style="text-align:center">Nouveau mot de passe</h1>
+  <form method="post" novalidate>{% csrf_token %}
+    {% for f in form %}<div class="fg"><label for="{{ f.id_for_label }}">{{ f.label }}</label>{{ f }}{% for e in f.errors %}<div class="ferr">{{ e }}</div>{% endfor %}</div>{% endfor %}
+    <button type="submit" class="btn-sub">Enregistrer</button>
+  </form>
+{% else %}
+  <div style="text-align:center"><div class="ico">⚠️</div><h1>Lien invalide</h1><p>Ce lien a expiré ou a déjà été utilisé.</p><a class="btn-accent" href="{% url 'portail:reset' %}">Refaire une demande</a></div>
+{% endif %}
+</div></div>
+{% endblock %}

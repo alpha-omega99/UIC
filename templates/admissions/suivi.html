@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block title %}Suivi de dossier – UIC{% endblock %}
+{% block content %}
+<div class="page">
+  <div class="list-hero"><div class="container"><span class="eyebrow">Admission</span><h1 class="stitle">Suivre mon dossier</h1><p class="sbody">Saisissez l'e-mail utilisé et votre numéro de dossier.</p></div></div>
+  <div class="list-body"><div class="container form-narrow">
+    <form method="post" class="form-card" novalidate>{% csrf_token %}
+      <div class="fg"><label for="{{ form.email.id_for_label }}">Adresse e-mail</label><input type="email" name="email" id="{{ form.email.id_for_label }}" required maxlength="254" value="{{ form.email.value|default:'' }}" placeholder="votre@email.com"></div>
+      <div class="fg"><label for="{{ form.numero.id_for_label }}">Numéro de dossier</label><input type="text" name="numero" id="{{ form.numero.id_for_label }}" required maxlength="20" value="{{ form.numero.value|default:'' }}" placeholder="UIC-2026-XXXXXX"></div>
+      {% if form.errors %}<div class="ferr" style="margin-bottom:1rem">Vérifiez les informations saisies.</div>{% endif %}
+      <button type="submit" class="btn-sub">Rechercher</button>
+    </form>
+    {% if dossier %}
+    <div class="form-card" style="margin-top:1.5rem">
+      <h2>Dossier {{ dossier.numero_dossier }}</h2>
+      <p class="form-sub">{{ dossier.prenom }} {{ dossier.nom }} · {{ dossier.filiere }}</p>
+      <p>Statut : <span class="pill {% if dossier.statut == 'accepte' %}ok{% elif dossier.statut == 'refuse' %}ko{% elif dossier.statut == 'incomplet' %}mid{% else %}neutral{% endif %}">{{ dossier.get_statut_display }}</span></p>
+      <p class="fnote" style="text-align:left">Déposé le {{ dossier.created_at|date:"j F Y" }}.</p>
+    </div>
+    {% elif cherche %}
+    <div class="form-card" style="margin-top:1.5rem"><p class="form-sub" style="margin:0">Aucun dossier ne correspond à ces informations.</p></div>
+    {% endif %}
+  </div></div>
+</div>
+{% endblock %}

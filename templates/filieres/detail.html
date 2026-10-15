@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% block title %}{{ filiere.nom }} – UIC{% endblock %}
+{% block meta_desc %}{{ filiere.resume }}{% endblock %}
+{% block content %}
+<div class="page">
+  <div class="page-topbar"><div class="container">
+    <a href="{% url 'filieres:liste' %}" class="back-link">← Retour aux filières</a>
+    <span class="breadcrumb-sep">/</span><span class="breadcrumb-cur">{{ filiere.nom }}</span>
+  </div></div>
+
+  <div class="fil-page-hero" style="background-image:url('{{ filiere.image_src }}')">
+    <div class="fil-page-hero-overlay"></div>
+    <div class="container fil-page-hero-content">
+      <span class="fil-page-badge" style="background:{{ filiere.couleur_badge }}">{{ filiere.niveaux_label }}</span>
+      <h1 class="fil-page-title">{{ filiere.icone }} {{ filiere.nom }}</h1>
+      <p class="fil-page-sub">{{ filiere.sous_titre|default:filiere.resume }}</p>
+      <div class="fil-page-meta">
+        <span>⏱ {{ filiere.duree }}</span>
+        <span>📋 Niveau requis : {{ filiere.niveau_requis }}</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="container fil-page-body">
+    <div class="fil-page-grid">
+      <div class="fil-page-main">
+        <section class="fil-section">
+          <h2>À propos de la formation</h2>
+          <p class="fil-desc-long">{{ filiere.description }}</p>
+        </section>
+        {% if semestres %}
+        <section class="fil-section">
+          <h2>Programme &amp; modules</h2>
+          <div class="modules-grid">
+            {% for num, intitules in semestres %}
+            <div class="module-sem"><h4>Semestre {{ num }}</h4><ul>{% for i in intitules %}<li>{{ i }}</li>{% endfor %}</ul></div>
+            {% endfor %}
+          </div>
+        </section>
+        {% endif %}
+      </div>
+      <aside class="fil-page-aside">
+        {% if filiere.debouches_liste %}
+        <div class="aside-card">
+          <h3>Débouchés professionnels</h3>
+          <div class="debouches">{% for d in filiere.debouches_liste %}<span class="debouche-pill">{{ d }}</span>{% endfor %}</div>
+        </div>
+        {% endif %}
+        <div class="aside-card aside-cta">
+          <h3>Intéressé(e) ?</h3>
+          <p>Rejoignez la filière {{ filiere.nom }} dès la prochaine rentrée.</p>
+          <a href="{% url 'admissions:formulaire' %}" class="btn-cta-fil">Faire une demande →</a>
+        </div>
+        <div class="aside-card aside-infos">
+          <h3>Informations pratiques</h3>
+          <div class="info-row"><span class="info-lbl">Durée</span><span>{{ filiere.duree }}</span></div>
+          <div class="info-row"><span class="info-lbl">Niveau d'entrée</span><span>{{ filiere.niveau_requis }}</span></div>
+          <div class="info-row"><span class="info-lbl">Mode</span><span>{{ filiere.mode }}</span></div>
+          <div class="info-row"><span class="info-lbl">Langue</span><span>{{ filiere.langue }}</span></div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</div>
+{% endblock %}

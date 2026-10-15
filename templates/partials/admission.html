@@ -1,0 +1,76 @@
+{% load static %}
+{# Formulaire d'admission en 3 étapes — design d'origine, branché sur Django (CSRF, validation serveur) #}
+<div class="adm-hero reveal">
+  <div class="adm-hero-text">
+    <h2>Rejoignez la prochaine promo</h2>
+    <p>Un processus simple et transparent. Notre équipe vous accompagne à chaque étape.</p>
+    <ul class="adm-steps-mini">
+      <li><span class="num">1</span> Renseignements personnels</li>
+      <li><span class="num">2</span> Choix de filière &amp; niveau</li>
+      <li><span class="num">3</span> Soumission &amp; confirmation</li>
+    </ul>
+  </div>
+  <div class="adm-hero-img"><img src="{% static 'img/formations.webp' %}" alt="Étudiants UIC"></div>
+</div>
+
+<form method="post" action="{% url 'admissions:formulaire' %}" id="admission-form" novalidate>
+  {% csrf_token %}
+  <div class="hp" aria-hidden="true">{{ form.site_web }}</div>
+  {% if form.non_field_errors %}<div class="ferr" style="text-align:center;margin-bottom:1rem">{{ form.non_field_errors }}</div>{% endif %}
+  <div class="adm-accordion reveal d1">
+    <div class="acc-item">
+      <button type="button" class="acc-trigger {% if etape|default:1 == 1 %}active{% endif %}" data-acc="step1">
+        <div class="acc-step">1</div>
+        <div class="acc-label"><strong>Informations personnelles</strong><span>Prénom, nom et coordonnées</span></div>
+        <span class="acc-icon">▼</span>
+      </button>
+      <div class="acc-body {% if etape|default:1 == 1 %}open{% endif %}" id="step1">
+        <div class="f2">
+          <div class="fg"><label for="fPrenom">Prénom *</label>{{ form.prenom }}{% for e in form.prenom.errors %}<div class="ferr">{{ e }}</div>{% endfor %}</div>
+          <div class="fg"><label for="fNom">Nom *</label>{{ form.nom }}{% for e in form.nom.errors %}<div class="ferr">{{ e }}</div>{% endfor %}</div>
+        </div>
+        <div class="fg"><label for="fEmail">Adresse e-mail *</label>{{ form.email }}{% for e in form.email.errors %}<div class="ferr">{{ e }}</div>{% endfor %}</div>
+        <div class="fg"><label for="fTel">Téléphone</label>{{ form.telephone }}{% for e in form.telephone.errors %}<div class="ferr">{{ e }}</div>{% endfor %}</div>
+        <button type="button" class="btn-sub" data-from="step1" data-next="step2">Continuer →</button>
+      </div>
+      <div class="acc-complete" id="done1"></div>
+    </div>
+
+    <div class="acc-item">
+      <button type="button" class="acc-trigger {% if etape == 2 %}active{% endif %}" data-acc="step2">
+        <div class="acc-step">2</div>
+        <div class="acc-label"><strong>Filière &amp; niveau</strong><span>Choisissez votre programme</span></div>
+        <span class="acc-icon">▼</span>
+      </button>
+      <div class="acc-body {% if etape == 2 %}open{% endif %}" id="step2">
+        <div class="fg"><label for="fFiliere">Filière souhaitée *</label>{{ form.filiere }}{% for e in form.filiere.errors %}<div class="ferr">{{ e }}</div>{% endfor %}</div>
+        <div class="fg"><label for="fNiveau">Niveau d'entrée *</label>{{ form.niveau_entree }}{% for e in form.niveau_entree.errors %}<div class="ferr">{{ e }}</div>{% endfor %}</div>
+        <button type="button" class="btn-sub" data-from="step2" data-next="step3">Continuer →</button>
+      </div>
+      <div class="acc-complete" id="done2"></div>
+    </div>
+
+    <div class="acc-item">
+      <button type="button" class="acc-trigger {% if etape == 3 %}active{% endif %}" data-acc="step3">
+        <div class="acc-step">3</div>
+        <div class="acc-label"><strong>Soumettre ma candidature</strong><span>Vérifiez et envoyez votre dossier</span></div>
+        <span class="acc-icon">▼</span>
+      </button>
+      <div class="acc-body {% if etape == 3 %}open{% endif %}" id="step3">
+        <div id="recap" style="background:var(--g50);border-radius:8px;padding:1.25rem;margin-bottom:1.25rem;font-size:.88rem;line-height:1.9;color:var(--g600)">
+          <strong style="color:var(--primary);display:block;margin-bottom:.5rem">📋 Récapitulatif</strong>
+          <div id="recap-content">Complétez les étapes précédentes pour voir votre récapitulatif.</div>
+        </div>
+        <button type="submit" class="btn-sub" id="btnSubmit">🎓 Soumettre ma candidature</button>
+        <p class="fnote">En soumettant ce formulaire, vous acceptez d'être contacté par l'équipe de l'UIC.</p>
+      </div>
+      <div class="acc-complete" id="done3"></div>
+    </div>
+  </div>
+</form>
+
+<div class="adm-cta-bar reveal">
+  <div><strong>Besoin d'aide pour votre dossier ?</strong><p>Notre équipe est disponible pour vous accompagner.</p></div>
+  <a href="tel:{{ site.telephone_lien }}" class="btn-cta-white">📞 Nous appeler</a>
+</div>
+<p style="text-align:center;margin-top:1.25rem;font-size:.85rem"><a class="link-arrow" href="{% url 'admissions:suivi' %}">Suivre un dossier déjà déposé →</a></p>

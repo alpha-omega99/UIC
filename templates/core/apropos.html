@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block title %}Histoire &amp; Valeurs – UIC{% endblock %}
+{% block content %}
+<div class="page">
+  <div class="page-topbar"><div class="container">
+    <a href="{% url 'core:home' %}" class="back-link">← Retour à l'accueil</a><span class="breadcrumb-sep">/</span><span class="breadcrumb-cur">À propos</span>
+  </div></div>
+  <div class="apropos-hero"><div class="container">
+    <span class="eyebrow" style="color:var(--gold-light)">Notre histoire</span>
+    <h1 style="font-family:var(--serif);font-size:clamp(2.5rem,5vw,4rem);color:white;line-height:1.1;margin-bottom:1rem;">20 ans de formation,<br>des milliers de réussites</h1>
+    <p style="color:rgba(255,255,255,.6);font-size:1rem;max-width:540px;line-height:1.75;">En {{ site.annee_fondation }}, l'UIC a ouvert avec 45 étudiants dans un campus de Cocody. Aujourd'hui, plus de 1 200 personnes y étudient. Ce document raconte comment on en est arrivé là.</p>
+  </div></div>
+  <div class="container" style="padding:5rem 2rem;">
+    <div style="text-align:center;margin-bottom:3.5rem;"><span class="eyebrow">Notre parcours</span><h2 class="stitle">Histoire de l'UIC</h2></div>
+    <div class="timeline-apropos">
+      {% for j in jalons %}<div class="ta-item"><div class="ta-year">{{ j.annee }}</div><div class="ta-content"><h4>{{ j.titre }}</h4><p>{{ j.texte }}</p></div></div>{% endfor %}
+    </div>
+    <div style="margin-top:5rem;text-align:center;margin-bottom:3rem;"><span class="eyebrow">Ce qui nous définit</span><h2 class="stitle">Nos valeurs fondatrices</h2></div>
+    <div class="values-grid">
+      {% for v in valeurs %}<div class="value-card"><span class="val-icon">{{ v.icone }}</span><h3>{{ v.titre }}</h3><p>{{ v.texte }}</p></div>{% endfor %}
+    </div>
+  </div>
+</div>
+{% endblock %}

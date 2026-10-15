@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block title %}{{ article.titre }} – UIC{% endblock %}
+{% block meta_desc %}{{ article.chapeau }}{% endblock %}
+{% block content %}
+<div class="page">
+  <div class="page-topbar"><div class="container">
+    <a href="{% url 'actualites:liste' %}" class="back-link">← Retour aux actualités</a>
+    <span class="breadcrumb-sep">/</span><span class="breadcrumb-cur">{{ article.categorie.nom }}</span>
+  </div></div>
+  <div class="actu-page-hero" style="background-image:url('{{ article.image_src }}')">
+    <div class="actu-hero-overlay"></div>
+    <div class="container actu-hero-content">
+      <span class="actu-cat-pill">{{ article.categorie.nom }}</span>
+      <h1 class="actu-page-title">{{ article.titre }}</h1>
+      <p class="actu-page-date">📅 {{ article.date_publication|date:"j F Y" }} · {{ article.temps_lecture }} min de lecture</p>
+    </div>
+  </div>
+  <div class="container actu-page-body">
+    <div class="actu-page-grid">
+      <article class="actu-article">
+        {% if article.chapeau %}<p class="actu-chapeau">{{ article.chapeau }}</p>{% endif %}
+        {% for p in article.paragraphes %}<p>{{ p }}</p>{% endfor %}
+      </article>
+      <aside class="actu-aside">
+        {% if autres %}
+        <div class="aside-card"><h3>Autres actualités</h3>
+          {% for a in autres %}<a href="{{ a.get_absolute_url }}" class="other-actu-link"><span class="oa-cat">{{ a.categorie.nom }}</span><span class="oa-title">{{ a.titre|truncatechars:70 }}</span></a>{% endfor %}
+        </div>
+        {% endif %}
+        <div class="aside-card aside-cta">
+          <h3>Vous intégrer à l'UIC</h3><p>Découvrez nos filières et commencez votre candidature.</p>
+          <a href="{% url 'admissions:formulaire' %}" class="btn-cta-fil">Pré-inscription →</a>
+        </div>
+      </aside>
+    </div>
+  </div>
+</div>
+{% endblock %}

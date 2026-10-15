@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block title %}Candidature reçue – UIC{% endblock %}
+{% block content %}
+<div class="state-page"><div class="state-card">
+  <div class="ico">✅</div><h1>Candidature reçue !</h1>
+  <p>Merci. Notre équipe étudie votre dossier et vous contactera sous 48h. Conservez votre numéro de dossier pour en suivre l'avancement.</p>
+  <div class="dossier-no"><small>Numéro de dossier</small><strong>{{ numero }}</strong></div><br>
+  <a class="btn-accent" href="{% url 'admissions:suivi' %}">Suivre mon dossier</a>
+  <p style="margin:1.25rem 0 0"><a class="link-arrow" href="{% url 'core:home' %}">Retour à l'accueil →</a></p>
+</div></div>
+{% endblock %}

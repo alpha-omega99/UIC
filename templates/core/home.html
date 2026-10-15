@@ -1,0 +1,213 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block splash %}
+<!-- SPLASH -->
+<div id="splash">
+  <div class="sp-ring"><div class="sp-logo"><img src="{% static 'img/logo.webp' %}" alt="Logo UIC"></div></div>
+  <div class="sp-name"><strong>{{ site.nom_court }}</strong><span>{{ site.nom }}</span></div>
+  <div class="sp-progress"><div class="sp-bar"></div></div>
+  <p class="sp-tagline">{{ site.slogan_splash }}</p>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="page" id="page-home">
+
+<section class="hero" id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-geo">
+    <svg viewBox="0 0 1400 900" preserveAspectRatio="xMidYMid slice">
+      <defs><pattern id="g" width="60" height="60" patternUnits="userSpaceOnUse"><path d="M60 0L0 0 0 60" fill="none" stroke="white" stroke-width="0.5"/></pattern></defs>
+      <rect width="100%" height="100%" fill="url(#g)"/>
+      <circle cx="1050" cy="200" r="220" fill="none" stroke="white" stroke-width="0.4"/>
+      <circle cx="1050" cy="200" r="340" fill="none" stroke="white" stroke-width="0.25"/>
+    </svg>
+  </div>
+  <div class="hero-photo" id="hero-photo"></div>
+  <div class="hero-student" id="hero-student">
+    <img src="{% static 'img/etudiante.png' %}" alt="Étudiante UIC" id="student-img">
+  </div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <p class="hero-eye">{{ site.hero_surtitre }}</p>
+    <h1>{{ site.hero_titre_debut }}<br><em>{{ site.hero_titre_accent }}</em> {{ site.hero_titre_fin }}</h1>
+    <p class="hero-desc">{{ site.hero_description }}</p>
+    <div class="hero-btns">
+      <a class="btn-accent" href="#admission">Faire une demande d'admission</a>
+      <a class="btn-ghost" href="#filieres">Découvrir nos filières</a>
+    </div>
+  </div>
+</section>
+
+<div class="statsbar">
+  <div class="statsbar-inner">
+    {% for s in stats_barre %}
+    <div class="stat-cell"><div class="stat-ico">{{ s.icone }}</div><div><div class="stat-num" data-target="{{ s.valeur }}" data-suffix="{{ s.suffixe }}">0{{ s.suffixe }}</div><div class="stat-lbl">{{ s.libelle }}</div></div></div>
+    {% endfor %}
+  </div>
+</div>
+
+<section class="presentation" id="presentation">
+  <div class="container">
+    <div class="pres-grid">
+      <div class="pres-visual reveal">
+        <div class="pres-img"><img src="{% static 'img/formations.webp' %}" alt="UIC Formations"></div>
+        <div class="pres-badge"><div class="badge-num">20</div><div class="badge-lbl">ans d'excellence</div></div>
+      </div>
+      <div class="pres-body">
+        <span class="eyebrow reveal">Bienvenue à l'UIC</span>
+        <h2 class="stitle reveal d1">Ce qu'on fait vraiment à l'UIC</h2>
+        <p class="sbody reveal d2">À l'UIC, on est direct : on forme des gens capables de travailler dès le premier jour. Pas de cours théoriques sans application. Chaque matière est enseignée par quelqu'un qui l'a pratiquée. Et le diplôme, il est reconnu.</p>
+        <ul class="values">
+          {% for v in valeurs %}
+          <li class="v-item reveal d{{ forloop.counter|add:1 }}"><div class="v-icon">{{ v.icone }}</div><div class="v-text"><strong>{{ v.titre }}</strong><span>{{ v.texte }}</span></div></li>
+          {% endfor %}
+        </ul>
+        <a class="link-arrow reveal d4" href="{% url 'core:apropos' %}">En savoir plus sur l'UIC →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="president" id="president">
+  <div class="container">
+    <div class="pres-p-grid">
+      <div class="reveal" style="position:relative">
+        <div class="pres-p-img-wrap"><img src="{% static 'img/president.png' %}" alt="Président UIC"></div>
+        <div class="pres-p-badge"><strong>Message du</strong><span>Président</span></div>
+      </div>
+      <div class="reveal d1" style="padding-left:1rem">
+        <span class="eyebrow">Mot du Président</span>
+        <h2 class="stitle">Un message de notre fondateur</h2>
+        <blockquote>« {{ site.president_citation }} »</blockquote>
+        <p class="sbody" style="max-width:100%">{{ site.president_texte }}</p>
+        <div style="margin-top:2rem">
+          <strong style="display:block;font-family:var(--serif);font-size:1.1rem;font-weight:700;color:var(--primary)">{{ site.president_nom }}</strong>
+          <span style="font-size:.8rem;color:var(--g400)">{{ site.nom }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="filieres" id="filieres">
+  <div class="container">
+    <div class="fil-head">
+      <div><span class="eyebrow">Nos programmes</span><h2 class="stitle" style="margin-bottom:0">Filières d'excellence</h2></div>
+      <div class="filters">
+        <button type="button" class="flt on" data-f="all">Tous</button>
+        <button type="button" class="flt" data-f="licence">Licence</button>
+        <button type="button" class="flt" data-f="master">Master</button>
+      </div>
+    </div>
+    <div class="fil-grid">
+      {% for f in filieres %}
+      <a class="fil-card reveal" href="{{ f.get_absolute_url }}" data-lv="{{ f.niveaux_data }}" style="background-image:url('{{ f.image_src }}')">
+        <div class="fil-card-content">
+          <div class="fil-icon">{{ f.icone }}</div>
+          <span class="fil-badge">{{ f.niveaux_label }}</span>
+          <h3 class="fil-title">{{ f.nom }}</h3>
+          <p class="fil-desc">{{ f.resume }}</p>
+          <span class="fc-link">Voir le programme →</span>
+        </div>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="chiffres">
+  <div class="container">
+    <div class="chiffres-grid">
+      {% for s in stats_section %}
+      <div class="ch-item reveal {% if forloop.counter0 %}d{{ forloop.counter0 }}{% endif %}"><div class="ch-num" data-target="{{ s.valeur }}" data-suffix="{{ s.suffixe }}">0{{ s.suffixe }}</div><div class="ch-lbl">{{ s.libelle }}</div></div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% if temoignages %}
+<section class="alumni-section">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:.5rem">
+      <span class="eyebrow">Témoignages</span>
+      <h2 class="stitle">Ce que disent nos alumni</h2>
+    </div>
+    <div class="alumni-carousel" id="alumni-carousel">
+      {% for t in temoignages %}
+      <div class="alumni-card">
+        <div class="alumni-avatar">{{ t.initiale }}</div>
+        <p class="alumni-quote">"{{ t.texte }}"</p>
+        <div class="alumni-info">
+          <strong>{{ t.nom }}</strong>
+          <span>{{ t.promotion }}</span>
+          {% if t.poste %}<span class="alumni-poste">{{ t.poste }}</span>{% endif %}
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    <div class="alumni-nav" id="alumni-nav"></div>
+  </div>
+</section>
+{% endif %}
+
+<section class="admission" id="admission">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:3rem">
+      <span class="eyebrow reveal">Admission en ligne</span>
+      <h2 class="stitle reveal d1">Commencez votre candidature</h2>
+      <p class="sbody reveal d2" style="margin:0 auto">Déroulez chaque étape, complétez vos informations et soumettez votre dossier en quelques minutes.</p>
+    </div>
+    {% include 'partials/admission.html' %}
+  </div>
+</section>
+
+{% if article_une %}
+<section class="actualites" id="actualites">
+  <div class="container">
+    <div class="actu-head">
+      <div><span class="eyebrow reveal">Actualités</span><h2 class="stitle reveal d1" style="margin-bottom:0">Vie du campus</h2></div>
+      <a class="btn-outline reveal" href="{% url 'actualites:liste' %}">Voir toutes les actualités</a>
+    </div>
+    <div class="actu-grid">
+      <a class="actu-card big reveal" href="{{ article_une.get_absolute_url }}">
+        <div class="actu-img tall" style="background-image:url('{{ article_une.image_src }}');background-size:cover;background-position:center;">
+          <span class="actu-cat">{{ article_une.categorie.nom }}</span>
+        </div>
+        <div class="actu-body">
+          <p class="actu-date">{{ article_une.date_publication|date:"j F Y" }}</p>
+          <h3 class="actu-title">{{ article_une.titre }}</h3>
+          <p class="actu-excerpt">{{ article_une.chapeau }}</p>
+          <span class="actu-link">Lire la suite →</span>
+        </div>
+      </a>
+      {% for a in articles_autres %}
+      <a class="actu-card reveal d1" href="{{ a.get_absolute_url }}">
+        <div class="actu-img wide" style="background-image:url('{{ a.image_src }}');background-size:cover;background-position:center;">
+          <span class="actu-cat">{{ a.categorie.nom }}</span>
+        </div>
+        <div class="actu-body">
+          <p class="actu-date">{{ a.date_publication|date:"j F Y" }}</p>
+          <h3 class="actu-title">{{ a.titre }}</h3>
+          <span class="actu-link">Lire la suite →</span>
+        </div>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+<section class="pourquoi">
+  <div class="container">
+    <div class="pq-head"><span class="eyebrow reveal" style="color:var(--gold-light)">Pourquoi nous choisir</span><h2 class="stitle reveal d1">L'UIC, un cadre d'excellence</h2><p class="sbody reveal d2">Des ressources modernes pour votre réussite.</p></div>
+    <div class="av-grid">
+      {% for v in avantages %}
+      <div class="av-card reveal {% if forloop.counter0 %}d{{ forloop.counter0 }}{% endif %}"><span class="av-ico">{{ v.icone }}</span><h3 class="av-title">{{ v.titre }}</h3><p class="av-desc">{{ v.texte }}</p></div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+</div>
+{% endblock %}

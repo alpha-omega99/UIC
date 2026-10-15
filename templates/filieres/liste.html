@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block title %}Filières – UIC{% endblock %}
+{% block content %}
+<div class="page">
+  <div class="list-hero"><div class="container">
+    <span class="eyebrow">Nos programmes</span><h1 class="stitle">Filières d'excellence</h1>
+    <p class="sbody">Licence et Master : des formations construites avec les entreprises, pour travailler dès le premier jour.</p>
+  </div></div>
+  <section class="filieres" style="padding-top:3.5rem">
+    <div class="container">
+      <div class="fil-head" style="justify-content:flex-end">
+        <div class="filters">
+          <button type="button" class="flt on" data-f="all">Tous</button>
+          <button type="button" class="flt" data-f="licence">Licence</button>
+          <button type="button" class="flt" data-f="master">Master</button>
+        </div>
+      </div>
+      <div class="fil-grid">
+        {% for f in filieres %}
+        <a class="fil-card in" href="{{ f.get_absolute_url }}" data-lv="{{ f.niveaux_data }}" style="background-image:url('{{ f.image_src }}')">
+          <div class="fil-card-content">
+            <div class="fil-icon">{{ f.icone }}</div><span class="fil-badge">{{ f.niveaux_label }}</span>
+            <h3 class="fil-title">{{ f.nom }}</h3><p class="fil-desc">{{ f.resume }}</p><span class="fc-link">Voir le programme →</span>
+          </div>
+        </a>
+        {% empty %}<p class="empty" style="color:rgba(255,255,255,.5)">Aucune filière publiée pour le moment.</p>{% endfor %}
+      </div>
+    </div>
+  </section>
+</div>
+{% endblock %}

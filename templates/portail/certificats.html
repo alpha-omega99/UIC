@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}Certificats – UIC{% endblock %}
+{% block content %}
+<div class="container"><div class="portal-wrap">
+  {% include 'portail/_side.html' with actif='certs' %}
+  <main class="portal-main">
+    <h1>Certificats &amp; attestations</h1><p class="sub">Vos documents officiels délivrés par l'UIC.</p>
+    {% for c in certificats %}
+    <div class="doc-row"><div><strong>{{ c.get_type_document_display }}</strong><small>{{ c.annee_academique }}</small></div>
+      <a class="btn-dl" href="{% url 'portail:telecharger' 'certificat' c.pk %}">⬇ Télécharger</a></div>
+    {% empty %}<p class="empty">Aucun certificat disponible.</p>{% endfor %}
+  </main>
+</div></div>
+{% endblock %}

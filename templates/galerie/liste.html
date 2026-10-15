@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %}Galerie – UIC{% endblock %}
+{% block content %}
+<div class="page">
+  <div class="list-hero"><div class="container"><span class="eyebrow">Galerie</span><h1 class="stitle">La vie à l'UIC en images</h1>
+    <p class="sbody">Cérémonies, rentrées, activités : revivez les moments forts du campus.</p></div></div>
+  <div class="list-body"><div class="container"><div class="alb-grid">
+    {% for a in albums %}
+    <a class="alb-card" href="{% url 'galerie:detail' a.slug %}">
+      <div class="alb-cover" {% if a.couverture %}style="background-image:url('{{ a.couverture }}')"{% endif %}></div>
+      <div class="alb-body"><h3>{{ a.titre }}</h3><p>{{ a.photos.all|length }} photo{{ a.photos.all|length|pluralize }}{% if a.date %} · {{ a.date|date:"F Y" }}{% endif %}</p></div>
+    </a>
+    {% empty %}<p class="empty" style="grid-column:1/-1">Aucun album pour le moment.</p>{% endfor %}
+  </div></div></div>
+</div>
+{% endblock %}

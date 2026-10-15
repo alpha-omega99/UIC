@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block title %}Mot de passe oublié – UIC{% endblock %}
+{% block content %}
+<div class="state-page"><div class="state-card" style="text-align:left;max-width:440px;width:100%">
+  <h1 style="text-align:center">Mot de passe oublié</h1><p style="text-align:center">Indiquez l'e-mail associé à votre compte étudiant.</p>
+  <form method="post" novalidate>{% csrf_token %}
+    <div class="fg"><label for="{{ form.email.id_for_label }}">Adresse e-mail</label>{{ form.email }}{% for e in form.email.errors %}<div class="ferr">{{ e }}</div>{% endfor %}</div>
+    <button type="submit" class="btn-sub">Envoyer le lien</button>
+  </form>
+</div></div>
+{% endblock %}

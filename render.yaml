@@ -1,0 +1,31 @@
+services:
+  - type: web
+    name: uic-site
+    runtime: python
+    buildCommand: ./build.sh
+    startCommand: gunicorn config.wsgi:application --workers 2 --timeout 60
+    envVars:
+      - key: DJANGO_SETTINGS_MODULE
+        value: config.settings.prod
+      - key: SECRET_KEY
+        generateValue: true
+      - key: ADMIN_URL
+        value: gestion-uic-change-moi/
+      - key: DATABASE_URL
+        fromDatabase:
+          name: uic-db
+          property: connectionString
+      - key: MEDIA_ROOT
+        value: /var/data/media
+      - key: PRIVATE_MEDIA_ROOT
+        value: /var/data/private_media
+    disk:
+      name: uic-data
+      mountPath: /var/data
+      sizeGB: 1
+
+databases:
+  - name: uic-db
+    plan: free
+    databaseName: uic_db
+    user: uic_user

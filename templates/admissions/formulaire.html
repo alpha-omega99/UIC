@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}Pré-inscription – UIC{% endblock %}
+{% block content %}
+<div class="page">
+  <div class="page-topbar"><div class="container"><a href="{% url 'core:home' %}" class="back-link">← Retour à l'accueil</a><span class="breadcrumb-sep">/</span><span class="breadcrumb-cur">Pré-inscription</span></div></div>
+  <section class="admission" id="admission"><div class="container">
+    <div style="text-align:center;margin-bottom:3rem">
+      <span class="eyebrow">Admission en ligne</span><h1 class="stitle">Commencez votre candidature</h1>
+      <p class="sbody" style="margin:0 auto">Déroulez chaque étape, complétez vos informations et soumettez votre dossier en quelques minutes.</p>
+    </div>
+    {% include 'partials/admission.html' %}
+  </div></section>
+</div>
+{% endblock %}

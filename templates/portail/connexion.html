@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Espace étudiant – UIC{% endblock %}
+{% block content %}
+<div class="state-page"><div class="state-card" style="text-align:left;max-width:440px;width:100%">
+  <div style="text-align:center"><img src="{% static 'img/logo.webp' %}" alt="UIC" width="72" height="72" style="margin:0 auto .75rem;border-radius:50%"><h1>Espace étudiant</h1>
+  <p style="margin-bottom:1.25rem">Résultats, cartes d'admission et certificats.</p></div>
+  <form method="post" novalidate>{% csrf_token %}
+    <input type="hidden" name="next" value="{{ next }}">
+    {% if form.non_field_errors %}<div class="ferr" style="margin-bottom:1rem;text-align:center">Identifiant ou mot de passe incorrect.</div>{% endif %}
+    <div class="fg"><label for="{{ form.username.id_for_label }}">Identifiant (matricule)</label>{{ form.username }}</div>
+    <div class="fg"><label for="{{ form.password.id_for_label }}">Mot de passe</label>{{ form.password }}</div>
+    <button type="submit" class="btn-sub">Se connecter</button>
+  </form>
+  <p style="text-align:center;margin:1.25rem 0 0;font-size:.85rem"><a class="link-arrow" href="{% url 'portail:reset' %}">Mot de passe oublié ?</a></p>
+</div></div>
+{% endblock %}
