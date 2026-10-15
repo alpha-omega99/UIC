@@ -103,3 +103,38 @@ a.back-link{color:var(--primary);}
   .stat-cell{padding:1.1rem 1rem;gap:.7rem;min-width:0;}
   body{overflow-x:hidden;}
 }
+
+/* ── Hero mobile / tablette : l'étudiante reste visible en arrière-plan ── */
+@media (max-width:1024px){
+  .hero{height:auto;min-height:92vh;min-height:92svh;}
+  .hero-photo{width:100%;clip-path:none;opacity:.6;}
+  .hero-student{display:flex;width:100%;height:100%;left:0;right:0;justify-content:center;align-items:flex-start;z-index:2;}
+  .hero-student img{height:auto;width:min(92vw,560px);max-height:68%;object-fit:contain;object-position:center top;margin-top:1.5rem;filter:drop-shadow(0 20px 50px rgba(0,0,0,.5));}
+  .hero-student::after{display:none;}
+  /* dégradé : photo nette en haut, texte lisible en bas */
+  .hero-overlay{background:linear-gradient(to top,rgba(11,28,48,.98) 0%,rgba(11,28,48,.92) 38%,rgba(11,28,48,.45) 62%,rgba(11,28,48,.08) 100%);z-index:3;}
+  .hero-content{padding:0 1.25rem 3rem;min-height:92vh;min-height:92svh;display:flex;flex-direction:column;justify-content:flex-end;}
+}
+@media (max-width:640px){
+  .hero-student img{width:min(100vw,430px);max-height:60%;margin-top:.5rem;}
+  .hero h1{font-size:2.3rem;margin-bottom:1rem;}
+  .hero-desc{font-size:.95rem;margin-bottom:1.75rem;}
+  .hero-btns .btn-accent,.hero-btns .btn-ghost{flex:1 1 100%;text-align:center;justify-content:center;}
+}
+
+/* Hero mobile/tablette : l'étudiante reste visible en arrière-plan (comme sur ordinateur) */
+@media (max-width:1024px){
+  .hero{min-height:calc(100vh - 72px);min-height:calc(100svh - 72px);}
+  .hero-photo{width:100%;clip-path:none;opacity:.55;}
+  .hero-student{display:flex;top:0;bottom:auto;right:0;left:0;width:100%;height:80%;justify-content:center;align-items:flex-end;-webkit-mask-image:linear-gradient(to bottom,#000 68%,transparent 100%);mask-image:linear-gradient(to bottom,#000 68%,transparent 100%);}
+  .hero-student img{height:100%;width:100%;object-fit:contain;object-position:right bottom;transform:translateX(0) scale(.97);filter:drop-shadow(0 0 40px rgba(0,0,0,.45));}
+  .hero-student img.visible{transform:none;}
+  .hero-overlay{background:linear-gradient(to top,rgba(11,28,48,.98) 0%,rgba(11,28,48,.9) 34%,rgba(11,28,48,.4) 62%,rgba(11,28,48,.05) 100%);}
+  .hero-content{padding:0 1.25rem 2.5rem;}
+  .hero h1{text-shadow:0 2px 18px rgba(0,0,0,.5);}
+}
+@media (max-width:640px){
+  .hero{min-height:calc(100svh - 72px);}
+  .hero-student{top:0;bottom:0;height:100%;overflow:hidden;-webkit-mask-image:linear-gradient(to bottom,#000 60%,transparent 92%);mask-image:linear-gradient(to bottom,#000 60%,transparent 92%);}
+  .hero-student img{position:absolute;right:-8%;bottom:34%;height:78%;width:auto;max-width:none;object-fit:contain;}
+}

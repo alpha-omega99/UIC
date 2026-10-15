@@ -27,7 +27,12 @@
   }
   if (splash) {
     var seen = false;
-    try { seen = sessionStorage.getItem('uic_splash') === '1'; } catch (e) {}
+    // Le splash s'affiche à chaque chargement de l'accueil (arrivée, lien, rechargement, téléphone compris).
+    // Il est sauté seulement au retour arrière/avant du navigateur, pour ne pas gêner la navigation.
+    try {
+      var nav = performance.getEntriesByType && performance.getEntriesByType('navigation')[0];
+      seen = !!nav && nav.type === 'back_forward';
+    } catch (e) {}
     if (seen) { splash.remove(); revealStudent(); }
     else {
       document.body.style.overflow = 'hidden';
