@@ -2,18 +2,28 @@ from django.shortcuts import render
 from apps.actualites.models import Article
 from apps.admissions.forms import DemandeAdmissionForm
 from apps.filieres.models import Filiere
-from .models import FAQ, Chiffre, JalonHistoire, Temoignage, Valeur
+from .models import FAQ, Chiffre, JalonHistoire, Partenaire, Valeur
+
+
+def niveaux_utilises_accueil():
+    from django.db.models import Count, Q
+    from apps.filieres.models import NiveauFormation
+    return (NiveauFormation.objects
+            .annotate(nb=Count('filieres', filter=Q(filieres__actif=True, filieres__en_avant=True), distinct=True))
+            .filter(nb__gt=0))
 
 
 def home(request):
     articles = list(Article.objects.filter(publie=True).select_related('categorie')[:3])
     return render(request, 'core/home.html', {
-        'filieres': Filiere.objects.filter(actif=True),
+        'filieres': Filiere.objects.filter(actif=True, en_avant=True).prefetch_related('niveaux')[:6],
+        'niveaux': niveaux_utilises_accueil(),
+        'total_filieres': Filiere.objects.filter(actif=True).count(),
         'stats_barre': Chiffre.objects.filter(emplacement=Chiffre.BARRE),
         'stats_section': Chiffre.objects.filter(emplacement=Chiffre.SECTION),
         'valeurs': Valeur.objects.filter(zone=Valeur.ACCUEIL),
         'avantages': Valeur.objects.filter(zone=Valeur.POURQUOI),
-        'temoignages': Temoignage.objects.filter(actif=True),
+        'partenaires': Partenaire.objects.filter(actif=True),
         'article_une': articles[0] if articles else None,
         'articles_autres': articles[1:],
         'form': DemandeAdmissionForm(),
@@ -29,3 +39,18 @@ def apropos(request):
 
 def faq(request):
     return render(request, 'core/faq.html', {'faqs': FAQ.objects.filter(actif=True)})
+
+
+LEGAL_MAJ = "17 octobre 2026"
+
+
+def mentions_legales(request):
+    return render(request, 'legal/mentions.html', {'maj': LEGAL_MAJ})
+
+
+def confidentialite(request):
+    return render(request, 'legal/confidentialite.html', {'maj': LEGAL_MAJ})
+
+
+def conditions(request):
+    return render(request, 'legal/conditions.html', {'maj': LEGAL_MAJ})

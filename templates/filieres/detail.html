@@ -11,7 +11,7 @@
   <div class="fil-page-hero" style="background-image:url('{{ filiere.image_src }}')">
     <div class="fil-page-hero-overlay"></div>
     <div class="container fil-page-hero-content">
-      <span class="fil-page-badge" style="background:{{ filiere.couleur_badge }}">{{ filiere.niveaux_label }}</span>
+      {% for n in filiere.niveaux.all %}<span class="fil-page-badge" style="background:{{ filiere.couleur_badge }}">{{ n.nom }}</span> {% endfor %}
       <h1 class="fil-page-title">{{ filiere.icone }} {{ filiere.nom }}</h1>
       <p class="fil-page-sub">{{ filiere.sous_titre|default:filiere.resume }}</p>
       <div class="fil-page-meta">
@@ -55,11 +55,18 @@
           <h3>Informations pratiques</h3>
           <div class="info-row"><span class="info-lbl">Durée</span><span>{{ filiere.duree }}</span></div>
           <div class="info-row"><span class="info-lbl">Niveau d'entrée</span><span>{{ filiere.niveau_requis }}</span></div>
-          <div class="info-row"><span class="info-lbl">Mode</span><span>{{ filiere.mode }}</span></div>
+          {% if filiere.mode %}<div class="info-row"><span class="info-lbl">Mode</span><span>{{ filiere.mode }}</span></div>{% endif %}
           <div class="info-row"><span class="info-lbl">Langue</span><span>{{ filiere.langue }}</span></div>
         </div>
       </aside>
     </div>
+    {% if voisines %}
+    <section class="fil-voisines">
+      <h2>Autres formations</h2>
+      <div class="fgrid fgrid-3">{% for f in voisines %}{% include 'filieres/_carte.html' %}{% endfor %}</div>
+      <p style="text-align:center;margin-top:2rem"><a class="btn-outline-dark" href="{% url 'filieres:liste' %}">Voir toutes les formations</a></p>
+    </section>
+    {% endif %}
   </div>
 </div>
 {% endblock %}

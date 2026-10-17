@@ -24,7 +24,8 @@
           <div class="fg"><label for="{{ form.telephone.id_for_label }}">Téléphone</label>{{ form.telephone }}{% for e in form.telephone.errors %}<div class="ferr">{{ e }}</div>{% endfor %}</div>
           <div class="fg"><label for="{{ form.sujet.id_for_label }}">Sujet</label>{{ form.sujet }}{% for e in form.sujet.errors %}<div class="ferr">{{ e }}</div>{% endfor %}</div>
           <div class="fg"><label for="{{ form.message.id_for_label }}">Message *</label>{{ form.message }}{% for e in form.message.errors %}<div class="ferr">{{ e }}</div>{% endfor %}</div>
-          <button type="submit" class="btn-sub">Envoyer le message</button>
+          <p class="form-legal">En envoyant ce formulaire, vous acceptez que l'{{ site.nom_court }} traite vos informations pour répondre à votre demande, conformément à notre <a href="{% url 'core:confidentialite' %}">politique de confidentialité</a>.</p>
+        <button type="submit" class="btn-sub">Envoyer le message</button>
         </form>
       </div>
       <div class="contact-info">

@@ -11,6 +11,7 @@ cp .env.example .env        # puis mettre une SECRET_KEY aléatoire (voir ci-des
 python manage.py migrate
 python manage.py createcachetable
 python manage.py seed_uic                            # contenu de la maquette
+python manage.py seed_images                         # images, galerie et partenaires (voir static/img/README.md)
 python manage.py createsuperuser
 python manage.py runserver
 ```

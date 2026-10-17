@@ -3,7 +3,7 @@
 {% block splash %}
 <!-- SPLASH -->
 <div id="splash">
-  <div class="sp-ring"><div class="sp-logo"><img src="{% static 'img/logo.webp' %}" alt="Logo UIC"></div></div>
+  <div class="sp-ring"><div class="sp-logo"><img src="{% static 'img/marque/logo.webp' %}" alt="Logo UIC"></div></div>
   <div class="sp-name"><strong>{{ site.nom_court }}</strong><span>{{ site.nom }}</span></div>
   <div class="sp-progress"><div class="sp-bar"></div></div>
   <p class="sp-tagline">{{ site.slogan_splash }}</p>
@@ -25,7 +25,7 @@
   </div>
   <div class="hero-photo" id="hero-photo"></div>
   <div class="hero-student" id="hero-student">
-    <img src="{% static 'img/etudiante.png' %}" alt="Étudiante UIC" id="student-img">
+    <img src="{% static 'img/accueil/etudiante.webp' %}" alt="Étudiante UIC" id="student-img">
   </div>
   <div class="hero-overlay"></div>
   <div class="hero-content">
@@ -51,7 +51,7 @@
   <div class="container">
     <div class="pres-grid">
       <div class="pres-visual reveal">
-        <div class="pres-img"><img src="{% static 'img/formations.webp' %}" alt="UIC Formations"></div>
+        <div class="pres-img"><img src="{% static 'img/accueil/formations.webp' %}" alt="UIC Formations"></div>
         <div class="pres-badge"><div class="badge-num">20</div><div class="badge-lbl">ans d'excellence</div></div>
       </div>
       <div class="pres-body">
@@ -73,7 +73,7 @@
   <div class="container">
     <div class="pres-p-grid">
       <div class="reveal" style="position:relative">
-        <div class="pres-p-img-wrap"><img src="{% static 'img/president.png' %}" alt="Président UIC"></div>
+        <div class="pres-p-img-wrap"><img src="{% static 'img/accueil/president.webp' %}" alt="Président UIC"></div>
         <div class="pres-p-badge"><strong>Message du</strong><span>Président</span></div>
       </div>
       <div class="reveal d1" style="padding-left:1rem">
@@ -94,24 +94,18 @@
   <div class="container">
     <div class="fil-head">
       <div><span class="eyebrow">Nos programmes</span><h2 class="stitle" style="margin-bottom:0">Filières d'excellence</h2></div>
-      <div class="filters">
+      {% if niveaux|length > 1 %}
+      <div class="filters" role="group" aria-label="Filtrer par niveau">
         <button type="button" class="flt on" data-f="all">Tous</button>
-        <button type="button" class="flt" data-f="licence">Licence</button>
-        <button type="button" class="flt" data-f="master">Master</button>
+        {% for n in niveaux %}<button type="button" class="flt" data-f="{{ n.slug }}">{{ n.nom }}</button>{% endfor %}
       </div>
+      {% endif %}
     </div>
-    <div class="fil-grid">
-      {% for f in filieres %}
-      <a class="fil-card reveal" href="{{ f.get_absolute_url }}" data-lv="{{ f.niveaux_data }}" style="background-image:url('{{ f.image_src }}')">
-        <div class="fil-card-content">
-          <div class="fil-icon">{{ f.icone }}</div>
-          <span class="fil-badge">{{ f.niveaux_label }}</span>
-          <h3 class="fil-title">{{ f.nom }}</h3>
-          <p class="fil-desc">{{ f.resume }}</p>
-          <span class="fc-link">Voir le programme →</span>
-        </div>
-      </a>
-      {% endfor %}
+    <div class="fgrid" id="fgrid">
+      {% for f in filieres %}{% include 'filieres/_carte.html' %}{% endfor %}
+    </div>
+    <div class="fil-more">
+      <a class="btn-accent" href="{% url 'filieres:liste' %}">Voir toutes les formations{% if total_filieres > filieres|length %} ({{ total_filieres }}){% endif %}</a>
     </div>
   </div>
 </section>
@@ -125,31 +119,6 @@
     </div>
   </div>
 </section>
-
-{% if temoignages %}
-<section class="alumni-section">
-  <div class="container">
-    <div style="text-align:center;margin-bottom:.5rem">
-      <span class="eyebrow">Témoignages</span>
-      <h2 class="stitle">Ce que disent nos alumni</h2>
-    </div>
-    <div class="alumni-carousel" id="alumni-carousel">
-      {% for t in temoignages %}
-      <div class="alumni-card">
-        <div class="alumni-avatar">{{ t.initiale }}</div>
-        <p class="alumni-quote">"{{ t.texte }}"</p>
-        <div class="alumni-info">
-          <strong>{{ t.nom }}</strong>
-          <span>{{ t.promotion }}</span>
-          {% if t.poste %}<span class="alumni-poste">{{ t.poste }}</span>{% endif %}
-        </div>
-      </div>
-      {% endfor %}
-    </div>
-    <div class="alumni-nav" id="alumni-nav"></div>
-  </div>
-</section>
-{% endif %}
 
 <section class="admission" id="admission">
   <div class="container">
@@ -208,6 +177,22 @@
     </div>
   </div>
 </section>
+
+{% if partenaires %}
+<section class="partenaires" id="partenaires">
+  <div class="container">
+    <div class="part-head"><span class="eyebrow reveal">Ouverture internationale</span><h2 class="stitle reveal d1">Nos partenaires</h2><p class="sbody reveal d2">Des universités de référence avec lesquelles l'UIC collabore.</p></div>
+    <div class="part-grid">
+      {% for p in partenaires %}
+      {% if p.site_web %}<a class="part-card reveal" href="{{ p.site_web }}" target="_blank" rel="noopener noreferrer" aria-label="{{ p.nom }}">{% else %}<div class="part-card reveal">{% endif %}
+        <div class="part-logo"><img src="{{ p.logo_src }}" alt="Logo {{ p.nom }}" loading="lazy"></div>
+        <strong>{{ p.nom }}</strong>{% if p.pays %}<span>{{ p.pays }}</span>{% endif %}
+      {% if p.site_web %}</a>{% else %}</div>{% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
 
 </div>
 {% endblock %}

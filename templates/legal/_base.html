@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="page">
+  <div class="list-hero"><div class="container"><span class="eyebrow">Informations légales</span><h1 class="stitle">{% block h1 %}{% endblock %}</h1>
+    <p class="sbody">Dernière mise à jour : {{ maj }}</p></div></div>
+  <div class="list-body"><div class="container legal">
+    {% block body %}{% endblock %}
+    <nav class="legal-nav" aria-label="Autres pages légales">
+      <a href="{% url 'core:mentions' %}">Mentions légales</a>
+      <a href="{% url 'core:confidentialite' %}">Politique de confidentialité</a>
+      <a href="{% url 'core:conditions' %}">Conditions d'utilisation</a>
+    </nav>
+  </div></div>
+</div>
+{% endblock %}

@@ -10,7 +10,7 @@
       <li><span class="num">3</span> Soumission &amp; confirmation</li>
     </ul>
   </div>
-  <div class="adm-hero-img"><img src="{% static 'img/formations.webp' %}" alt="Étudiants UIC"></div>
+  <div class="adm-hero-img"><img src="{% static 'img/accueil/formations.webp' %}" alt="Étudiants UIC"></div>
 </div>
 
 <form method="post" action="{% url 'admissions:formulaire' %}" id="admission-form" novalidate>
@@ -61,6 +61,7 @@
           <strong style="color:var(--primary);display:block;margin-bottom:.5rem">📋 Récapitulatif</strong>
           <div id="recap-content">Complétez les étapes précédentes pour voir votre récapitulatif.</div>
         </div>
+        <p class="form-legal">En envoyant ce formulaire, vous acceptez que l'{{ site.nom_court }} traite vos informations pour répondre à votre demande, conformément à notre <a href="{% url 'core:confidentialite' %}">politique de confidentialité</a>.</p>
         <button type="submit" class="btn-sub" id="btnSubmit">🎓 Soumettre ma candidature</button>
         <p class="fnote">En soumettant ce formulaire, vous acceptez d'être contacté par l'équipe de l'UIC.</p>
       </div>

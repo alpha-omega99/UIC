@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import FAQ, Chiffre, InfoEtablissement, JalonHistoire, Temoignage, Valeur
+from .models import FAQ, Chiffre, InfoEtablissement, JalonHistoire, Partenaire, Valeur
 
 
 @admin.register(InfoEtablissement)
@@ -9,6 +9,8 @@ class InfoAdmin(admin.ModelAdmin):
         ('Page d\'accueil (hero)', {'fields': ('hero_surtitre', 'hero_titre_debut', 'hero_titre_accent', 'hero_titre_fin', 'hero_description')}),
         ('Mot du Président', {'fields': ('president_nom', 'president_citation', 'president_texte')}),
         ('Contact', {'fields': ('telephone', 'email', 'whatsapp', 'adresse', 'boite_postale', 'horaires', 'horaires_court', 'maps_embed')}),
+        ('Mentions légales', {'fields': ('statut_juridique', 'rccm', 'numero_agrement', 'directeur_publication', 'hebergeur'),
+                              'description': "Ces informations apparaissent dans la page « Mentions légales ». Les champs vides ne sont pas affichés."}),
         ('Réseaux sociaux', {'fields': ('facebook', 'linkedin', 'x_twitter', 'youtube')}),
     )
 
@@ -38,13 +40,13 @@ class JalonAdmin(admin.ModelAdmin):
     list_display = ('annee', 'titre')
 
 
-@admin.register(Temoignage)
-class TemoignageAdmin(admin.ModelAdmin):
-    list_display = ('nom', 'promotion', 'poste', 'actif', 'ordre')
-    list_editable = ('actif', 'ordre')
-
-
 @admin.register(FAQ)
 class FAQAdmin(admin.ModelAdmin):
     list_display = ('question', 'actif', 'ordre')
+    list_editable = ('actif', 'ordre')
+
+
+@admin.register(Partenaire)
+class PartenaireAdmin(admin.ModelAdmin):
+    list_display = ('nom', 'pays', 'actif', 'ordre')
     list_editable = ('actif', 'ordre')

@@ -1,0 +1,15 @@
+<a class="fcard" href="{{ f.get_absolute_url }}" data-lv="{{ f.niveaux_data }}" data-nom="{{ f.nom|lower }} {{ f.resume|lower }}">
+  <div class="fcard-img" style="background-image:url('{{ f.image_src }}')">
+    <div class="fcard-badges">{% for n in f.niveaux.all %}<span>{{ n.nom }}</span>{% endfor %}</div>
+    {% if f.icone %}<div class="fcard-ico" aria-hidden="true">{{ f.icone }}</div>{% endif %}
+  </div>
+  <div class="fcard-body">
+    <h3>{{ f.nom }}</h3>
+    <p>{{ f.resume }}</p>
+    <ul class="fcard-meta">
+      <li>⏱ {{ f.duree }}</li>
+      <li>📋 {{ f.niveau_requis }}</li>
+    </ul>
+    <span class="fcard-link">Découvrir le programme <i aria-hidden="true">→</i></span>
+  </div>
+</a>

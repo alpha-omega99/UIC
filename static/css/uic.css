@@ -181,20 +181,6 @@ blockquote{border-left:3px solid var(--gold);padding-left:1.5rem;margin:1.5rem 0
 .ch-lbl{font-size:.8rem;color:rgba(255,255,255,.45);letter-spacing:.08em;text-transform:uppercase;font-weight:500;}
 
 /* ══ ALUMNI ══ */
-.alumni-section{background:var(--off);padding:6rem 0;overflow:hidden;}
-.alumni-carousel{display:flex;gap:1.5rem;margin-top:3rem;overflow-x:auto;padding-bottom:1rem;scrollbar-width:none;cursor:grab;}
-.alumni-carousel:active{cursor:grabbing;}
-.alumni-carousel::-webkit-scrollbar{display:none;}
-.alumni-card{min-width:320px;background:white;border:1px solid var(--g200);border-radius:14px;padding:2rem;transition:all var(--tr);flex-shrink:0;}
-.alumni-card:hover{box-shadow:0 16px 50px rgba(27,58,92,.1);transform:translateY(-4px);border-color:var(--gold);}
-.alumni-avatar{width:52px;height:52px;border-radius:50%;background:var(--primary);color:var(--gold-light);font-family:var(--serif);font-size:1.4rem;display:flex;align-items:center;justify-content:center;margin-bottom:1.2rem;}
-.alumni-quote{font-family:var(--serif);font-size:1rem;font-style:italic;color:var(--g600);line-height:1.75;margin-bottom:1.2rem;}
-.alumni-info strong{display:block;font-size:.9rem;font-weight:600;color:var(--primary);}
-.alumni-info span{font-size:.78rem;color:var(--g400);display:block;margin-top:.15rem;}
-.alumni-poste{color:var(--gold)!important;font-weight:500!important;margin-top:.1rem!important;}
-.alumni-nav{display:flex;justify-content:center;gap:.75rem;margin-top:2rem;}
-.alumni-dot{width:8px;height:8px;border-radius:50%;background:var(--g200);border:none;cursor:pointer;transition:all .2s;padding:0;}
-.alumni-dot.active{background:var(--gold);width:24px;border-radius:4px;}
 
 /* ══ ADMISSION ACCORDION ══ */
 .admission{background:var(--off);}

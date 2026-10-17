@@ -3,7 +3,7 @@
 {% block title %}Espace étudiant – UIC{% endblock %}
 {% block content %}
 <div class="state-page"><div class="state-card" style="text-align:left;max-width:440px;width:100%">
-  <div style="text-align:center"><img src="{% static 'img/logo.webp' %}" alt="UIC" width="72" height="72" style="margin:0 auto .75rem;border-radius:50%"><h1>Espace étudiant</h1>
+  <div style="text-align:center"><img src="{% static 'img/marque/logo.webp' %}" alt="UIC" width="72" height="72" style="margin:0 auto .75rem;border-radius:50%"><h1>Espace étudiant</h1>
   <p style="margin-bottom:1.25rem">Résultats, cartes d'admission et certificats.</p></div>
   <form method="post" novalidate>{% csrf_token %}
     <input type="hidden" name="next" value="{{ next }}">

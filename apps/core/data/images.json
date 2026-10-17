@@ -1,0 +1,201 @@
+{
+ "filieres": {},
+ "articles": {
+  "rentree-2025": "img/campus/salle-de-cours-01.webp",
+  "partenariat-entreprises": "img/campus/vie-etudiante-01.webp",
+  "resultats-master": "img/evenements/remise-diplomes-02.webp"
+ },
+ "albums": [
+  {
+   "slug": "vie-etudiante",
+   "titre": "Vie étudiante",
+   "description": "Les étudiants de l'UIC au quotidien : portraits, travaux de groupe, moments partagés.",
+   "date": "2025-09-01",
+   "photos": [
+    [
+     "img/campus/vie-etudiante-01.webp",
+     "Étudiants de l'UIC"
+    ],
+    [
+     "img/campus/vie-etudiante-02.webp",
+     "Étudiants de l'UIC"
+    ],
+    [
+     "img/campus/vie-etudiante-03.webp",
+     "Étudiants de l'UIC"
+    ],
+    [
+     "img/campus/vie-etudiante-04.webp",
+     "Étudiants de l'UIC"
+    ],
+    [
+     "img/campus/vie-etudiante-05.webp",
+     "Étudiants de l'UIC"
+    ],
+    [
+     "img/campus/vie-etudiante-06.webp",
+     "Étudiants de l'UIC"
+    ],
+    [
+     "img/campus/vie-etudiante-07.webp",
+     "Étudiants de l'UIC"
+    ],
+    [
+     "img/campus/vie-etudiante-08.webp",
+     "Étudiants de l'UIC"
+    ],
+    [
+     "img/campus/vie-etudiante-09.webp",
+     "Étudiants de l'UIC"
+    ],
+    [
+     "img/campus/vie-etudiante-10.webp",
+     "Étudiants de l'UIC"
+    ],
+    [
+     "img/campus/travail-en-groupe-01.webp",
+     "Travail en groupe"
+    ],
+    [
+     "img/campus/travail-en-groupe-02.webp",
+     "Travail en groupe"
+    ]
+   ]
+  },
+  {
+   "slug": "salles-de-cours",
+   "titre": "En salle de cours",
+   "description": "Cours, travaux dirigés et examens sur le campus de Cocody.",
+   "date": "2025-09-15",
+   "photos": [
+    [
+     "img/campus/salle-de-cours-01.webp",
+     "En salle de cours"
+    ],
+    [
+     "img/campus/salle-de-cours-02.webp",
+     "En salle de cours"
+    ],
+    [
+     "img/campus/salle-de-cours-03.webp",
+     "En salle de cours"
+    ],
+    [
+     "img/campus/salle-de-cours-04.webp",
+     "En salle de cours"
+    ]
+   ]
+  },
+  {
+   "slug": "remise-des-diplomes",
+   "titre": "Remise des diplômes",
+   "description": "Première promotion du Master 2 Droit des affaires.",
+   "date": "2025-07-01",
+   "photos": [
+    [
+     "img/evenements/remise-diplomes-01.webp",
+     "Remise des diplômes"
+    ],
+    [
+     "img/evenements/remise-diplomes-02.webp",
+     "Remise des diplômes"
+    ],
+    [
+     "img/evenements/remise-diplomes-03.webp",
+     "Remise des diplômes"
+    ],
+    [
+     "img/evenements/remise-diplomes-04.webp",
+     "Remise des diplômes"
+    ],
+    [
+     "img/evenements/remise-diplomes-05.webp",
+     "Remise des diplômes"
+    ]
+   ]
+  },
+  {
+   "slug": "journee-culturelle",
+   "titre": "Journée culturelle",
+   "description": "Tenues traditionnelles, musique et convivialité : la journée culturelle de l'UIC.",
+   "date": "2026-04-01",
+   "photos": [
+    [
+     "img/evenements/journee-culturelle-01.webp",
+     "Journée culturelle"
+    ],
+    [
+     "img/evenements/journee-culturelle-02.webp",
+     "Journée culturelle"
+    ],
+    [
+     "img/evenements/journee-culturelle-03.webp",
+     "Journée culturelle"
+    ],
+    [
+     "img/evenements/journee-culturelle-04.webp",
+     "Journée culturelle"
+    ],
+    [
+     "img/evenements/journee-culturelle-05.webp",
+     "Journée culturelle"
+    ],
+    [
+     "img/evenements/journee-culturelle-06.webp",
+     "Journée culturelle"
+    ],
+    [
+     "img/evenements/journee-culturelle-07.webp",
+     "Journée culturelle"
+    ],
+    [
+     "img/evenements/journee-culturelle-08.webp",
+     "Journée culturelle"
+    ],
+    [
+     "img/evenements/journee-culturelle-09.webp",
+     "Journée culturelle"
+    ],
+    [
+     "img/evenements/journee-culturelle-10.webp",
+     "Journée culturelle"
+    ],
+    [
+     "img/evenements/journee-culturelle-11.webp",
+     "Journée culturelle"
+    ],
+    [
+     "img/evenements/journee-culturelle-12.webp",
+     "Journée culturelle"
+    ],
+    [
+     "img/evenements/journee-culturelle-13.webp",
+     "Journée culturelle"
+    ]
+   ]
+  }
+ ],
+ "partenaires": [
+  {
+   "nom": "Université Laval",
+   "pays": "Québec, Canada",
+   "logo": "img/partenaires/universite-laval.webp",
+   "site_web": "https://www.ulaval.ca",
+   "ordre": 1
+  },
+  {
+   "nom": "RUDN University",
+   "pays": "Moscou, Russie",
+   "logo": "img/partenaires/rudn-university.webp",
+   "site_web": "https://eng.rudn.ru",
+   "ordre": 2
+  },
+  {
+   "nom": "Université Laurentienne",
+   "pays": "Ontario, Canada",
+   "logo": "img/partenaires/universite-laurentienne.webp",
+   "site_web": "https://laurentian.ca",
+   "ordre": 3
+  }
+ ]
+}

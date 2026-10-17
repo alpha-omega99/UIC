@@ -1,550 +1,404 @@
 {
  "filieres": [
   {
-   "slug": "management",
-   "nom": "Gestion & Management",
-   "icone": "💼",
-   "resume": "Administration des entreprises, stratégie et leadership pour les futurs décideurs.",
-   "description": "En Gestion & Management à l'UIC, on apprend à diriger une équipe, lire un bilan comptable, monter un projet et convaincre un investisseur — pas dans les livres, mais en faisant. Nos intervenants sont des directeurs, des DRH et des entrepreneurs qui enseignent ce qu'ils pratiquent au quotidien à Abidjan et ailleurs.",
-   "badge": "Licence · Master",
-   "badge_color": "#C8922A",
-   "sous_titre": "Administration des entreprises, stratégie et leadership pour les futurs décideurs.",
-   "duree": "3 ans Licence / 5 ans Master",
-   "niveau_requis": "Baccalauréat ou équivalent",
-   "mode": "Présentiel + Hybride",
+   "slug": "classe-prepa-tsi",
+   "nom": "Classe préparatoire TSI",
+   "icone": "🛠️",
+   "pole": "Classes préparatoires",
+   "niveaux": [
+    "Classe préparatoire"
+   ],
+   "resume": "Technologie et Sciences de l'Ingénieur : préparation aux grandes écoles et cycles sélectifs.",
+   "description": "La classe préparatoire TSI (Technologie et Sciences de l'Ingénieur) prépare aux grandes écoles et aux cycles sélectifs. Admission par concours d'entrée en classe préparatoire intégrée, réservée aux bacheliers récents.",
+   "sous_titre": "Technologie et Sciences de l'Ingénieur : préparation aux grandes écoles et cycles sélectifs.",
+   "duree": "Admission sur concours",
+   "niveau_requis": "Baccalauréat récent",
+   "mode": "",
    "langue": "Français",
-   "debouches": [
-    "Directeur d'entreprise",
-    "Consultant en management",
-    "Chef de projet",
-    "Responsable RH",
-    "Entrepreneur"
-   ],
-   "modules": [
-    [
-     1,
-     "Introduction à la gestion"
-    ],
-    [
-     1,
-     "Comptabilité générale"
-    ],
-    [
-     1,
-     "Droit des affaires"
-    ],
-    [
-     1,
-     "Économie générale"
-    ],
-    [
-     2,
-     "Management des organisations"
-    ],
-    [
-     2,
-     "Marketing fondamental"
-    ],
-    [
-     2,
-     "Finance d'entreprise"
-    ],
-    [
-     2,
-     "Statistiques"
-    ],
-    [
-     3,
-     "Stratégie d'entreprise"
-    ],
-    [
-     3,
-     "GRH avancée"
-    ],
-    [
-     3,
-     "Contrôle de gestion"
-    ],
-    [
-     3,
-     "Entrepreneuriat"
-    ],
-    [
-     4,
-     "Management international"
-    ],
-    [
-     4,
-     "Business Plan"
-    ],
-    [
-     4,
-     "Stage professionnel"
-    ],
-    [
-     4,
-     "Projet de fin d'études"
-    ]
-   ],
-   "image_url": "https://images.unsplash.com/photo-1552664730-d307ca884978?w=900&q=80",
-   "ordre": 0,
-   "licence": true,
-   "master": true
+   "debouches": [],
+   "image_statique": "img/campus/travail-en-groupe-01.webp",
+   "en_avant": false,
+   "ordre": 0
   },
   {
-   "slug": "informatique",
-   "nom": "Informatique & Réseaux",
-   "icone": "💻",
-   "resume": "Développement logiciel, cybersécurité et infrastructure réseau pour les technologies de demain.",
-   "description": "En Informatique & Réseaux à l'UIC, on code, on installe, on répare et on sécurise dès la première année. Pas de théorie sans pratique : les salles informatiques restent ouvertes le soir, et les projets de fin d'études sont des solutions réelles commandées par des entreprises partenaires.",
-   "badge": "Licence · Master",
-   "badge_color": "#2563eb",
-   "sous_titre": "Développement logiciel, cybersécurité et infrastructure réseau pour les technologies de demain.",
-   "duree": "3 ans Licence / 5 ans Master",
-   "niveau_requis": "Baccalauréat scientifique ou équivalent",
-   "mode": "Présentiel + Hybride",
+   "slug": "classe-prepa-bpcst",
+   "nom": "Classe préparatoire BPCST",
+   "icone": "🔬",
+   "pole": "Classes préparatoires",
+   "niveaux": [
+    "Classe préparatoire"
+   ],
+   "resume": "Biologie, Chimie, Physique et Sciences de la Terre : préparation aux grandes écoles et cycles sélectifs.",
+   "description": "La classe préparatoire BPCST (Biologie, Chimie, Physique et Sciences de la Terre) prépare aux grandes écoles et aux cycles sélectifs. Admission par concours d'entrée en classe préparatoire intégrée, réservée aux bacheliers récents.",
+   "sous_titre": "Biologie, Chimie, Physique et Sciences de la Terre : préparation aux grandes écoles et cycles sélectifs.",
+   "duree": "Admission sur concours",
+   "niveau_requis": "Baccalauréat récent",
+   "mode": "",
    "langue": "Français",
-   "debouches": [
-    "Développeur full-stack",
-    "Ingénieur réseau",
-    "Expert cybersécurité",
-    "DevOps",
-    "CTO / DSI"
-   ],
-   "modules": [
-    [
-     1,
-     "Algorithmique"
-    ],
-    [
-     1,
-     "Programmation Python/Java"
-    ],
-    [
-     1,
-     "Architecture des systèmes"
-    ],
-    [
-     1,
-     "Mathématiques discrètes"
-    ],
-    [
-     2,
-     "Bases de données"
-    ],
-    [
-     2,
-     "Réseaux informatiques"
-    ],
-    [
-     2,
-     "Développement web"
-    ],
-    [
-     2,
-     "Sécurité informatique"
-    ],
-    [
-     3,
-     "Cloud computing"
-    ],
-    [
-     3,
-     "DevOps & CI/CD"
-    ],
-    [
-     3,
-     "Intelligence artificielle"
-    ],
-    [
-     3,
-     "Administration Linux"
-    ],
-    [
-     4,
-     "Cybersécurité avancée"
-    ],
-    [
-     4,
-     "Big Data"
-    ],
-    [
-     4,
-     "Stage en entreprise"
-    ],
-    [
-     4,
-     "Projet de fin d'études"
-    ]
-   ],
-   "image_url": "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=900&q=80",
-   "ordre": 1,
-   "licence": true,
-   "master": true
+   "debouches": [],
+   "image_statique": "img/campus/vie-etudiante-03.webp",
+   "en_avant": false,
+   "ordre": 1
   },
   {
-   "slug": "droit",
-   "nom": "Droit des Affaires",
-   "icone": "⚖️",
-   "resume": "Droit commercial, fiscalité et régulation pour conseiller les entreprises et institutions ivoiriens.",
-   "description": "Le Droit des Affaires à l'UIC, c'est concret : on travaille sur des contrats réels, on simule des procès, on analyse des litiges ivoiriens actuels. Le droit OHADA est enseigné par des avocats et juristes d'entreprise qui le pratiquent chaque semaine devant les tribunaux.",
-   "badge": "Licence · Master",
-   "badge_color": "#7c3aed",
-   "sous_titre": "Droit commercial, fiscalité et régulation pour conseiller les entreprises et institutions ivoiriens.",
-   "duree": "3 ans Licence / 5 ans Master",
-   "niveau_requis": "Baccalauréat toutes séries",
-   "mode": "Présentiel + Hybride",
+   "slug": "classe-prepa-ecg",
+   "nom": "Classe préparatoire ECG",
+   "icone": "📈",
+   "pole": "Classes préparatoires",
+   "niveaux": [
+    "Classe préparatoire"
+   ],
+   "resume": "Économique et Commerciale, option Générale : préparation aux grandes écoles et cycles sélectifs.",
+   "description": "La classe préparatoire ECG (Économique et Commerciale, option Générale) prépare aux grandes écoles et aux cycles sélectifs. Admission par concours d'entrée en classe préparatoire intégrée, réservée aux bacheliers récents.",
+   "sous_titre": "Économique et Commerciale, option Générale : préparation aux grandes écoles et cycles sélectifs.",
+   "duree": "Admission sur concours",
+   "niveau_requis": "Baccalauréat récent",
+   "mode": "",
    "langue": "Français",
-   "debouches": [
-    "Avocat d'affaires",
-    "Juriste d'entreprise",
-    "Notaire",
-    "Magistrat",
-    "Consultant juridique"
-   ],
-   "modules": [
-    [
-     1,
-     "Introduction au droit"
-    ],
-    [
-     1,
-     "Droit civil"
-    ],
-    [
-     1,
-     "Droit constitutionnel"
-    ],
-    [
-     1,
-     "Histoire du droit"
-    ],
-    [
-     2,
-     "Droit des sociétés"
-    ],
-    [
-     2,
-     "Droit fiscal"
-    ],
-    [
-     2,
-     "Procédure civile"
-    ],
-    [
-     2,
-     "Économie du droit"
-    ],
-    [
-     3,
-     "Droit OHADA"
-    ],
-    [
-     3,
-     "Droit du travail"
-    ],
-    [
-     3,
-     "Droit bancaire"
-    ],
-    [
-     3,
-     "Arbitrage commercial"
-    ],
-    [
-     4,
-     "Contentieux des affaires"
-    ],
-    [
-     4,
-     "Droit international privé"
-    ],
-    [
-     4,
-     "Stage juridique"
-    ],
-    [
-     4,
-     "Mémoire de recherche"
-    ]
-   ],
-   "image_url": "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=900&q=80",
-   "ordre": 2,
-   "licence": true,
-   "master": true
+   "debouches": [],
+   "image_statique": "img/campus/salle-de-cours-02.webp",
+   "en_avant": true,
+   "ordre": 2
   },
   {
-   "slug": "finance",
-   "nom": "Finance & Comptabilité",
+   "slug": "bts-fcge",
+   "nom": "BTS Finances, Comptabilité & Gestion des Entreprises (FCGE)",
    "icone": "📊",
-   "resume": "Finance d'entreprise, audit et comptabilité pour piloter la performance des organisations.",
-   "description": "En Finance & Comptabilité à l'UIC, on apprend à lire une liasse fiscale, construire un budget prévisionnel et passer un audit sans trembler. Le SYSCOHADA et l'IFRS sont enseignés par des experts-comptables et auditeurs qui travaillent pour de vraies entreprises ivoiriennes et multinationales.",
-   "badge": "Licence · Master",
-   "badge_color": "#059669",
-   "sous_titre": "Finance d'entreprise, audit et comptabilité pour piloter la performance des organisations.",
-   "duree": "3 ans Licence / 5 ans Master",
-   "niveau_requis": "Baccalauréat série D ou G",
-   "mode": "Présentiel + Hybride",
+   "pole": "BTS (Bac +2)",
+   "niveaux": [
+    "BTS"
+   ],
+   "resume": "Comptabilité, finances et gestion des entreprises, niveau Bac +2.",
+   "description": "Le BTS FCGE (Finances, Comptabilité et Gestion des Entreprises) forme aux métiers de la comptabilité et de la gestion. Formation de niveau Bac +2 (BTS) orientée vers une insertion rapide sur le marché de l'emploi.",
+   "sous_titre": "Comptabilité, finances et gestion des entreprises, niveau Bac +2.",
+   "duree": "Bac +2",
+   "niveau_requis": "Baccalauréat",
+   "mode": "",
    "langue": "Français",
    "debouches": [
-    "Expert-comptable",
-    "Auditeur financier",
-    "Analyste financier",
-    "DAF",
-    "Contrôleur de gestion"
+    "Assistant comptable",
+    "Technicien de gestion"
    ],
-   "modules": [
-    [
-     1,
-     "Comptabilité générale"
-    ],
-    [
-     1,
-     "Mathématiques financières"
-    ],
-    [
-     1,
-     "Analyse économique"
-    ],
-    [
-     1,
-     "Droit des sociétés"
-    ],
-    [
-     2,
-     "Comptabilité analytique"
-    ],
-    [
-     2,
-     "Finance de marché"
-    ],
-    [
-     2,
-     "Fiscalité des entreprises"
-    ],
-    [
-     2,
-     "SYSCOHADA"
-    ],
-    [
-     3,
-     "Audit et contrôle"
-    ],
-    [
-     3,
-     "Gestion de trésorerie"
-    ],
-    [
-     3,
-     "Évaluation d'entreprise"
-    ],
-    [
-     3,
-     "IFRS"
-    ],
-    [
-     4,
-     "Finance internationale"
-    ],
-    [
-     4,
-     "Conseil en gestion"
-    ],
-    [
-     4,
-     "Stage en cabinet"
-    ],
-    [
-     4,
-     "Mémoire professionnel"
-    ]
-   ],
-   "image_url": "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=900&q=80",
-   "ordre": 3,
-   "licence": true,
-   "master": true
+   "image_statique": "img/campus/vie-etudiante-07.webp",
+   "en_avant": true,
+   "ordre": 3
   },
   {
-   "slug": "commerce",
-   "nom": "Commerce International",
-   "icone": "🌍",
-   "resume": "Échanges mondiaux, logistique et marketing international quand les marchés africains s'ouvrent au monde.",
-   "description": "Le Commerce International à l'UIC, c'est apprendre à vendre à l'étranger, négocier un contrat en anglais, gérer une douane et optimiser une supply chain. On travaille sur des cas réels d'import-export entre l'Afrique de l'Ouest, l'Europe et l'Asie.",
-   "badge": "Licence · Master",
-   "badge_color": "#dc2626",
-   "sous_titre": "Échanges mondiaux, logistique et marketing international quand les marchés africains s'ouvrent au monde.",
-   "duree": "3 ans Licence / 5 ans Master",
-   "niveau_requis": "Baccalauréat toutes séries",
-   "mode": "Présentiel + Hybride",
+   "slug": "bts-gec",
+   "nom": "BTS Gestion Commerciale (GEC)",
+   "icone": "🤝",
+   "pole": "BTS (Bac +2)",
+   "niveaux": [
+    "BTS"
+   ],
+   "resume": "Vente, relation client et gestion commerciale, niveau Bac +2.",
+   "description": "Le BTS GEC (Gestion Commerciale) forme aux métiers de la vente et de la relation client. Formation de niveau Bac +2 (BTS) orientée vers une insertion rapide sur le marché de l'emploi.",
+   "sous_titre": "Vente, relation client et gestion commerciale, niveau Bac +2.",
+   "duree": "Bac +2",
+   "niveau_requis": "Baccalauréat",
+   "mode": "",
    "langue": "Français",
    "debouches": [
-    "Export manager",
-    "Responsable logistique",
-    "Chargé d'affaires international",
-    "Trader",
-    "Douanier expert"
+    "Assistant commercial",
+    "Chargé de clientèle"
    ],
-   "modules": [
-    [
-     1,
-     "Commerce international"
-    ],
-    [
-     1,
-     "Techniques d'import/export"
-    ],
-    [
-     1,
-     "Géographie économique"
-    ],
-    [
-     1,
-     "Anglais commercial"
-    ],
-    [
-     2,
-     "Logistique internationale"
-    ],
-    [
-     2,
-     "Incoterms & douanes"
-    ],
-    [
-     2,
-     "Marketing international"
-    ],
-    [
-     2,
-     "Négociation commerciale"
-    ],
-    [
-     3,
-     "Marchés émergents"
-    ],
-    [
-     3,
-     "Financement du commerce"
-    ],
-    [
-     3,
-     "Supply chain"
-    ],
-    [
-     3,
-     "Droit international"
-    ],
-    [
-     4,
-     "Stratégie d'internationalisation"
-    ],
-    [
-     4,
-     "Veille concurrentielle"
-    ],
-    [
-     4,
-     "Stage à l'international"
-    ],
-    [
-     4,
-     "Mémoire"
-    ]
-   ],
-   "image_url": "https://images.unsplash.com/photo-1521791136064-7986c2920216?w=900&q=80",
-   "ordre": 4,
-   "licence": true,
-   "master": true
+   "image_statique": "img/campus/vie-etudiante-05.webp",
+   "en_avant": true,
+   "ordre": 4
   },
   {
-   "slug": "communication",
-   "nom": "Communication & Médias",
-   "icone": "📡",
-   "resume": "Communication institutionnelle, journalisme et stratégie de marque aujourd'hui.",
-   "description": "En Communication & Médias à l'UIC, on apprend à écrire pour la presse, tourner une vidéo, gérer une crise sur les réseaux et défendre l'image d'une marque. Le campus dispose d'une rédaction et d'un studio de production que les étudiants utilisent dès le premier semestre.",
-   "badge": "Licence · Master",
-   "badge_color": "#d97706",
-   "sous_titre": "Communication institutionnelle, journalisme et stratégie de marque aujourd'hui.",
-   "duree": "3 ans Licence / 5 ans Master",
-   "niveau_requis": "Baccalauréat toutes séries",
-   "mode": "Présentiel + Hybride",
+   "slug": "bts-ad",
+   "nom": "BTS Assistanat de Direction (AD)",
+   "icone": "🗂️",
+   "pole": "BTS (Bac +2)",
+   "niveaux": [
+    "BTS"
+   ],
+   "resume": "Assistanat de direction, niveau Bac +2.",
+   "description": "Le BTS AD (Assistanat de Direction) forme aux fonctions d'assistance auprès des équipes dirigeantes. Formation de niveau Bac +2 (BTS) orientée vers une insertion rapide sur le marché de l'emploi.",
+   "sous_titre": "Assistanat de direction, niveau Bac +2.",
+   "duree": "Bac +2",
+   "niveau_requis": "Baccalauréat",
+   "mode": "",
+   "langue": "Français",
+   "debouches": [],
+   "image_statique": "img/campus/vie-etudiante-02.webp",
+   "en_avant": false,
+   "ordre": 5
+  },
+  {
+   "slug": "bts-rhc",
+   "nom": "BTS Ressources Humaines & Communication (RHC)",
+   "icone": "👥",
+   "pole": "BTS (Bac +2)",
+   "niveaux": [
+    "BTS"
+   ],
+   "resume": "Ressources humaines et communication, niveau Bac +2.",
+   "description": "Le BTS RHC (Ressources Humaines et Communication) forme aux métiers des ressources humaines et de la communication. Formation de niveau Bac +2 (BTS) orientée vers une insertion rapide sur le marché de l'emploi.",
+   "sous_titre": "Ressources humaines et communication, niveau Bac +2.",
+   "duree": "Bac +2",
+   "niveau_requis": "Baccalauréat",
+   "mode": "",
    "langue": "Français",
    "debouches": [
-    "Directeur de communication",
-    "Journaliste",
-    "Community manager",
-    "Chef de projet digital",
-    "Chargé de relations presse"
+    "Assistant RH",
+    "Chargé de communication"
    ],
-   "modules": [
-    [
-     1,
-     "Introduction à la communication"
-    ],
-    [
-     1,
-     "Techniques rédactionnelles"
-    ],
-    [
-     1,
-     "Sociologie des médias"
-    ],
-    [
-     1,
-     "Photographie & image"
-    ],
-    [
-     2,
-     "Relations presse"
-    ],
-    [
-     2,
-     "Communication digitale"
-    ],
-    [
-     2,
-     "Création graphique"
-    ],
-    [
-     2,
-     "Prise de parole publique"
-    ],
-    [
-     3,
-     "Stratégie de marque"
-    ],
-    [
-     3,
-     "Réseaux sociaux & SEO"
-    ],
-    [
-     3,
-     "Production audiovisuelle"
-    ],
-    [
-     3,
-     "Communication de crise"
-    ],
-    [
-     4,
-     "Communication institutionnelle"
-    ],
-    [
-     4,
-     "Influence & lobbying"
-    ],
-    [
-     4,
-     "Stage en agence/médias"
-    ],
-    [
-     4,
-     "Projet final"
-    ]
+   "image_statique": "img/campus/vie-etudiante-09.webp",
+   "en_avant": true,
+   "ordre": 6
+  },
+  {
+   "slug": "bts-lt",
+   "nom": "BTS Logistique & Transport (LT)",
+   "icone": "🚚",
+   "pole": "BTS (Bac +2)",
+   "niveaux": [
+    "BTS"
    ],
-   "image_url": "https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=900&q=80",
-   "ordre": 5,
-   "licence": true,
-   "master": true
+   "resume": "Logistique et transport, niveau Bac +2.",
+   "description": "Le BTS LT (Logistique et Transport) forme aux métiers de la chaîne logistique et du transport. Formation de niveau Bac +2 (BTS) orientée vers une insertion rapide sur le marché de l'emploi.",
+   "sous_titre": "Logistique et transport, niveau Bac +2.",
+   "duree": "Bac +2",
+   "niveau_requis": "Baccalauréat",
+   "mode": "",
+   "langue": "Français",
+   "debouches": [],
+   "image_statique": "img/campus/vie-etudiante-04.webp",
+   "en_avant": false,
+   "ordre": 7
+  },
+  {
+   "slug": "bts-ida",
+   "nom": "BTS Informatique, Développeur d'Application (IDA)",
+   "icone": "💻",
+   "pole": "BTS (Bac +2)",
+   "niveaux": [
+    "BTS"
+   ],
+   "resume": "Développement d'applications informatiques, niveau Bac +2.",
+   "description": "Le BTS IDA (Informatique, Développeur d'Application) forme au développement d'applications informatiques. Formation de niveau Bac +2 (BTS) orientée vers une insertion rapide sur le marché de l'emploi.",
+   "sous_titre": "Développement d'applications informatiques, niveau Bac +2.",
+   "duree": "Bac +2",
+   "niveau_requis": "Baccalauréat",
+   "mode": "",
+   "langue": "Français",
+   "debouches": [],
+   "image_statique": "img/campus/travail-en-groupe-02.webp",
+   "en_avant": true,
+   "ordre": 8
+  },
+  {
+   "slug": "sciences-informatiques",
+   "nom": "Département des Sciences Informatiques",
+   "icone": "🖥️",
+   "pole": "Licences & Masters (LMD)",
+   "niveaux": [
+    "Licence",
+    "Master"
+   ],
+   "resume": "Licence (Bac +3) et Master (Bac +5) en sciences informatiques.",
+   "description": "Le Département des Sciences Informatiques propose des formations en système LMD. Parcours LMD : Licence (Bac +3) puis Master (Bac +5).",
+   "sous_titre": "Licence (Bac +3) et Master (Bac +5) en sciences informatiques.",
+   "duree": "Bac +3 / Bac +5",
+   "niveau_requis": "Baccalauréat",
+   "mode": "",
+   "langue": "Français",
+   "debouches": [],
+   "image_statique": "img/campus/salle-de-cours-03.webp",
+   "en_avant": false,
+   "ordre": 9
+  },
+  {
+   "slug": "sciences-juridiques",
+   "nom": "Département des Sciences Juridiques",
+   "icone": "⚖️",
+   "pole": "Licences & Masters (LMD)",
+   "niveaux": [
+    "Licence",
+    "Master"
+   ],
+   "resume": "Licence en Droit (privé et public) et Master (Bac +5).",
+   "description": "Le Département des Sciences Juridiques propose la Licence en Droit (privé et public) en système LMD. Parcours LMD : Licence (Bac +3) puis Master (Bac +5).",
+   "sous_titre": "Licence en Droit (privé et public) et Master (Bac +5).",
+   "duree": "Bac +3 / Bac +5",
+   "niveau_requis": "Baccalauréat",
+   "mode": "",
+   "langue": "Français",
+   "debouches": [
+    "Juriste assistant",
+    "Secrétaire juridique",
+    "Opérateur juridique"
+   ],
+   "image_statique": "img/campus/vie-etudiante-06.webp",
+   "en_avant": true,
+   "ordre": 10
+  },
+  {
+   "slug": "sciences-economiques-gestion",
+   "nom": "Département des Sciences Économiques et de Gestion",
+   "icone": "💼",
+   "pole": "Licences & Masters (LMD)",
+   "niveaux": [
+    "Licence",
+    "Master"
+   ],
+   "resume": "Licence (Bac +3) et Master (Bac +5) en sciences économiques et de gestion.",
+   "description": "Le Département des Sciences Économiques et de Gestion propose des formations en système LMD. Parcours LMD : Licence (Bac +3) puis Master (Bac +5).",
+   "sous_titre": "Licence (Bac +3) et Master (Bac +5) en sciences économiques et de gestion.",
+   "duree": "Bac +3 / Bac +5",
+   "niveau_requis": "Baccalauréat",
+   "mode": "",
+   "langue": "Français",
+   "debouches": [],
+   "image_statique": "img/campus/salle-de-cours-01.webp",
+   "en_avant": false,
+   "ordre": 11
+  },
+  {
+   "slug": "science-de-gestion",
+   "nom": "Science de Gestion",
+   "icone": "🏢",
+   "pole": "Licences & Masters professionnels",
+   "niveaux": [
+    "Licence professionnelle",
+    "Master professionnel"
+   ],
+   "resume": "Licence et Master professionnels en science de gestion.",
+   "description": "Science de Gestion : Formation professionnalisante, du niveau Licence (Bac +3) au Master (Bac +5), orientée vers l'insertion sur le marché de l'emploi.",
+   "sous_titre": "Licence et Master professionnels en science de gestion.",
+   "duree": "Bac +3 / Bac +5",
+   "niveau_requis": "Baccalauréat",
+   "mode": "",
+   "langue": "Français",
+   "debouches": [],
+   "image_statique": "img/campus/vie-etudiante-08.webp",
+   "en_avant": false,
+   "ordre": 12
+  },
+  {
+   "slug": "science-de-ladministration",
+   "nom": "Science de l'Administration",
+   "icone": "🏛️",
+   "pole": "Licences & Masters professionnels",
+   "niveaux": [
+    "Licence professionnelle",
+    "Master professionnel"
+   ],
+   "resume": "Licence et Master professionnels en science de l'administration.",
+   "description": "Science de l'Administration : Formation professionnalisante, du niveau Licence (Bac +3) au Master (Bac +5), orientée vers l'insertion sur le marché de l'emploi.",
+   "sous_titre": "Licence et Master professionnels en science de l'administration.",
+   "duree": "Bac +3 / Bac +5",
+   "niveau_requis": "Baccalauréat",
+   "mode": "",
+   "langue": "Français",
+   "debouches": [],
+   "image_statique": "img/campus/vie-etudiante-10.webp",
+   "en_avant": false,
+   "ordre": 13
+  },
+  {
+   "slug": "genie-logistique",
+   "nom": "Génie Logistique",
+   "icone": "📦",
+   "pole": "Licences & Masters professionnels",
+   "niveaux": [
+    "Licence professionnelle",
+    "Master professionnel"
+   ],
+   "resume": "Licence et Master professionnels en génie logistique.",
+   "description": "Génie Logistique : Formation professionnalisante, du niveau Licence (Bac +3) au Master (Bac +5), orientée vers l'insertion sur le marché de l'emploi.",
+   "sous_titre": "Licence et Master professionnels en génie logistique.",
+   "duree": "Bac +3 / Bac +5",
+   "niveau_requis": "Baccalauréat",
+   "mode": "",
+   "langue": "Français",
+   "debouches": [],
+   "image_statique": "img/campus/salle-de-cours-04.webp",
+   "en_avant": false,
+   "ordre": 14
+  },
+  {
+   "slug": "genie-industriel",
+   "nom": "Génie Industriel",
+   "icone": "⚙️",
+   "pole": "Licences & Masters professionnels",
+   "niveaux": [
+    "Licence professionnelle",
+    "Master professionnel"
+   ],
+   "resume": "Licence et Master professionnels en génie industriel.",
+   "description": "Génie Industriel : Formation professionnalisante, du niveau Licence (Bac +3) au Master (Bac +5), orientée vers l'insertion sur le marché de l'emploi.",
+   "sous_titre": "Licence et Master professionnels en génie industriel.",
+   "duree": "Bac +3 / Bac +5",
+   "niveau_requis": "Baccalauréat",
+   "mode": "",
+   "langue": "Français",
+   "debouches": [],
+   "image_statique": "img/campus/vie-etudiante-01.webp",
+   "en_avant": false,
+   "ordre": 15
+  },
+  {
+   "slug": "mqhse",
+   "nom": "Management de la Qualité, Hygiène, Sécurité & Environnement (MQHSE)",
+   "icone": "🦺",
+   "pole": "Formations continues",
+   "niveaux": [
+    "Formation continue"
+   ],
+   "resume": "Management de la qualité, de l'hygiène, de la sécurité et de l'environnement.",
+   "description": "Formation continue en Management de la Qualité, Hygiène, Sécurité et Environnement (MQHSE).",
+   "sous_titre": "Management de la qualité, de l'hygiène, de la sécurité et de l'environnement.",
+   "duree": "Nous consulter",
+   "niveau_requis": "Nous consulter",
+   "mode": "",
+   "langue": "Français",
+   "debouches": [],
+   "image_statique": "img/campus/salle-de-cours-02.webp",
+   "en_avant": false,
+   "ordre": 16
+  },
+  {
+   "slug": "global-exclusive-mba",
+   "nom": "Global Exclusive MBA",
+   "icone": "🎓",
+   "pole": "Formations continues",
+   "niveaux": [
+    "Formation continue"
+   ],
+   "resume": "Programme MBA en formation continue.",
+   "description": "Le Global Exclusive MBA fait partie des formations continues proposées par l'UIC.",
+   "sous_titre": "Programme MBA en formation continue.",
+   "duree": "Nous consulter",
+   "niveau_requis": "Nous consulter",
+   "mode": "",
+   "langue": "Français",
+   "debouches": [],
+   "image_statique": "img/campus/travail-en-groupe-01.webp",
+   "en_avant": false,
+   "ordre": 17
+  },
+  {
+   "slug": "certifications",
+   "nom": "Certifications",
+   "icone": "📜",
+   "pole": "Formations continues",
+   "niveaux": [
+    "Formation continue"
+   ],
+   "resume": "Formations certifiantes proposées en formation continue.",
+   "description": "Des certifications sont proposées dans le cadre des formations continues de l'UIC.",
+   "sous_titre": "Formations certifiantes proposées en formation continue.",
+   "duree": "Nous consulter",
+   "niveau_requis": "Nous consulter",
+   "mode": "",
+   "langue": "Français",
+   "debouches": [],
+   "image_statique": "img/campus/vie-etudiante-03.webp",
+   "en_avant": false,
+   "ordre": 18
   }
  ],
  "articles": [
@@ -580,32 +434,6 @@
    "image_url": "https://images.unsplash.com/photo-1606761568499-6d2451b23c66?w=1200&q=80",
    "temps_lecture": 3,
    "ordre": 2
-  }
- ],
- "alumni": [
-  {
-   "nom": "Konan Stéphane",
-   "promotion": "Master Management 2022",
-   "poste": "Directeur Commercial — Orange CI",
-   "texte": "Honnêtement, j'avais des doutes avant d'entrer à l'UIC. Deux ans après mon diplôme, je suis à Orange CI et je manage une équipe de cinq personnes. Je n'aurais pas parié là-dessus en quittant le lycée."
-  },
-  {
-   "nom": "Adjoua Marie",
-   "promotion": "Licence Finance 2021",
-   "poste": "Auditrice Senior — Ernst & Young Abidjan",
-   "texte": "Mon premier audit chez EY, je connaissais le SYSCOHADA mieux que certains collègues qui sortaient d'écoles françaises. Je leur ai expliqué deux ou trois choses. C'était inattendu."
-  },
-  {
-   "nom": "Bamba Karim",
-   "promotion": "Master Informatique 2023",
-   "poste": "Lead Developer — Startup Fintech",
-   "texte": "Mon projet de fin d'études, c'est devenu ma vraie startup. On a trouvé nos premiers clients avant même la soutenance. L'UIC nous a mis en contact avec un incubateur local — ça, c'était pas dans le programme officiel."
-  },
-  {
-   "nom": "Dosso Fatoumata",
-   "promotion": "Master Droit des Affaires 2022",
-   "poste": "Juriste — Cabinet Kouadio & Associés",
-   "texte": "Lors de mon premier stage au cabinet, le patron m'a demandé de rédiger un contrat commercial. Je l'avais déjà fait six fois à l'UIC. Il n'a fait que deux corrections. C'est ce jour-là que j'ai compris pourquoi les cas pratiques comptaient."
   }
  ],
  "stats_barre": [

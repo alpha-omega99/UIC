@@ -1,29 +1,54 @@
 {% extends 'base.html' %}
-{% block title %}Filières – UIC{% endblock %}
+{% block title %}Formations & filières – UIC{% endblock %}
+{% block meta_desc %}Toutes les formations de l'UIC : classes préparatoires, BTS, Licences, Masters et formations continues.{% endblock %}
 {% block content %}
 <div class="page">
   <div class="list-hero"><div class="container">
-    <span class="eyebrow">Nos programmes</span><h1 class="stitle">Filières d'excellence</h1>
-    <p class="sbody">Licence et Master : des formations construites avec les entreprises, pour travailler dès le premier jour.</p>
+    <span class="eyebrow">Nos programmes</span><h1 class="stitle">Nos formations</h1>
+    <p class="sbody">{% if total %}{{ total }} formation{{ total|pluralize }} construite{{ total|pluralize }} avec les entreprises, pour travailler dès le premier jour.{% else %}Des formations construites avec les entreprises, pour travailler dès le premier jour.{% endif %}</p>
   </div></div>
-  <section class="filieres" style="padding-top:3.5rem">
+
+  <section class="fl-wrap">
     <div class="container">
-      <div class="fil-head" style="justify-content:flex-end">
-        <div class="filters">
-          <button type="button" class="flt on" data-f="all">Tous</button>
-          <button type="button" class="flt" data-f="licence">Licence</button>
-          <button type="button" class="flt" data-f="master">Master</button>
+      <div class="fil-tools">
+        <label class="fil-search"><span class="sr-only">Rechercher une formation</span>
+          <input type="search" id="fil-search" placeholder="Rechercher une formation…" autocomplete="off" maxlength="60">
+        </label>
+        {% if poles|length > 1 %}
+        <div class="filters" role="group" aria-label="Filtrer par école">
+          <button type="button" class="flt on" data-p="all">Toutes</button>
+          {% for p in poles %}<button type="button" class="flt" data-p="{{ p.slug }}">{{ p.nom }}</button>{% endfor %}
         </div>
+        {% endif %}
+        {% if niveaux|length > 1 %}
+        <div class="filters filters-niv" role="group" aria-label="Filtrer par niveau">
+          <span class="filters-lbl">Niveau</span>
+          <button type="button" class="flt on" data-f="all">Tous</button>
+          {% for n in niveaux %}<button type="button" class="flt" data-f="{{ n.slug }}">{{ n.nom }}</button>{% endfor %}
+        </div>
+        {% endif %}
+        <p class="fil-count" id="fil-count" aria-live="polite">{{ total }} formation{{ total|pluralize }}</p>
       </div>
-      <div class="fil-grid">
-        {% for f in filieres %}
-        <a class="fil-card in" href="{{ f.get_absolute_url }}" data-lv="{{ f.niveaux_data }}" style="background-image:url('{{ f.image_src }}')">
-          <div class="fil-card-content">
-            <div class="fil-icon">{{ f.icone }}</div><span class="fil-badge">{{ f.niveaux_label }}</span>
-            <h3 class="fil-title">{{ f.nom }}</h3><p class="fil-desc">{{ f.resume }}</p><span class="fc-link">Voir le programme →</span>
-          </div>
-        </a>
-        {% empty %}<p class="empty" style="color:rgba(255,255,255,.5)">Aucune filière publiée pour le moment.</p>{% endfor %}
+
+      <div id="fcat">
+        {% for g in groupes %}
+        <div class="fgroup" data-pole="{{ g.pole.slug|default:'' }}">
+          {% if a_des_poles %}
+          <header class="fgroup-head">
+            <div><h2>{% if g.pole %}{{ g.pole.nom }}{% else %}Autres formations{% endif %}</h2>{% if g.pole.description %}<p>{{ g.pole.description }}</p>{% endif %}</div>
+            <span class="fgroup-n">{{ g.nb }} formation{{ g.nb|pluralize }}</span>
+          </header>
+          {% endif %}
+          <div class="cgrid">{% for f in g.filieres %}{% include 'filieres/_carte_compacte.html' %}{% endfor %}</div>
+        </div>
+        {% endfor %}
+      </div>
+      <p class="empty" id="fil-empty" hidden>Aucune formation ne correspond à votre recherche.</p>
+      {% if not groupes %}<p class="empty">Aucune formation publiée pour le moment.</p>{% endif %}
+
+      <div class="fil-cta">
+        <div><h2>Une question sur nos formations&nbsp;?</h2><p>Notre équipe vous conseille sur le programme adapté à votre profil.</p></div>
+        <div class="fil-cta-btns"><a class="btn-accent" href="{% url 'admissions:formulaire' %}">Faire une demande d'admission</a><a class="btn-outline" href="{% url 'contact:contact' %}">Nous contacter</a></div>
       </div>
     </div>
   </section>

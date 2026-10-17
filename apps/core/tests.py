@@ -44,10 +44,11 @@ class PagesPubliques(Base):
 
     def test_accueil_contient_le_contenu_de_la_maquette(self):
         html = self.client.get('/').content.decode()
-        for txt in ['font bouger', 'Gestion &amp; Management', "Filières d'excellence", 'Commencez votre candidature',
-                    'Konan Stéphane', 'Vie du campus', "L'UIC, un cadre d'excellence", 'Mot du Président']:
+        for txt in ['font bouger', 'BTS Gestion Commerciale (GEC)', "Filières d'excellence", 'Commencez votre candidature',
+                    'Vie du campus', "L'UIC, un cadre d'excellence", 'Mot du Président']:
             self.assertIn(txt, html)
-        self.assertEqual(html.count('class="fil-card reveal"'), 6)
+        self.assertEqual(html.count('class="fcard"'), 6)
+        self.assertNotIn('alumni', html)
 
     def test_404_personnalise_et_admin_par_defaut_cache(self):
         self.assertEqual(self.client.get('/inexistant/').status_code, 404)
@@ -130,7 +131,7 @@ class Admission(Base):
         self.assertContains(ok, d.numero_dossier)
         bad = self.client.post('/admission/suivi/', {'email': 'autre@x.com', 'numero': d.numero_dossier})
         self.assertContains(bad, 'Aucun dossier ne correspond')                   # mauvais e-mail : rien n'est révélé
-        for secret in ('Awa', 'Traoré', 'En attente', self.filiere.nom):
+        for secret in ('Awa', 'Traoré', 'En attente', Filiere.objects.order_by('-ordre').first().nom):
             self.assertNotContains(bad, secret)
 
 
@@ -235,3 +236,93 @@ class Config(TestCase):
     def test_secret_key_et_debug(self):
         from django.conf import settings
         self.assertGreater(len(settings.SECRET_KEY), 30)
+
+
+class FilieresExtensibles(Base):
+    """Le catalogue doit rester propre quand de nouvelles formations sont ajoutées."""
+
+    def _ajouter(self, nb, niveau='BTS', en_avant=True):
+        from apps.filieres.models import NiveauFormation
+        niv, _ = NiveauFormation.objects.get_or_create(nom=niveau)
+        for i in range(nb):
+            f = Filiere.objects.create(nom=f"{niveau} Test {i}", resume="Résumé", description="Description", duree="2 ans",
+                                       niveau_requis="Bac", en_avant=en_avant, ordre=100 + i)
+            f.niveaux.add(niv)
+
+    def test_filtre_genere_depuis_la_base(self):
+        html = self.client.get('/filieres/').content.decode()
+        from apps.filieres.models import NiveauFormation
+        self.assertIn('data-f="bts"', html)
+        NiveauFormation.objects.create(nom='Doctorat')
+        self.assertNotIn('data-f="doctorat"', self.client.get('/filieres/').content.decode())   # niveau vide : pas de filtre
+        self._ajouter(1, 'Doctorat')
+        self.assertIn('data-f="doctorat"', self.client.get('/filieres/').content.decode())
+
+    def test_page_filieres_liste_tout_et_accueil_limite(self):
+        self._ajouter(10, 'BTS')
+        self.assertEqual(self.client.get('/filieres/').content.decode().count('class="ccard"'), 29)
+        accueil = self.client.get('/').content.decode()
+        self.assertEqual(accueil.count('class="fcard"'), 6)
+        self.assertIn('Voir toutes les formations (29)', accueil)
+
+    def test_en_avant_decoche_masque_de_laccueil(self):
+        Filiere.objects.update(en_avant=False)
+        self._ajouter(1, 'Master', en_avant=True)
+        self.assertEqual(self.client.get('/').content.decode().count('class="fcard"'), 1)
+        self.assertEqual(self.client.get('/filieres/').content.decode().count('class="ccard"'), 20)
+
+    def test_detail_propose_dautres_formations(self):
+        html = self.client.get(self.filiere.get_absolute_url()).content.decode()
+        self.assertIn('Autres formations', html)
+        self.assertEqual(html.count('class="fcard"'), 3)
+        self.assertNotIn(f'href="{self.filiere.get_absolute_url()}" data-lv', html)   # pas elle-même
+
+    def test_filiere_sans_niveau_ne_casse_rien(self):
+        Filiere.objects.create(nom="Sans niveau", resume="r", description="d", duree="1 an", niveau_requis="Bac")
+        for u in ('/', '/filieres/', '/filieres/sans-niveau/'):
+            self.assertEqual(self.client.get(u).status_code, 200)
+
+
+class CatalogueParEcole(TestCase):
+    def test_groupes_et_filtres(self):
+        from apps.filieres.models import Filiere, Pole
+        droit = Pole.objects.create(nom="École de Droit")
+        Filiere.objects.create(nom="Droit privé", resume="r", description="d", duree="3 ans", niveau_requis="Bac", pole=droit)
+        Filiere.objects.create(nom="Sans école", resume="r", description="d", duree="2 ans", niveau_requis="Bac")
+        html = self.client.get('/filieres/').content.decode()
+        self.assertIn('École de Droit', html)
+        self.assertEqual(html.count('class="ccard"'), 2)
+        self.assertIn('Autres formations', html)
+
+    def test_sans_ecole_pas_de_titre_de_groupe(self):
+        from apps.filieres.models import Filiere
+        Filiere.objects.create(nom="Seule", resume="r", description="d", duree="2 ans", niveau_requis="Bac")
+        html = self.client.get('/filieres/').content.decode()
+        self.assertNotIn('Autres formations', html)
+        self.assertEqual(html.count('class="ccard"'), 1)
+
+
+class PagesLegales(TestCase):
+    URLS = ['/mentions-legales/', '/confidentialite/', '/conditions-utilisation/']
+
+    def test_pages_accessibles_et_liees_dans_le_pied_de_page(self):
+        for u in self.URLS:
+            self.assertEqual(self.client.get(u).status_code, 200, u)
+        accueil = self.client.get('/').content.decode()
+        for u in self.URLS:
+            self.assertIn(f'href="{u}"', accueil)
+
+    def test_mentions_masquent_les_champs_vides_et_affichent_les_remplis(self):
+        from apps.core.models import InfoEtablissement
+        html = self.client.get('/mentions-legales/').content.decode()
+        self.assertNotIn('RCCM', html.split('Hébergement')[0])
+        info = InfoEtablissement.get(); info.rccm = 'CI-ABJ-2004-B-1234'; info.directeur_publication = 'Dr X'; info.save()
+        html = self.client.get('/mentions-legales/').content.decode()
+        self.assertIn('CI-ABJ-2004-B-1234', html); self.assertIn('Dr X', html)
+
+    def test_formulaires_renvoient_vers_la_confidentialite(self):
+        for u in ('/contact/', '/'):
+            self.assertIn('/confidentialite/', self.client.get(u).content.decode())
+
+    def test_temoignages_supprimes(self):
+        self.assertNotIn('alumni', self.client.get('/').content.decode())

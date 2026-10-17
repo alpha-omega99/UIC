@@ -5,7 +5,7 @@
   <div class="page-topbar"><div class="container"><a href="{% url 'galerie:liste' %}" class="back-link">← Retour à la galerie</a><span class="breadcrumb-sep">/</span><span class="breadcrumb-cur">{{ album.titre }}</span></div></div>
   <div class="list-hero"><div class="container"><span class="eyebrow">Album</span><h1 class="stitle">{{ album.titre }}</h1>{% if album.description %}<p class="sbody">{{ album.description }}</p>{% endif %}</div></div>
   <div class="list-body"><div class="container"><div class="photo-grid">
-    {% for p in photos %}<figure><img src="{{ p.image.url }}" alt="{{ p.legende|default:album.titre }}" loading="lazy">{% if p.legende %}<figcaption>{{ p.legende }}</figcaption>{% endif %}</figure>
+    {% for p in photos %}<figure><img src="{{ p.image_src }}" alt="{{ p.legende|default:album.titre }}" loading="lazy">{% if p.legende %}<figcaption>{{ p.legende }}</figcaption>{% endif %}</figure>
     {% empty %}<p class="empty" style="grid-column:1/-1">Cet album ne contient pas encore de photos.</p>{% endfor %}
   </div></div></div>
 </div>

@@ -1,8 +1,12 @@
+# Blueprint Render. Version "test gratuit" : web + PostgreSQL gratuits.
+# Pour la production : passer le web en `plan: starter`, activer le disque ci-dessous
+# (les fichiers téléversés y sont conservés) et prendre une base PostgreSQL payante.
 services:
   - type: web
     name: uic-site
     runtime: python
-    buildCommand: ./build.sh
+    plan: free
+    buildCommand: bash build.sh
     startCommand: gunicorn config.wsgi:application --workers 2 --timeout 60
     envVars:
       - key: DJANGO_SETTINGS_MODULE
@@ -15,14 +19,28 @@ services:
         fromDatabase:
           name: uic-db
           property: connectionString
-      - key: MEDIA_ROOT
-        value: /var/data/media
-      - key: PRIVATE_MEDIA_ROOT
-        value: /var/data/private_media
-    disk:
-      name: uic-data
-      mountPath: /var/data
-      sizeGB: 1
+      # Administrateur créé au build (offre gratuite sans Shell). Mot de passe : à saisir dans Render, jamais dans le code.
+      - key: DJANGO_SUPERUSER_USERNAME
+        sync: false
+      - key: DJANGO_SUPERUSER_EMAIL
+        sync: false
+      - key: DJANGO_SUPERUSER_PASSWORD
+        sync: false
+      - key: EMAIL_HOST_USER
+        sync: false
+      - key: EMAIL_HOST_PASSWORD
+        sync: false
+      - key: NOTIFY_EMAIL
+        sync: false
+      # --- Production avec disque persistant (offre payante) : décommenter ---
+      # - key: MEDIA_ROOT
+      #   value: /var/data/media
+      # - key: PRIVATE_MEDIA_ROOT
+      #   value: /var/data/private_media
+    # disk:
+    #   name: uic-data
+    #   mountPath: /var/data
+    #   sizeGB: 1
 
 databases:
   - name: uic-db

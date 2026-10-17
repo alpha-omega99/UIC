@@ -10,8 +10,8 @@ from django.core.management.base import BaseCommand
 from django.utils import timezone
 
 from apps.actualites.models import Article, Categorie
-from apps.core.models import FAQ, Chiffre, InfoEtablissement, JalonHistoire, Temoignage, Valeur
-from apps.filieres.models import Filiere, Module
+from apps.core.models import FAQ, Chiffre, InfoEtablissement, JalonHistoire, Valeur
+from apps.filieres.models import Filiere, Module, NiveauFormation, Pole
 from apps.portail.models import ProfilEtudiant, Resultat
 
 MOIS = {m: i for i, m in enumerate(['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août',
@@ -43,15 +43,30 @@ class Command(BaseCommand):
                            "!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNcKwMjEnMzEuMyJOIDPCsDU5JzQxLjAiVw!5e0!3m2!1sfr!2sci!4v1")
         info.save()
 
+        # Formations réelles (source : uic-ci.com, page « Filières », et affiches de l'établissement)
+        for i, nom in enumerate(['Classe préparatoire', 'BTS', 'Licence', 'Master', 'Licence professionnelle',
+                                 'Master professionnel', 'Formation continue']):
+            NiveauFormation.objects.get_or_create(nom=nom, defaults={'ordre': i})
         for f in d['filieres']:
+            pole = None
+            if f.get('pole'):
+                pole, _ = Pole.objects.get_or_create(nom=f['pole'])
             obj, _ = Filiere.objects.update_or_create(slug=f['slug'], defaults=dict(
                 nom=f['nom'], icone=f['icone'], resume=f['resume'], sous_titre=f['sous_titre'], description=f['description'],
-                licence=f['licence'], master=f['master'], couleur_badge=f['badge_color'], duree=f['duree'],
-                niveau_requis=f['niveau_requis'], mode=f['mode'], langue=f['langue'],
-                debouches='\n'.join(f['debouches']), image_url=f['image_url'], ordre=f['ordre']))
-            obj.modules.all().delete()
-            for i, (sem, nom) in enumerate(f['modules']):
-                Module.objects.create(filiere=obj, semestre=sem, intitule=nom, ordre=i)
+                duree=f['duree'], niveau_requis=f['niveau_requis'], mode=f['mode'], langue=f['langue'],
+                debouches='\n'.join(f['debouches']), image_statique=f['image_statique'], image_url='',
+                ordre=f['ordre'], en_avant=f['en_avant'], pole=pole, actif=True))
+            obj.niveaux.set(NiveauFormation.objects.filter(nom__in=f['niveaux']))
+        # Anciennes formations de démonstration : supprimées (ou masquées si une candidature y est liée)
+        for old in Filiere.objects.filter(slug__in=['management', 'informatique', 'droit', 'finance', 'commerce', 'communication']):
+            if old.candidatures.exists():
+                old.actif = False
+                old.save(update_fields=['actif'])
+            else:
+                old.delete()
+        # Ordre des écoles = ordre d'apparition dans les données
+        for i, nom in enumerate(dict.fromkeys(f['pole'] for f in d['filieres'] if f.get('pole'))):
+            Pole.objects.filter(nom=nom).update(ordre=i)
 
         for a in d['articles']:
             cat, _ = Categorie.objects.get_or_create(nom=a['categorie'])
@@ -74,17 +89,13 @@ class Command(BaseCommand):
         for j in d['jalons']:
             JalonHistoire.objects.create(**j)
 
-        Temoignage.objects.all().delete()
-        for i, t in enumerate(d['alumni']):
-            Temoignage.objects.create(ordre=i, **t)
-
         FAQ.objects.all().delete()
         for i, q in enumerate(d['faq']):
             FAQ.objects.create(ordre=i, **q)
 
         self.stdout.write(self.style.SUCCESS(
             f"Contenu chargé : {Filiere.objects.count()} filières, {Article.objects.count()} actualités, "
-            f"{Temoignage.objects.count()} témoignages, {FAQ.objects.count()} FAQ."))
+            f"{FAQ.objects.count()} FAQ."))
 
         if opts['demo_etudiant']:
             U = get_user_model()

@@ -1,0 +1,44 @@
+{% extends 'legal/_base.html' %}
+{% block title %}Conditions d'utilisation – UIC{% endblock %}
+{% block meta_desc %}Conditions d'utilisation du site de l'{{ site.nom }} : pré-inscription, espace étudiant, propriété intellectuelle, responsabilité.{% endblock %}
+{% block h1 %}Conditions d'utilisation{% endblock %}
+{% block body %}
+<h2>1. Objet</h2>
+<p>Les présentes conditions encadrent l'utilisation du site de l'{{ site.nom }} ({{ site.nom_court }}). En naviguant sur le site ou en utilisant ses services, vous les acceptez.</p>
+
+<h2>2. Informations sur les formations</h2>
+<p>Les pages « Filières » présentent les formations proposées par l'établissement. Ces informations (programmes, durées, conditions d'accès, frais) sont données à titre indicatif et peuvent évoluer ; elles ne constituent pas un engagement contractuel. Pour une information officielle, contactez la scolarité.</p>
+
+<h2>3. Pré-inscription et admission</h2>
+<ul>
+  <li>Le formulaire de pré-inscription permet de déposer une demande ; <strong>il ne vaut pas admission ni inscription définitive</strong>.</li>
+  <li>Les informations fournies doivent être exactes et complètes. Une information volontairement fausse peut entraîner le rejet de la demande.</li>
+  <li>L'admission définitive est prononcée par l'établissement après étude du dossier, selon ses propres procédures (pièces à fournir, concours, entretien, règlement des frais).</li>
+  <li>Le numéro de dossier remis à l'issue de la demande permet d'en suivre l'avancement ; il est personnel et ne doit pas être communiqué à des tiers.</li>
+</ul>
+
+<h2>4. Espace étudiant</h2>
+<ul>
+  <li>L'accès est réservé aux étudiants de l'établissement, avec les identifiants fournis par l'administration.</li>
+  <li>Vous êtes responsable de la confidentialité de vos identifiants et de l'usage qui en est fait. Signalez immédiatement toute utilisation suspecte à <a href="mailto:{{ site.email }}">{{ site.email }}</a>.</li>
+  <li>Les documents mis à disposition sont destinés à l'usage personnel de l'étudiant concerné.</li>
+</ul>
+
+<h2>5. Usages interdits</h2>
+<p>Il est interdit de tenter d'accéder sans autorisation aux comptes ou aux données d'autrui, de perturber le fonctionnement du site (envois automatisés, attaques, collecte massive de données), d'usurper l'identité d'une personne, ou de transmettre des contenus illicites, injurieux ou diffamatoires via les formulaires. L'établissement se réserve le droit de bloquer l'accès et d'engager toute poursuite utile.</p>
+
+<h2>6. Propriété intellectuelle</h2>
+<p>Les contenus du site sont protégés (voir les <a href="{% url 'core:mentions' %}">mentions légales</a>). Toute réutilisation sans autorisation écrite est interdite.</p>
+
+<h2>7. Liens externes</h2>
+<p>Le site peut renvoyer vers des sites tiers (réseaux sociaux, partenaires, cartographie). L'établissement n'exerce aucun contrôle sur leur contenu et n'en est pas responsable.</p>
+
+<h2>8. Disponibilité</h2>
+<p>L'accès au site peut être interrompu à tout moment, notamment pour maintenance, sans que la responsabilité de l'établissement puisse être engagée.</p>
+
+<h2>9. Données personnelles</h2>
+<p>Voir la <a href="{% url 'core:confidentialite' %}">politique de confidentialité</a>.</p>
+
+<h2>10. Droit applicable</h2>
+<p>Les présentes conditions sont soumises au droit ivoirien. Tout litige relève, à défaut d'accord amiable, des tribunaux compétents d'Abidjan.</p>
+{% endblock %}

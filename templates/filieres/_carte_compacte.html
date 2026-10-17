@@ -1,0 +1,9 @@
+<a class="ccard" href="{{ f.get_absolute_url }}" data-lv="{{ f.niveaux_data }}" data-pole="{{ f.pole.slug|default:'' }}" data-nom="{{ f.nom|lower }} {{ f.resume|lower }}">
+  <div class="ccard-top">
+    <span class="ccard-lv">{% for n in f.niveaux.all %}{{ n.nom }}{% if not forloop.last %} · {% endif %}{% endfor %}</span>
+    <span class="ccard-dur">⏱ {{ f.duree }}</span>
+  </div>
+  <h3>{{ f.nom }}</h3>
+  <p>{{ f.resume }}</p>
+  <span class="fcard-link">Voir le programme <i aria-hidden="true">→</i></span>
+</a>

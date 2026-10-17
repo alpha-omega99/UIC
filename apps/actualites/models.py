@@ -2,7 +2,7 @@ from django.db import models
 from django.urls import reverse
 from django.utils import timezone
 from django.utils.text import slugify
-from apps.core.utils import validate_image
+from apps.core.utils import image_source, validate_image
 
 
 class Categorie(models.Model):
@@ -23,6 +23,7 @@ class Article(models.Model):
     chapeau = models.CharField(max_length=400, blank=True)
     contenu = models.TextField(help_text="Séparez les paragraphes par une ligne vide.")
     image = models.ImageField(upload_to='articles/', blank=True, validators=[validate_image])
+    image_statique = models.CharField("Image du site", max_length=200, blank=True, help_text="Chemin dans static/, ex : img/evenements/remise-diplomes-01.webp")
     image_url = models.URLField(blank=True)
     temps_lecture = models.PositiveSmallIntegerField(default=3, help_text="minutes")
     publie = models.BooleanField(default=False)
@@ -46,7 +47,7 @@ class Article(models.Model):
 
     @property
     def image_src(self):
-        return self.image.url if self.image else self.image_url
+        return image_source(self.image, self.image_statique, self.image_url)
 
     @property
     def paragraphes(self):

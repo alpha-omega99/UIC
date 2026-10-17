@@ -96,19 +96,62 @@
     counters.forEach(function (el) { cIO.observe(el); });
   } else { counters.forEach(function (el) { el.textContent = (+el.dataset.target).toLocaleString('fr-FR') + (el.dataset.suffix || ''); }); }
 
-  /* ── Filtre des filières ── */
-  $$('.flt').forEach(function (btn) {
-    btn.addEventListener('click', function () {
-      $$('.flt').forEach(function (b) { b.classList.remove('on'); });
-      btn.classList.add('on');
-      var f = btn.dataset.f;
-      $$('.fil-card').forEach(function (c) {
-        var show = f === 'all' || (c.dataset.lv || '').split(' ').indexOf(f) !== -1;
-        c.style.transition = 'opacity .35s, transform .35s';
-        c.classList.toggle('is-dim', !show);
+  /* ── Filtre des filières : niveau + recherche (fonctionne quel que soit le nombre de formations) ── */
+  (function () {
+    var grid = $('#fgrid'); if (!grid) return;
+    var cards = $$('.fcard', grid), search = $('#fil-search'), count = $('#fil-count'), empty = $('#fil-empty');
+    var level = 'all';
+    function norm(t) { return (t || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, ''); }
+    function apply() {
+      var q = norm(search ? search.value.trim() : ''), n = 0;
+      cards.forEach(function (c) {
+        var okLv = level === 'all' || (c.dataset.lv || '').split(' ').indexOf(level) !== -1;
+        var okQ = !q || norm(c.dataset.nom).indexOf(q) !== -1;
+        c.hidden = !(okLv && okQ); if (!c.hidden) n++;
+      });
+      if (count) count.textContent = n + ' formation' + (n > 1 ? 's' : '');
+      if (empty) empty.hidden = n !== 0 || !cards.length;
+    }
+    $$('.flt').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        $$('.flt').forEach(function (b) { b.classList.remove('on'); });
+        btn.classList.add('on'); level = btn.dataset.f; apply();
       });
     });
-  });
+    if (search) search.addEventListener('input', apply);
+  })();
+
+  /* ── Catalogue des formations : école + niveau + recherche ── */
+  (function () {
+    var cat = $('#fcat'); if (!cat) return;
+    var cards = $$('.ccard', cat), groups = $$('.fgroup', cat);
+    var search = $('#fil-search'), count = $('#fil-count'), empty = $('#fil-empty');
+    var level = 'all', pole = 'all';
+    function norm(t) { return (t || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, ''); }
+    function apply() {
+      var q = norm(search ? search.value.trim() : ''), n = 0;
+      cards.forEach(function (c) {
+        var okLv = level === 'all' || (c.dataset.lv || '').split(' ').indexOf(level) !== -1;
+        var okP = pole === 'all' || c.dataset.pole === pole;
+        var okQ = !q || norm(c.dataset.nom).indexOf(q) !== -1;
+        c.hidden = !(okLv && okP && okQ); if (!c.hidden) n++;
+      });
+      groups.forEach(function (g) { g.hidden = !$$('.ccard:not([hidden])', g).length; });
+      if (count) count.textContent = n + ' formation' + (n > 1 ? 's' : '');
+      if (empty) empty.hidden = n !== 0 || !cards.length;
+    }
+    function bind(sel, attr, set) {
+      $$(sel).forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          $$(sel).forEach(function (b) { b.classList.remove('on'); });
+          btn.classList.add('on'); set(btn.dataset[attr]); apply();
+        });
+      });
+    }
+    bind('.flt[data-f]', 'f', function (v) { level = v; });
+    bind('.flt[data-p]', 'p', function (v) { pole = v; });
+    if (search) search.addEventListener('input', apply);
+  })();
 
   /* ── Admission : accordéon 3 étapes ── */
   function openStep(id) {
@@ -162,26 +205,6 @@
       if (!stepValid('step2')) { e.preventDefault(); openStep('step2'); showToast('Veuillez choisir une filière et un niveau.', 'err'); return; }
       var b = $('#btnSubmit'); if (b) { b.textContent = '⏳ Envoi en cours...'; b.disabled = true; }
     });
-  }
-
-  /* ── Carrousel alumni ── */
-  var car = $('#alumni-carousel'), nav = $('#alumni-nav');
-  if (car && nav) {
-    var cards = $$('.alumni-card', car);
-    cards.forEach(function (_, i) {
-      var dot = document.createElement('button');
-      dot.type = 'button'; dot.setAttribute('aria-label', 'Témoignage ' + (i + 1));
-      dot.className = 'alumni-dot' + (i === 0 ? ' active' : '');
-      dot.addEventListener('click', function () {
-        car.scrollTo({ left: i * (cards[0].offsetWidth + 24), behavior: 'smooth' });
-        $$('.alumni-dot', nav).forEach(function (d) { d.classList.remove('active'); }); dot.classList.add('active');
-      });
-      nav.appendChild(dot);
-    });
-    var drag = false, sx = 0, sl = 0;
-    car.addEventListener('mousedown', function (e) { drag = true; sx = e.pageX - car.offsetLeft; sl = car.scrollLeft; car.style.cursor = 'grabbing'; });
-    document.addEventListener('mouseup', function () { drag = false; car.style.cursor = 'grab'; });
-    car.addEventListener('mousemove', function (e) { if (!drag) return; e.preventDefault(); car.scrollLeft = sl - (e.pageX - car.offsetLeft - sx) * 1.5; });
   }
 
   /* ── FAQ (accordéon) ── */

@@ -11,7 +11,7 @@ env = environ.Env()
 environ.Env.read_env(BASE_DIR / '.env')
 
 # ── Sécurité de base ─────────────────────────────────────────────────────────
-SECRET_KEY = env('SECRET_KEY')                 # obligatoire, aucun défaut
+SECRET_KEY = env('SECRET_KEY', default='').strip()   # vide = refusé en production, clé jetable en dev
 DEBUG = env.bool('DEBUG', default=False)       # False par défaut = sûr
 ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=[])
 ADMIN_URL = env('ADMIN_URL', default='gestion-uic/')

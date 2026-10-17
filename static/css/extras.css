@@ -138,3 +138,124 @@ a.back-link{color:var(--primary);}
   .hero-student{top:0;bottom:0;height:100%;overflow:hidden;-webkit-mask-image:linear-gradient(to bottom,#000 60%,transparent 92%);mask-image:linear-gradient(to bottom,#000 60%,transparent 92%);}
   .hero-student img{position:absolute;right:-8%;bottom:34%;height:78%;width:auto;max-width:none;object-fit:contain;}
 }
+
+/* ══ PARTENAIRES (accueil) ══ */
+.partenaires{background:var(--white);padding:5rem 0;border-top:1px solid var(--g200);}
+.part-head{text-align:center;max-width:640px;margin:0 auto 3rem;}
+.part-head .sbody{margin-left:auto;margin-right:auto;}
+.part-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.5rem;max-width:960px;margin:0 auto;}
+.part-card{display:flex;flex-direction:column;align-items:center;gap:.35rem;text-align:center;padding:1.75rem 1.25rem;background:var(--white);border:1px solid var(--g200);border-radius:14px;text-decoration:none;color:var(--primary);transition:box-shadow var(--tr),transform var(--tr),border-color var(--tr);}
+a.part-card:hover{box-shadow:0 14px 40px rgba(27,58,92,.12);transform:translateY(-4px);border-color:var(--gold);}
+.part-logo{height:84px;width:100%;display:flex;align-items:center;justify-content:center;margin-bottom:.6rem;}
+.part-logo img{max-height:100%;max-width:100%;width:auto;height:auto;object-fit:contain;}
+.part-card strong{font-family:var(--serif);font-size:1.15rem;font-weight:700;}
+.part-card span{font-size:.8rem;color:var(--g400);letter-spacing:.04em;}
+@media (max-width:900px){.part-grid{grid-template-columns:1fr;max-width:420px;}.partenaires{padding:3.5rem 0;}}
+
+/* ══ FILIÈRES — grille de cartes extensible ══ */
+[hidden]{display:none!important;}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;}
+.fgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:1.5rem;}
+.fgrid-3{grid-template-columns:repeat(auto-fit,minmax(270px,1fr));}
+.fcard{display:flex;flex-direction:column;background:var(--white);border:1px solid var(--g200);border-radius:14px;overflow:hidden;text-decoration:none;color:inherit;transition:transform .3s ease,box-shadow .3s ease,border-color .3s ease;}
+.fcard:hover,.fcard:focus-visible{transform:translateY(-6px);box-shadow:0 22px 50px rgba(7,20,36,.28);border-color:var(--gold);}
+.fcard-img{position:relative;height:190px;background:var(--primary) center/cover no-repeat;}
+.fcard-img::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(7,20,36,.55) 0%,rgba(7,20,36,0) 60%);}
+.fcard-badges{position:absolute;top:.85rem;left:.85rem;right:.85rem;z-index:2;display:flex;flex-wrap:wrap;gap:.35rem;}
+.fcard-badges span{background:rgba(255,255,255,.95);color:var(--primary);font-size:.66rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:.28rem .65rem;border-radius:100px;}
+.fcard-ico{position:absolute;left:1.25rem;bottom:-22px;z-index:3;width:46px;height:46px;border-radius:12px;background:var(--gold);display:flex;align-items:center;justify-content:center;font-size:1.3rem;box-shadow:0 8px 20px rgba(200,146,42,.45);}
+.fcard-body{display:flex;flex-direction:column;flex:1;padding:2rem 1.4rem 1.4rem;}
+.fcard-body h3{font-family:var(--serif);font-size:1.3rem;font-weight:700;color:var(--primary);line-height:1.25;margin-bottom:.55rem;}
+.fcard-body p{font-size:.88rem;color:var(--g600);line-height:1.65;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;margin-bottom:1rem;}
+.fcard-meta{list-style:none;display:flex;flex-wrap:wrap;gap:.4rem;margin:0 0 1.1rem;padding:0;}
+.fcard-meta li{font-size:.74rem;color:var(--g600);background:var(--g50);border:1px solid var(--g200);border-radius:100px;padding:.25rem .65rem;}
+.fcard-link{margin-top:auto;font-size:.84rem;font-weight:600;color:var(--gold);display:inline-flex;align-items:center;gap:.4rem;}
+.fcard-link i{font-style:normal;transition:transform var(--tr);}
+.fcard:hover .fcard-link i{transform:translateX(5px);}
+.fil-more{text-align:center;margin-top:3rem;}
+/* page « Filières » */
+.fl-wrap{background:var(--g50);padding:3rem 0 5rem;}
+.fil-tools{display:flex;flex-wrap:wrap;align-items:center;gap:1rem 1.5rem;margin-bottom:2rem;}
+.fil-search{flex:1 1 260px;max-width:380px;}
+.fil-search input{width:100%;padding:.8rem 1.1rem;border:1.5px solid var(--g200);border-radius:100px;font:inherit;font-size:.92rem;background:var(--white);color:var(--primary);}
+.fil-search input:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(200,146,42,.18);}
+.fil-tools .filters{flex-wrap:wrap;}
+.fil-tools .flt{color:var(--primary);border-color:var(--g200);background:var(--white);}
+.fil-tools .flt small{opacity:.6;margin-left:.2rem;font-size:.72rem;}
+.fil-tools .flt.on,.fil-tools .flt:hover{background:var(--gold);border-color:var(--gold);color:#fff;}
+.fil-count{margin-left:auto;font-size:.82rem;color:var(--g400);}
+.fil-cta{margin-top:4rem;background:linear-gradient(135deg,var(--primary),var(--navy));border-radius:16px;padding:2.5rem;display:flex;flex-wrap:wrap;gap:1.5rem;align-items:center;justify-content:space-between;}
+.fil-cta h2{font-family:var(--serif);font-size:1.6rem;color:#fff;margin-bottom:.35rem;}
+.fil-cta p{color:rgba(255,255,255,.6);font-size:.92rem;}
+.fil-cta-btns{display:flex;flex-wrap:wrap;gap:.75rem;}
+.fil-cta .btn-outline{color:#fff;border-color:rgba(255,255,255,.4);}
+/* détail : autres formations */
+.fil-voisines{margin-top:4rem;padding-top:3rem;border-top:1px solid var(--g200);}
+.fil-voisines h2{font-family:var(--serif);font-size:1.7rem;color:var(--primary);margin-bottom:1.5rem;text-align:center;}
+.fil-voisines .fcard{box-shadow:0 6px 24px rgba(27,58,92,.08);}
+.btn-outline-dark{display:inline-block;padding:.8rem 1.6rem;border:1.5px solid var(--primary);border-radius:8px;color:var(--primary);font-weight:600;font-size:.88rem;text-decoration:none;transition:all var(--tr);}
+.btn-outline-dark:hover{background:var(--primary);color:#fff;}
+.fil-page-badge+.fil-page-badge{margin-left:.3rem;}
+@media (max-width:640px){
+  .fgrid{grid-template-columns:1fr;}
+  .fcard-img{height:170px;}
+  .fil-count{margin-left:0;width:100%;}
+  .fil-cta{padding:1.75rem 1.4rem;}
+}
+
+/* ===== Respiration globale (plus d'espace entre et dans les sections) ===== */
+section{padding:clamp(4.5rem,8vw,8rem) 0;}
+.container,.topbar-inner,.nav-wrap{padding-left:clamp(1.25rem,4vw,3rem);padding-right:clamp(1.25rem,4vw,3rem);}
+.fil-head,.actu-head{margin-bottom:clamp(2.5rem,4vw,4rem);}
+.fgrid,.fil-grid,.actu-grid{gap:clamp(1.5rem,2.4vw,2.25rem);}
+.fcard-body{padding:2.25rem 1.6rem 1.6rem;}
+.fcard p,.s-sub,section p{line-height:1.75;}
+.pres-grid{gap:clamp(2.5rem,6vw,6rem);}
+.values{gap:1.5rem;}
+.fil-more{margin-top:clamp(2.5rem,4vw,4rem);}
+
+/* ===== Catalogue des formations (style annuaire : groupé par école, cartes compactes) ===== */
+.fl-wrap{background:var(--white);padding-top:2.5rem;}
+.fil-tools{border-bottom:1px solid var(--g200);padding-bottom:1.5rem;margin-bottom:3rem;}
+.fil-search{flex:1 1 100%;max-width:none;}
+.fil-search input{border-radius:10px;}
+.filters-niv{align-items:center;}
+.filters-lbl{font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--g400);margin-right:.25rem;}
+.fil-tools .flt{padding:.45rem .95rem;font-size:.78rem;}
+.fgroup{margin-bottom:clamp(2.5rem,5vw,4.5rem);}
+.fgroup-head{display:flex;justify-content:space-between;align-items:flex-end;gap:1rem;flex-wrap:wrap;padding-bottom:.9rem;margin-bottom:1.75rem;border-bottom:1px solid var(--g200);}
+.fgroup-head h2{font-family:var(--serif);font-size:1.5rem;color:var(--primary);text-transform:uppercase;letter-spacing:.02em;line-height:1.2;}
+.fgroup-head p{font-size:.88rem;color:var(--g600);margin-top:.35rem;}
+.fgroup-n{font-size:.8rem;font-weight:600;color:var(--gold);white-space:nowrap;}
+.cgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;}
+.ccard{display:flex;flex-direction:column;gap:.7rem;background:var(--white);border:1px solid var(--g200);border-radius:12px;padding:1.5rem 1.5rem 1.35rem;text-decoration:none;color:inherit;transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease;}
+.ccard:hover,.ccard:focus-visible{transform:translateY(-4px);border-color:var(--gold);box-shadow:0 14px 34px rgba(27,58,92,.12);}
+.ccard-top{display:flex;justify-content:space-between;align-items:center;gap:.75rem;font-size:.7rem;}
+.ccard-lv{font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--gold);}
+.ccard-dur{color:var(--g400);white-space:nowrap;}
+.ccard h3{font-family:var(--serif);font-size:1.15rem;line-height:1.3;color:var(--primary);}
+.ccard p{font-size:.86rem;line-height:1.65;color:var(--g600);display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;}
+.ccard .fcard-link{margin-top:auto;padding-top:.4rem;}
+.ccard:hover .fcard-link i{transform:translateX(5px);}
+.fl-wrap .fil-cta{margin-top:2rem;}
+@media (max-width:1024px){.cgrid{grid-template-columns:repeat(2,1fr);}}
+@media (max-width:640px){.cgrid{grid-template-columns:1fr;}.fgroup-head h2{font-size:1.25rem;}}
+
+/* ===== Pages légales ===== */
+.legal{max-width:820px;}
+.legal h2{font-family:var(--serif);font-size:1.45rem;color:var(--primary);margin:2.5rem 0 .8rem;}
+.legal p,.legal li{font-size:.97rem;line-height:1.8;color:var(--g600);}
+.legal p{margin-bottom:1rem;}
+.legal ul{margin:0 0 1rem 1.25rem;}
+.legal li{margin-bottom:.4rem;}
+.legal a{color:var(--gold);text-decoration:underline;text-underline-offset:3px;}
+.legal strong{color:var(--primary);}
+.legal-table{width:100%;border-collapse:collapse;margin:1rem 0 1.5rem;font-size:.9rem;}
+.legal-table th,.legal-table td{text-align:left;vertical-align:top;padding:.75rem .9rem;border:1px solid var(--g200);line-height:1.6;color:var(--g600);}
+.legal-table th{background:var(--g50);color:var(--primary);font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;}
+.legal-nav{display:flex;flex-wrap:wrap;gap:.6rem 1.5rem;margin-top:3rem;padding-top:1.5rem;border-top:1px solid var(--g200);}
+.legal-nav a{font-size:.88rem;font-weight:600;text-decoration:none;}
+.form-legal{font-size:.78rem;line-height:1.6;color:var(--g400);margin:1rem 0;}
+.form-legal a{color:var(--gold);}
+.ft-bi-links{flex-wrap:wrap;gap:.4rem 1.25rem;}
+@media (max-width:640px){.legal-table thead{display:none;}.legal-table td{display:block;border:none;border-bottom:1px solid var(--g200);}.legal-table tr{display:block;margin-bottom:1rem;border:1px solid var(--g200);border-radius:8px;overflow:hidden;}}

@@ -1,6 +1,8 @@
 from django.core.exceptions import ValidationError
 from django.db import models
 
+from .utils import image_source, validate_image
+
 
 def _maps_ok(value):
     if value and not value.startswith('https://www.google.com/maps/embed'):
@@ -34,6 +36,13 @@ class InfoEtablissement(models.Model):
     horaires = models.CharField(max_length=120, default="Lundi – Vendredi : 10h00 – 16h00")
     horaires_court = models.CharField(max_length=60, default="Lun–Ven : 10h–16h")
     maps_embed = models.URLField(max_length=700, blank=True, validators=[_maps_ok])
+    # Mentions légales (affichées uniquement si renseignées)
+    statut_juridique = models.CharField("Forme juridique", max_length=160, blank=True, help_text="Ex : Société à responsabilité limitée (SARL), association…")
+    rccm = models.CharField("N° RCCM / immatriculation", max_length=80, blank=True)
+    numero_agrement = models.CharField("N° d'agrément / arrêté d'ouverture", max_length=120, blank=True)
+    directeur_publication = models.CharField("Directeur de la publication", max_length=120, blank=True)
+    hebergeur = models.CharField("Hébergeur du site", max_length=250,
+                                 default="Render Services, Inc. — 525 Brannan Street, Suite 300, San Francisco, CA 94107, États-Unis (render.com)")
     facebook = models.URLField(blank=True)
     linkedin = models.URLField(blank=True)
     x_twitter = models.URLField("X (Twitter)", blank=True)
@@ -113,27 +122,6 @@ class JalonHistoire(models.Model):
         return f"{self.annee} — {self.titre}"
 
 
-class Temoignage(models.Model):
-    nom = models.CharField(max_length=100)
-    promotion = models.CharField(max_length=120, help_text="Ex : Master Management 2022")
-    poste = models.CharField(max_length=160, blank=True)
-    texte = models.TextField()
-    actif = models.BooleanField(default=True)
-    ordre = models.PositiveSmallIntegerField(default=0)
-
-    class Meta:
-        ordering = ['ordre', 'id']
-        verbose_name = "Témoignage alumni"
-        verbose_name_plural = "Témoignages alumni"
-
-    def __str__(self):
-        return self.nom
-
-    @property
-    def initiale(self):
-        return self.nom[:1].upper()
-
-
 class FAQ(models.Model):
     question = models.CharField(max_length=250)
     reponse = models.TextField()
@@ -147,3 +135,25 @@ class FAQ(models.Model):
 
     def __str__(self):
         return self.question
+
+
+class Partenaire(models.Model):
+    nom = models.CharField(max_length=120)
+    pays = models.CharField(max_length=80, blank=True)
+    logo = models.ImageField("Logo (téléversé)", upload_to='partenaires/', blank=True, validators=[validate_image])
+    logo_statique = models.CharField("Logo du site", max_length=200, blank=True,
+                                     help_text="Chemin dans static/, ex : img/partenaires/universite-laval.webp")
+    site_web = models.URLField(blank=True, help_text="Lien vers le site du partenaire (https://…)")
+    ordre = models.PositiveSmallIntegerField(default=0)
+    actif = models.BooleanField(default=True)
+
+    class Meta:
+        ordering = ['ordre', 'nom']
+        verbose_name = "Partenaire"
+
+    def __str__(self):
+        return self.nom
+
+    @property
+    def logo_src(self):
+        return image_source(self.logo, self.logo_statique)
