@@ -9,6 +9,7 @@ class PhotoInline(admin.TabularInline):
 
 @admin.register(Album)
 class AlbumAdmin(admin.ModelAdmin):
-    list_display = ('titre', 'date', 'actif')
+    list_display = ('titre', 'ordre', 'date', 'actif')
+    list_editable = ('ordre', 'actif')
     prepopulated_fields = {'slug': ('titre',)}
     inlines = [PhotoInline]

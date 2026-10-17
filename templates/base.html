@@ -51,9 +51,8 @@
     </a>
     <ul class="nav-menu" id="nav-menu">
       <li><a href="{% url 'core:home' %}" {% if request.resolver_match.view_name == 'core:home' %}class="active"{% endif %}>Accueil</a></li>
-      <li><a href="{% url 'core:home' %}#presentation">À propos</a></li>
-      <li><a href="{% url 'core:apropos' %}" {% if request.resolver_match.view_name == 'core:apropos' %}class="active"{% endif %}>Histoire &amp; Valeurs</a></li>
       <li><a href="{% url 'filieres:liste' %}" {% if request.resolver_match.app_name == 'filieres' %}class="active"{% endif %}>Filières</a></li>
+      <li><a href="{% url 'core:apropos' %}" {% if request.resolver_match.view_name == 'core:apropos' %}class="active"{% endif %}>Histoire &amp; Valeurs</a></li>
       <li><a href="{% url 'actualites:liste' %}" {% if request.resolver_match.app_name == 'actualites' %}class="active"{% endif %}>Actualités</a></li>
       <li><a href="{% url 'galerie:liste' %}" {% if request.resolver_match.app_name == 'galerie' %}class="active"{% endif %}>Galerie</a></li>
       <li><a href="{% url 'contact:contact' %}" {% if request.resolver_match.app_name == 'contact' %}class="active"{% endif %}>Contact</a></li>
@@ -67,8 +66,16 @@
 
 <!-- FOOTER -->
 <footer>
-  <div class="ft-wave">
-    <svg viewBox="0 0 1440 80" preserveAspectRatio="none"><path d="M0,40 C360,80 1080,0 1440,40 L1440,80 L0,80 Z" fill="#0a1520"/></svg>
+  <div class="ft-wave" aria-hidden="true">
+    <svg viewBox="0 24 150 28" preserveAspectRatio="none" focusable="false">
+      <defs><path id="ft-vague" d="M-160 44c30 0 58-18 88-18s58 18 88 18 58-18 88-18 58 18 88 18v44h-352z"/></defs>
+      <g class="ft-parallax">
+        <use href="#ft-vague" x="48" y="0" fill="#2e6498" fill-opacity=".35"/>
+        <use href="#ft-vague" x="48" y="3" fill="#1B3A5C" fill-opacity=".5"/>
+        <use href="#ft-vague" x="48" y="5" fill="#12283f" fill-opacity=".75"/>
+        <use href="#ft-vague" x="48" y="7" fill="#0a1520"/>
+      </g>
+    </svg>
   </div>
   <div class="ft-top"><div class="container"><div class="ft-grid">
     <div>

@@ -1,16 +1,29 @@
 {% extends 'base.html' %}
-{% block title %}Galerie – UIC{% endblock %}
+{% block title %}Galerie – Vie du campus – UIC{% endblock %}
+{% block meta_desc %}La vie à l'UIC en images : campus, étudiants, cours, cérémonies et événements.{% endblock %}
 {% block content %}
 <div class="page">
   <div class="list-hero"><div class="container"><span class="eyebrow">Galerie</span><h1 class="stitle">La vie à l'UIC en images</h1>
-    <p class="sbody">Cérémonies, rentrées, activités : revivez les moments forts du campus.</p></div></div>
-  <div class="list-body"><div class="container"><div class="alb-grid">
+    <p class="sbody">Campus, étudiants, cours, cérémonies : revivez les moments forts de l'établissement.</p></div></div>
+
+  {% if albums %}
+  <div class="gal-chips-wrap"><div class="container">
+    <nav class="gal-chips" aria-label="Aller à une section">
+      {% for a in albums %}<a href="#album-{{ a.slug }}">{{ a.titre }} <small>{{ a.photos.all|length }}</small></a>{% endfor %}
+    </nav>
+  </div></div>
+  {% endif %}
+
+  <div class="list-body"><div class="container">
     {% for a in albums %}
-    <a class="alb-card" href="{% url 'galerie:detail' a.slug %}">
-      <div class="alb-cover" {% if a.couverture %}style="background-image:url('{{ a.couverture }}')"{% endif %}></div>
-      <div class="alb-body"><h3>{{ a.titre }}</h3><p>{{ a.photos.all|length }} photo{{ a.photos.all|length|pluralize }}{% if a.date %} · {{ a.date|date:"F Y" }}{% endif %}</p></div>
-    </a>
-    {% empty %}<p class="empty" style="grid-column:1/-1">Aucun album pour le moment.</p>{% endfor %}
-  </div></div></div>
+    <div class="gal-section" id="album-{{ a.slug }}">
+      <header class="gal-head">
+        <div><h2>{{ a.titre }}</h2>{% if a.description %}<p>{{ a.description }}</p>{% endif %}</div>
+        <a class="gal-all" href="{% url 'galerie:detail' a.slug %}">Voir tout l'album ({{ a.photos.all|length }}) →</a>
+      </header>
+      {% include 'galerie/_carrousel.html' with groupe=a.slug photos=a.photos.all titre=a.titre %}
+    </div>
+    {% empty %}<p class="empty">Aucun album pour le moment.</p>{% endfor %}
+  </div></div>
 </div>
 {% endblock %}

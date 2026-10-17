@@ -13,6 +13,22 @@
    "date": "2025-09-01",
    "photos": [
     [
+     "img/campus/vie-etudiante-11.webp",
+     "Étudiants de l'UIC en tenue de cérémonie"
+    ],
+    [
+     "img/campus/vie-etudiante-12.webp",
+     "Promotion devant le bâtiment de l'UIC"
+    ],
+    [
+     "img/campus/vie-etudiante-14.webp",
+     "Étudiants réunis devant l'établissement"
+    ],
+    [
+     "img/campus/vie-etudiante-13.webp",
+     "Étudiants de l'UIC"
+    ],
+    [
      "img/campus/vie-etudiante-01.webp",
      "Étudiants de l'UIC"
     ],
@@ -60,7 +76,8 @@
      "img/campus/travail-en-groupe-02.webp",
      "Travail en groupe"
     ]
-   ]
+   ],
+   "ordre": 0
   },
   {
    "slug": "salles-de-cours",
@@ -83,8 +100,17 @@
     [
      "img/campus/salle-de-cours-04.webp",
      "En salle de cours"
+    ],
+    [
+     "img/campus/salle-de-cours-05.webp",
+     "Cours en salle"
+    ],
+    [
+     "img/campus/salle-de-cours-06.webp",
+     "Un étudiant en salle de cours"
     ]
-   ]
+   ],
+   "ordre": 2
   },
   {
    "slug": "remise-des-diplomes",
@@ -112,7 +138,8 @@
      "img/evenements/remise-diplomes-05.webp",
      "Remise des diplômes"
     ]
-   ]
+   ],
+   "ordre": 4
   },
   {
    "slug": "journee-culturelle",
@@ -172,7 +199,42 @@
      "img/evenements/journee-culturelle-13.webp",
      "Journée culturelle"
     ]
-   ]
+   ],
+   "ordre": 5
+  },
+  {
+   "slug": "le-campus",
+   "titre": "Le campus",
+   "description": "Les bâtiments de l'UIC à Cocody.",
+   "date": "2025-09-02",
+   "photos": [
+    [
+     "img/campus/batiment-01.webp",
+     "Bâtiment de l'UIC"
+    ],
+    [
+     "img/campus/batiment-02.webp",
+     "Entrée de l'UIC"
+    ],
+    [
+     "img/campus/batiment-03.webp",
+     "Façade et jardin du campus"
+    ]
+   ],
+   "ordre": 1
+  },
+  {
+   "slug": "stand-uic",
+   "titre": "Stand de l'UIC",
+   "description": "L'UIC en salon : démonstrations et présentation des formations.",
+   "date": "2025-09-03",
+   "photos": [
+    [
+     "img/evenements/stand-uic-01.webp",
+     "Stand de l'UIC avec les supports de formation"
+    ]
+   ],
+   "ordre": 3
   }
  ],
  "partenaires": [

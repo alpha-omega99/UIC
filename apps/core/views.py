@@ -2,6 +2,7 @@ from django.shortcuts import render
 from apps.actualites.models import Article
 from apps.admissions.forms import DemandeAdmissionForm
 from apps.filieres.models import Filiere
+from apps.galerie.models import Album, Photo
 from .models import FAQ, Chiffre, JalonHistoire, Partenaire, Valeur
 
 
@@ -11,6 +12,14 @@ def niveaux_utilises_accueil():
     return (NiveauFormation.objects
             .annotate(nb=Count('filieres', filter=Q(filieres__actif=True, filieres__en_avant=True), distinct=True))
             .filter(nb__gt=0))
+
+
+def photos_accueil(max_total=12, par_album=3):
+    """Quelques photos de chaque album actif, pour la section « Vie du campus » de l'accueil."""
+    photos = []
+    for album in Album.objects.filter(actif=True).prefetch_related('photos'):
+        photos.extend(list(album.photos.all()[:par_album]))
+    return photos[:max_total]
 
 
 def home(request):
@@ -26,6 +35,7 @@ def home(request):
         'partenaires': Partenaire.objects.filter(actif=True),
         'article_une': articles[0] if articles else None,
         'articles_autres': articles[1:],
+        'photos_campus': photos_accueil(),
         'form': DemandeAdmissionForm(),
     })
 

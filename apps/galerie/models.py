@@ -8,10 +8,11 @@ class Album(models.Model):
     slug = models.SlugField(unique=True, blank=True)
     description = models.CharField(max_length=300, blank=True)
     date = models.DateField(null=True, blank=True)
+    ordre = models.PositiveSmallIntegerField(default=0, help_text="Position dans la galerie (0 = en premier).")
     actif = models.BooleanField(default=True)
 
     class Meta:
-        ordering = ['-date', '-id']
+        ordering = ['ordre', '-date', '-id']
         verbose_name = "Album photo"
 
     def __str__(self):

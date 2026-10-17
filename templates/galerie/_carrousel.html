@@ -1,0 +1,15 @@
+{# Carrousel de photos : défile (flèches, balayage, auto) ; un clic ouvre la visionneuse plein écran. Variables : groupe (id), photos, titre #}
+<div class="gal" data-gal="{{ groupe }}">
+  <button type="button" class="gal-nav gal-prev" aria-label="Photos précédentes"><span aria-hidden="true">‹</span></button>
+  <div class="gal-track" tabindex="0" aria-label="Photos : {{ titre }}">
+    {% for p in photos %}
+    <figure class="gal-slide">
+      <button type="button" class="gal-open" data-full="{{ p.image_src }}" data-cap="{{ p.legende }}" aria-label="Agrandir la photo{% if p.legende %} : {{ p.legende }}{% endif %}">
+        <img src="{{ p.image_src }}" alt="{{ p.legende|default:titre }}" loading="lazy" decoding="async">
+        <span class="gal-zoom" aria-hidden="true">⤢</span>
+      </button>
+    </figure>
+    {% endfor %}
+  </div>
+  <button type="button" class="gal-nav gal-next" aria-label="Photos suivantes"><span aria-hidden="true">›</span></button>
+</div>

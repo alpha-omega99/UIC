@@ -28,3 +28,10 @@ Après modification : `python manage.py seed_images` (ne remplace jamais une ima
 ## Partenaires
 Les trois logos actuels sont des **recadrages provisoires** de l'affiche des formations (basse résolution).
 Remplacer par les logos officiels : mêmes noms de fichiers dans `partenaires/`, de préférence en PNG/WebP fond transparent d'au moins 400 px de large.
+
+## Ajouts « vie du campus »
+- `campus/vie-etudiante-11..14.webp` : portraits et groupes d'étudiants
+- `campus/salle-de-cours-05.webp`, `salle-de-cours-06.webp` : étudiants en salle de cours
+- `campus/batiment-01..03.webp` : bâtiment du campus (basse résolution, 680 px : à remplacer par les originaux)
+- `evenements/stand-uic-01.webp` : stand de l'UIC
+Ces photos sont reliées aux albums par `python manage.py seed_images` (voir `apps/core/data/images.json`).

@@ -38,11 +38,21 @@ class Command(BaseCommand):
 
         for a in d['albums']:
             album, cree = Album.objects.get_or_create(slug=a['slug'], defaults=dict(
-                titre=a['titre'], description=a['description'], date=date.fromisoformat(a['date'])))
+                titre=a['titre'], description=a['description'], date=date.fromisoformat(a['date']), ordre=a.get('ordre', 0)))
+            if not cree and album.ordre == 0 and a.get('ordre', 0):
+                Album.objects.filter(pk=album.pk, ordre=0).update(ordre=a['ordre'])   # n'écrase jamais un ordre déjà choisi
+            # Ajoute les photos manquantes (sans toucher à celles déjà présentes ni à l'ordre choisi dans l'admin)
+            deja = set(album.photos.values_list('image_statique', flat=True))
             if not album.photos.exists():
                 for i, (chemin, legende) in enumerate(a['photos']):
                     if verifier(chemin):
                         Photo.objects.create(album=album, image_statique=chemin, legende=legende, ordre=i)
+            else:
+                suite = (album.photos.order_by('-ordre').values_list('ordre', flat=True).first() or 0) + 1
+                for chemin, legende in a['photos']:
+                    if chemin not in deja and verifier(chemin):
+                        Photo.objects.create(album=album, image_statique=chemin, legende=legende, ordre=suite)
+                        suite += 1
 
         for p in d['partenaires']:
             if verifier(p['logo']):

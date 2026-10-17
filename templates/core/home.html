@@ -120,6 +120,18 @@
   </div>
 </section>
 
+{% if photos_campus %}
+<section class="campus-life" id="vie-du-campus">
+  <div class="container">
+    <div class="gal-home-head">
+      <div><span class="eyebrow">Vie du campus</span><h2 class="stitle" style="margin-bottom:0">La vie à l'UIC</h2></div>
+      <a class="link-arrow" href="{% url 'galerie:liste' %}">Toute la galerie</a>
+    </div>
+    {% include 'galerie/_carrousel.html' with groupe='accueil' photos=photos_campus titre="Vie du campus" %}
+  </div>
+</section>
+{% endif %}
+
 <section class="admission" id="admission">
   <div class="container">
     <div style="text-align:center;margin-bottom:3rem">
