@@ -23,6 +23,35 @@ def parse_date(s):
     return timezone.make_aware(datetime(int(a), MOIS[m], int(j), 9, 0))
 
 
+
+def charger_formations(d):
+    """Charge (ou met à jour) les formations réelles de l'UIC. Utilisable seule : python manage.py seed_formations"""
+    # Formations réelles (source : uic-ci.com, page « Filières », et affiches de l'établissement)
+    for i, nom in enumerate(['Classe préparatoire', 'BTS', 'Licence', 'Master', 'Licence professionnelle',
+                             'Master professionnel', 'Formation continue']):
+        NiveauFormation.objects.get_or_create(nom=nom, defaults={'ordre': i})
+    for f in d['filieres']:
+        pole = None
+        if f.get('pole'):
+            pole, _ = Pole.objects.get_or_create(nom=f['pole'])
+        obj, _ = Filiere.objects.update_or_create(slug=f['slug'], defaults=dict(
+            nom=f['nom'], icone=f['icone'], resume=f['resume'], sous_titre=f['sous_titre'], description=f['description'],
+            duree=f['duree'], niveau_requis=f['niveau_requis'], mode=f['mode'], langue=f['langue'],
+            debouches='\n'.join(f['debouches']), image_statique=f['image_statique'], image_url='',
+            ordre=f['ordre'], en_avant=f['en_avant'], pole=pole, actif=True))
+        obj.niveaux.set(NiveauFormation.objects.filter(nom__in=f['niveaux']))
+    # Anciennes formations de démonstration : supprimées (ou masquées si une candidature y est liée)
+    for old in Filiere.objects.filter(slug__in=['management', 'informatique', 'droit', 'finance', 'commerce', 'communication']):
+        if old.candidatures.exists():
+            old.actif = False
+            old.save(update_fields=['actif'])
+        else:
+            old.delete()
+    # Ordre des écoles = ordre d'apparition dans les données
+    for i, nom in enumerate(dict.fromkeys(f['pole'] for f in d['filieres'] if f.get('pole'))):
+        Pole.objects.filter(nom=nom).update(ordre=i)
+
+
 class Command(BaseCommand):
     help = "Charge le contenu de la maquette UIC"
 
@@ -43,30 +72,7 @@ class Command(BaseCommand):
                            "!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNcKwMjEnMzEuMyJOIDPCsDU5JzQxLjAiVw!5e0!3m2!1sfr!2sci!4v1")
         info.save()
 
-        # Formations réelles (source : uic-ci.com, page « Filières », et affiches de l'établissement)
-        for i, nom in enumerate(['Classe préparatoire', 'BTS', 'Licence', 'Master', 'Licence professionnelle',
-                                 'Master professionnel', 'Formation continue']):
-            NiveauFormation.objects.get_or_create(nom=nom, defaults={'ordre': i})
-        for f in d['filieres']:
-            pole = None
-            if f.get('pole'):
-                pole, _ = Pole.objects.get_or_create(nom=f['pole'])
-            obj, _ = Filiere.objects.update_or_create(slug=f['slug'], defaults=dict(
-                nom=f['nom'], icone=f['icone'], resume=f['resume'], sous_titre=f['sous_titre'], description=f['description'],
-                duree=f['duree'], niveau_requis=f['niveau_requis'], mode=f['mode'], langue=f['langue'],
-                debouches='\n'.join(f['debouches']), image_statique=f['image_statique'], image_url='',
-                ordre=f['ordre'], en_avant=f['en_avant'], pole=pole, actif=True))
-            obj.niveaux.set(NiveauFormation.objects.filter(nom__in=f['niveaux']))
-        # Anciennes formations de démonstration : supprimées (ou masquées si une candidature y est liée)
-        for old in Filiere.objects.filter(slug__in=['management', 'informatique', 'droit', 'finance', 'commerce', 'communication']):
-            if old.candidatures.exists():
-                old.actif = False
-                old.save(update_fields=['actif'])
-            else:
-                old.delete()
-        # Ordre des écoles = ordre d'apparition dans les données
-        for i, nom in enumerate(dict.fromkeys(f['pole'] for f in d['filieres'] if f.get('pole'))):
-            Pole.objects.filter(nom=nom).update(ordre=i)
+        charger_formations(d)
 
         for a in d['articles']:
             cat, _ = Categorie.objects.get_or_create(nom=a['categorie'])

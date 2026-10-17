@@ -7,7 +7,7 @@
     <p class="sbody">Événements, partenariats, résultats : ce qui se passe à l'UIC.</p>
   </div></div>
   <section class="actualites list-body"><div class="container">
-    <div class="actu-grid" style="grid-template-columns:repeat(3,1fr)">
+    <div class="actu-grid actu-grid-liste">
       {% for a in page %}
       <a class="actu-card" href="{{ a.get_absolute_url }}">
         <div class="actu-img wide" style="background-image:url('{{ a.image_src }}');background-size:cover;background-position:center;"><span class="actu-cat">{{ a.categorie.nom }}</span></div>
