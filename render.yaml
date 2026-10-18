@@ -42,8 +42,7 @@ services:
     #   mountPath: /var/data
     #   sizeGB: 1
 
-databases:
-  - name: uic-db
-    plan: free
-    databaseName: uic_db
-    user: uic_user
+
+
+      - key: DATABASE_URL
+        sync: false
