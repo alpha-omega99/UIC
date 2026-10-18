@@ -1,4 +1,6 @@
-# Blueprint Render. Version "test gratuit" : web + PostgreSQL gratuits.
+# Blueprint Render. Version "test gratuit" : web gratuit + base PostgreSQL existante.
+# La base est créée à part (Render > New > PostgreSQL, ou un fournisseur externe) ;
+# son adresse est saisie dans Render (DATABASE_URL), jamais dans le code.
 # Pour la production : passer le web en `plan: starter`, activer le disque ci-dessous
 # (les fichiers téléversés y sont conservés) et prendre une base PostgreSQL payante.
 services:
@@ -15,10 +17,9 @@ services:
         generateValue: true
       - key: ADMIN_URL
         value: gestion-uic-change-moi/
+      # Adresse de la base PostgreSQL : à saisir dans Render (Internal Database URL).
       - key: DATABASE_URL
-        fromDatabase:
-          name: uic-db
-          property: connectionString
+        sync: false
       # Administrateur créé au build (offre gratuite sans Shell). Mot de passe : à saisir dans Render, jamais dans le code.
       - key: DJANGO_SUPERUSER_USERNAME
         sync: false
@@ -41,8 +42,3 @@ services:
     #   name: uic-data
     #   mountPath: /var/data
     #   sizeGB: 1
-
-
-
-      - key: DATABASE_URL
-        sync: false
