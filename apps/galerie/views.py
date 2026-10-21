@@ -1,9 +1,10 @@
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, redirect, render
 from .models import Album
 
 
 def liste(request):
-    return render(request, 'galerie/liste.html', {'albums': Album.objects.filter(actif=True).prefetch_related('photos')})
+    # La galerie est désormais un onglet de la page « Actualités & galerie »
+    return redirect('/actualites/#galerie')
 
 
 def detail(request, slug):

@@ -4,6 +4,19 @@ from django.utils.text import slugify
 from apps.core.utils import image_source, validate_image
 
 
+def lignes(texte):
+    return [l.strip() for l in (texte or '').splitlines() if l.strip()]
+
+
+def couple(ligne):
+    """« Titre: texte » -> (titre, texte) ; sans « : » -> ('', ligne)."""
+    if ':' in ligne:
+        t, r = ligne.split(':', 1)
+        if len(t) <= 60:
+            return (t.strip(), r.strip())
+    return ('', ligne)
+
+
 class NiveauFormation(models.Model):
     """Type de diplôme / cycle : Licence, Master, BTS, Classe préparatoire, Formation continue…
     Les filtres du site sont générés à partir de cette liste : ajouter un niveau ici suffit."""
@@ -53,7 +66,7 @@ class Filiere(models.Model):
     icone = models.CharField(max_length=8, blank=True)
     resume = models.CharField("Résumé (carte)", max_length=300)
     sous_titre = models.CharField(max_length=300, blank=True)
-    description = models.TextField("À propos de la formation")
+    description = models.TextField("À propos de la formation", blank=True)
     pole = models.ForeignKey(Pole, null=True, blank=True, on_delete=models.SET_NULL, related_name='filieres',
                              verbose_name="École / département", help_text="Facultatif : range la formation dans le catalogue.")
     niveaux = models.ManyToManyField(NiveauFormation, blank=True, related_name='filieres', verbose_name="Niveaux",
@@ -71,6 +84,22 @@ class Filiere(models.Model):
     image_url = models.URLField(blank=True, help_text="Image externe (utilisée si aucune autre image)")
     ordre = models.PositiveSmallIntegerField(default=0)
     actif = models.BooleanField(default=True)
+    # ── Fiche détaillée (tout est facultatif : une section vide n'est pas affichée) ──
+    nouveau = models.BooleanField("Nouveauté (rentrée à venir)", default=False,
+                                  help_text="Affiche un badge « Nouveau » et la formation dans la section Nouveautés de l'accueil.")
+    objectif = models.TextField("Objectif de la formation", blank=True)
+    public_cible = models.TextField("Public concerné", blank=True, help_text="Une ligne par profil")
+    organisation = models.TextField("Durée et organisation", blank=True, help_text="Une ligne par information. Ex : Volume: 60 crédits")
+    programme = models.TextField("Programme détaillé", blank=True,
+                                 help_text="Un bloc commence par « ## Titre du bloc », puis une matière par ligne.")
+    competences = models.TextField("Compétences acquises", blank=True, help_text="Une compétence par ligne")
+    atouts = models.TextField("Nos atouts", blank=True, help_text="Un atout par ligne. Format conseillé : « Titre: explication »")
+    admission = models.TextField("Conditions d'admission", blank=True, help_text="Une ligne par condition")
+    frais = models.TextField("Frais et scolarité", blank=True, help_text="Une ligne par information. Ex : Scolarité: 650.000 FCFA / an")
+    repere_salaire = models.TextField("Repères de rémunération (indicatif)", blank=True, help_text="Une ligne par métier. Laisser vide si non confirmé.")
+    accroche = models.TextField("Phrase de conclusion", blank=True)
+    licence_associee = models.ForeignKey('self', null=True, blank=True, on_delete=models.SET_NULL, related_name='masters_suite',
+                                         verbose_name="Licence qui précède (pour un master)")
 
     class Meta:
         ordering = ['ordre', 'nom']
@@ -101,7 +130,37 @@ class Filiere(models.Model):
 
     @property
     def debouches_liste(self):
-        return [l.strip() for l in self.debouches.splitlines() if l.strip()]
+        return lignes(self.debouches)
+
+    public_liste = property(lambda self: lignes(self.public_cible))
+    competences_liste = property(lambda self: lignes(self.competences))
+    admission_liste = property(lambda self: lignes(self.admission))
+    salaires_liste = property(lambda self: lignes(self.repere_salaire))
+
+    @property
+    def organisation_liste(self):
+        return [couple(l) for l in lignes(self.organisation)]
+
+    @property
+    def frais_liste(self):
+        return [couple(l) for l in lignes(self.frais)]
+
+    @property
+    def atouts_liste(self):
+        return [couple(l) for l in lignes(self.atouts)]
+
+    @property
+    def programme_blocs(self):
+        """[(titre, [matières])] à partir du texte « ## Titre » + une matière par ligne."""
+        blocs = []
+        for l in lignes(self.programme):
+            if l.startswith('##'):
+                blocs.append((l.lstrip('# ').strip(), []))
+            else:
+                if not blocs:
+                    blocs.append(('', []))
+                blocs[-1][1].append(l)
+        return blocs
 
 
 class Module(models.Model):

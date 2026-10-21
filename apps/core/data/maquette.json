@@ -339,76 +339,16 @@
    "image_statique": "img/campus/vie-etudiante-01.webp",
    "en_avant": false,
    "ordre": 15
-  },
-  {
-   "slug": "mqhse",
-   "nom": "Management de la Qualité, Hygiène, Sécurité & Environnement (MQHSE)",
-   "icone": "🦺",
-   "pole": "Formations continues",
-   "niveaux": [
-    "Formation continue"
-   ],
-   "resume": "Management de la qualité, de l'hygiène, de la sécurité et de l'environnement.",
-   "description": "Formation continue en Management de la Qualité, Hygiène, Sécurité et Environnement (MQHSE).",
-   "sous_titre": "Management de la qualité, de l'hygiène, de la sécurité et de l'environnement.",
-   "duree": "Nous consulter",
-   "niveau_requis": "Nous consulter",
-   "mode": "",
-   "langue": "Français",
-   "debouches": [],
-   "image_statique": "img/campus/salle-de-cours-02.webp",
-   "en_avant": false,
-   "ordre": 16
-  },
-  {
-   "slug": "global-exclusive-mba",
-   "nom": "Global Exclusive MBA",
-   "icone": "🎓",
-   "pole": "Formations continues",
-   "niveaux": [
-    "Formation continue"
-   ],
-   "resume": "Programme MBA en formation continue.",
-   "description": "Le Global Exclusive MBA fait partie des formations continues proposées par l'UIC.",
-   "sous_titre": "Programme MBA en formation continue.",
-   "duree": "Nous consulter",
-   "niveau_requis": "Nous consulter",
-   "mode": "",
-   "langue": "Français",
-   "debouches": [],
-   "image_statique": "img/campus/travail-en-groupe-01.webp",
-   "en_avant": false,
-   "ordre": 17
-  },
-  {
-   "slug": "certifications",
-   "nom": "Certifications",
-   "icone": "📜",
-   "pole": "Formations continues",
-   "niveaux": [
-    "Formation continue"
-   ],
-   "resume": "Formations certifiantes proposées en formation continue.",
-   "description": "Des certifications sont proposées dans le cadre des formations continues de l'UIC.",
-   "sous_titre": "Formations certifiantes proposées en formation continue.",
-   "duree": "Nous consulter",
-   "niveau_requis": "Nous consulter",
-   "mode": "",
-   "langue": "Français",
-   "debouches": [],
-   "image_statique": "img/campus/vie-etudiante-03.webp",
-   "en_avant": false,
-   "ordre": 18
-  }
+  },  
  ],
  "articles": [
   {
-   "slug": "rentree-2025",
-   "titre": "Rentrée académique 2025–2026 : UIC accueille sa plus grande promotion",
+   "slug": "rentree-2026",
+   "titre": "Rentrée académique 2026–2027 : UIC accueille sa plus grande promotion",
    "categorie": "Événement",
-   "date": "12 Septembre 2025",
-   "chapeau": "L'UIC a célébré l'ouverture de l'année académique 2025-2026 avec l'accueil de sa plus grande promotion.",
-   "contenu": "Lundi 8 septembre 2025, les couloirs de l'UIC n'avaient jamais été aussi animés. Cette rentrée marque un tournant pour l'université : pour la première fois, plus de 300 nouveaux étudiants ont franchi les portes du campus de Cocody en une seule journée d'accueil. Un chiffre qui surprend même les administrateurs qui avaient tablé sur 280 inscrits.\n\nDans son allocution, le fondateur a choisi de ne pas faire de grand discours. Il a demandé aux étudiants de lever la main s'ils avaient déjà entendu parler de l'UIC par un diplômé. Presque tous les bras se sont levés. « C'est ça, notre vraie publicité », a-t-il dit simplement.\n\nNouveauté cette année : une plateforme en ligne permet aux étudiants de retrouver leurs cours, exercices et notes sur leur téléphone. Plusieurs professeurs ont déjà commencé à publier des ressources complémentaires la veille des cours. Les étudiants du soir apprécient particulièrement.\n\nDeux nouvelles salles informatiques ont été ouvertes côté est du bâtiment principal. 40 postes supplémentaires entièrement renouvelés, disponibles jusqu'à 20h les jours de semaine. Pour la filière Informatique, c'est un changement concret qui s'était fait attendre.",
+   "date": "14 Septembre 2026",
+   "chapeau": "L'UIC a célébré l'ouverture de l'année académique 2026-2027 avec l'accueil de sa plus grande promotion.",
+   "contenu": "Lundi 8 septembre 2026, les couloirs de l'UIC n'avaient jamais été aussi animés. Cette rentrée marque un tournant pour l'université : pour la première fois, plus de 300 nouveaux étudiants ont franchi les portes du campus de Cocody en une seule journée d'accueil. Un chiffre qui surprend même les administrateurs qui avaient tablé sur 280 inscrits.\n\nDans son allocution, le fondateur a choisi de ne pas faire de grand discours. Il a demandé aux étudiants de lever la main s'ils avaient déjà entendu parler de l'UIC par un diplômé. Presque tous les bras se sont levés. « C'est ça, notre vraie publicité », a-t-il dit simplement.\n\nNouveauté cette année : une plateforme en ligne permet aux étudiants de retrouver leurs cours, exercices et notes sur leur téléphone. Plusieurs professeurs ont déjà commencé à publier des ressources complémentaires la veille des cours. Les étudiants du soir apprécient particulièrement.\n\nDeux nouvelles salles informatiques ont été ouvertes côté est du bâtiment principal. 40 postes supplémentaires entièrement renouvelés, disponibles jusqu'à 20h les jours de semaine. Pour la filière Informatique, c'est un changement concret qui s'était fait attendre.",
    "image_url": "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=1200&q=80",
    "temps_lecture": 3,
    "ordre": 0
@@ -439,13 +379,13 @@
  "stats_barre": [
   {
    "icone": "🎓",
-   "valeur": 1200,
+   "valeur": 1000,
    "suffixe": "+",
    "libelle": "diplômés depuis 2004"
   },
   {
    "icone": "📚",
-   "valeur": 20,
+   "valeur": 10,
    "suffixe": " ans",
    "libelle": "D'expérience"
   },
@@ -457,14 +397,14 @@
   },
   {
    "icone": "🌍",
-   "valeur": 12,
+   "valeur": 6,
    "suffixe": "+",
    "libelle": "Nationalités"
   }
  ],
  "stats_section": [
   {
-   "valeur": 1200,
+   "valeur": 1000,
    "suffixe": "+",
    "libelle": "Étudiants inscrits"
   },
@@ -479,7 +419,7 @@
    "libelle": "Enseignants experts"
   },
   {
-   "valeur": 20,
+   "valeur": 10,
    "suffixe": " ans",
    "libelle": "D'expérience"
   }
@@ -515,7 +455,7 @@
   {
    "icone": "🌍",
    "titre": "Ouverture",
-   "texte": "On accueille des étudiants de plus de 12 nationalités. Les profs viennent aussi de l'extérieur de la Côte d'Ivoire. Cette diversité n'est pas un argument marketing — c'est notre quotidien."
+   "texte": "On accueille des étudiants de plus de 6+ nationalités. Les profs viennent aussi de l'extérieur de la Côte d'Ivoire. Cette diversité n'est pas un argument marketing — c'est notre quotidien."
   },
   {
    "icone": "💡",
@@ -546,35 +486,35 @@
   }
  ],
  "jalons": [
-  {
-   "annee": "2004",
-   "titre": "Fondation de l'UIC",
-   "texte": "L'UIC ouvre ses portes à Cocody avec deux filières : Gestion et Droit. 45 étudiants s'inscrivent cette première année — certains encore présents comme enseignants aujourd'hui."
-  },
-  {
-   "annee": "2007",
+    {
+   "annee": "2015",
    "titre": "Agrément ministériel",
    "texte": "Après trois ans d'activité, le Ministère de l'Enseignement Supérieur accorde son agrément officiel à l'UIC. Un cap qui rassure les familles et ouvre la voie aux diplômes reconnus."
   },
   {
-   "annee": "2010",
-   "titre": "Ouverture du campus actuel",
-   "texte": "Le campus actuel ouvre à Cocody Deux-Plateaux. Premier amphi vrai, première vraie bibliothèque, premiers labos informatiques. Les étudiants qui passaient d'un local à l'autre depuis 2004 ont enfin un vrai campus."
+   "annee": "2016",
+   "titre": "Fondation de l'UIC",
+   "texte": "L'UIC ouvre ses portes à Cocody avec deux (2) filières : FCGE & GEC. 30 étudiants s'inscrivent cette première année — certains encore présents comme enseignants aujourd'hui."
   },
   {
-   "annee": "2014",
+   "annee": "2017",
+   "titre": "Ouverture du campus actuel",
+   "texte": "Le campus actuel ouvre à Cocody. Premier amphi vrai, première vraie bibliothèque, premiers labos informatiques. Les étudiants qui passaient d'un local à l'autre ont enfin un vrai campus."
+  },
+  {
+   "annee": "2019",
    "titre": "Lancement des Masters",
    "texte": "L'UIC lance les Masters. Les étudiants peuvent désormais aller jusqu'au Bac+5 sans quitter leur université. Beaucoup qui avaient prévu de partir vers d'autres établissements restent finalement."
   },
   {
-   "annee": "2018",
-   "titre": "500ème diplômé",
-   "texte": "Le 500ème diplômé de l'UIC reçoit son titre lors d'une cérémonie marquante. On retrouve désormais des anciens de l'UIC dans presque toutes les grandes entreprises d'Abidjan — et certains les gèrent."
+   "annee": "2022",
+   "titre": "150ème diplômé",
+   "texte": "Le 150ème diplômé de l'UIC reçoit son titre lors d'une cérémonie marquante. On retrouve désormais des anciens de l'UIC dans presque toutes les grandes entreprises d'Abidjan — et certains les gèrent."
   },
   {
-   "annee": "2024",
-   "titre": "20 ans d'excellence",
-   "texte": "20 ans. Plus de 1 200 étudiants actifs, un taux d'insertion professionnelle à 92% dans les 6 mois après le diplôme, et une réputation qui se construit par le travail de chaque promotion — pas par la communication."
+   "annee": "2026",
+   "titre": "10 ans d'excellence",
+   "texte": "10 ans. Plus de 1 200 étudiants actifs, un taux d'insertion professionnelle à 92% dans les 6 mois après le diplôme, et une réputation qui se construit par le travail de chaque promotion — pas par la communication."
   }
  ],
  "faq": [

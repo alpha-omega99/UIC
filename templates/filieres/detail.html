@@ -11,7 +11,7 @@
   <div class="fil-page-hero" style="background-image:url('{{ filiere.image_src }}')">
     <div class="fil-page-hero-overlay"></div>
     <div class="container fil-page-hero-content">
-      {% for n in filiere.niveaux.all %}<span class="fil-page-badge" style="background:{{ filiere.couleur_badge }}">{{ n.nom }}</span> {% endfor %}
+      {% if filiere.nouveau %}<span class="fil-page-badge" style="background:#fff;color:var(--primary)">Nouveau</span> {% endif %}{% for n in filiere.niveaux.all %}<span class="fil-page-badge" style="background:{{ filiere.couleur_badge }}">{{ n.nom }}</span> {% endfor %}
       <h1 class="fil-page-title">{{ filiere.icone }} {{ filiere.nom }}</h1>
       <p class="fil-page-sub">{{ filiere.sous_titre|default:filiere.resume }}</p>
       <div class="fil-page-meta">
@@ -24,10 +24,44 @@
   <div class="container fil-page-body">
     <div class="fil-page-grid">
       <div class="fil-page-main">
+        {% if filiere.objectif %}
+        <section class="fil-section"><h2>Objectif de la formation</h2><p class="fil-desc-long">{{ filiere.objectif }}</p></section>
+        {% endif %}
+        {% if filiere.description %}
         <section class="fil-section">
           <h2>À propos de la formation</h2>
           <p class="fil-desc-long">{{ filiere.description }}</p>
         </section>
+        {% endif %}
+        {% if filiere.licence_associee %}
+        <p class="fiche-lien">Cette formation prolonge la <a href="{{ filiere.licence_associee.get_absolute_url }}">{{ filiere.licence_associee.nom }}</a>.</p>
+        {% endif %}
+        {% if filiere.public_liste %}
+        <section class="fil-section"><h2>Public concerné</h2><ul class="fiche-liste">{% for l in filiere.public_liste %}<li>{{ l }}</li>{% endfor %}</ul></section>
+        {% endif %}
+        {% if filiere.programme_blocs %}
+        <section class="fil-section">
+          <h2>Programme détaillé</h2>
+          <div class="modules-grid">
+            {% for titre, matieres in filiere.programme_blocs %}
+            <div class="module-sem">{% if titre %}<h4>{{ titre }}</h4>{% endif %}<ul>{% for m in matieres %}<li>{{ m }}</li>{% endfor %}</ul></div>
+            {% endfor %}
+          </div>
+        </section>
+        {% endif %}
+        {% if filiere.competences_liste %}
+        <section class="fil-section"><h2>Compétences acquises</h2><p class="fiche-intro">À l'issue de la formation, l'étudiant sait :</p>
+          <ul class="fiche-liste fiche-check">{% for l in filiere.competences_liste %}<li>{{ l }}</li>{% endfor %}</ul></section>
+        {% endif %}
+        {% if filiere.atouts_liste %}
+        <section class="fil-section"><h2>Les atouts de la formation</h2>
+          <div class="atouts-grid">{% for t, r in filiere.atouts_liste %}<div class="atout">{% if t %}<strong>{{ t }}</strong>{% endif %}<span>{{ r }}</span></div>{% endfor %}</div></section>
+        {% endif %}
+        {% if filiere.accroche %}<blockquote class="fiche-accroche">{{ filiere.accroche }}</blockquote>{% endif %}
+        {% if filiere.masters_suite.all %}
+        <section class="fil-section"><h2>Poursuite d'études</h2><ul class="fiche-liste">
+          {% for m in filiere.masters_suite.all %}<li><a href="{{ m.get_absolute_url }}">{{ m.nom }}</a></li>{% endfor %}</ul></section>
+        {% endif %}
         {% if semestres %}
         <section class="fil-section">
           <h2>Programme &amp; modules</h2>
@@ -46,6 +80,11 @@
           <div class="debouches">{% for d in filiere.debouches_liste %}<span class="debouche-pill">{{ d }}</span>{% endfor %}</div>
         </div>
         {% endif %}
+        {% if filiere.salaires_liste %}
+        <div class="aside-card"><h3>Repères de rémunération</h3>
+          <ul class="fiche-liste">{% for l in filiere.salaires_liste %}<li>{{ l }}</li>{% endfor %}</ul>
+          <p class="fiche-note">Fourchettes indicatives, communiquées par l'établissement.</p></div>
+        {% endif %}
         <div class="aside-card aside-cta">
           <h3>Intéressé(e) ?</h3>
           <p>Rejoignez la filière {{ filiere.nom }} dès la prochaine rentrée.</p>
@@ -57,7 +96,14 @@
           <div class="info-row"><span class="info-lbl">Niveau d'entrée</span><span>{{ filiere.niveau_requis }}</span></div>
           {% if filiere.mode %}<div class="info-row"><span class="info-lbl">Mode</span><span>{{ filiere.mode }}</span></div>{% endif %}
           <div class="info-row"><span class="info-lbl">Langue</span><span>{{ filiere.langue }}</span></div>
+          {% for t, r in filiere.organisation_liste %}{% if t and t != 'Mode' and t != 'Rythme' %}<div class="info-row"><span class="info-lbl">{{ t }}</span><span>{{ r }}</span></div>{% endif %}{% endfor %}
         </div>
+        {% if filiere.admission_liste or filiere.frais_liste %}
+        <div class="aside-card aside-infos"><h3>Admission et frais</h3>
+          {% for l in filiere.admission_liste %}<p class="fiche-ligne">{{ l }}</p>{% endfor %}
+          {% for t, r in filiere.frais_liste %}<div class="info-row"><span class="info-lbl">{{ t|default:'Frais' }}</span><span>{{ r }}</span></div>{% endfor %}
+        </div>
+        {% endif %}
       </aside>
     </div>
     {% if voisines %}

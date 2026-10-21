@@ -8,16 +8,39 @@ python manage.py createcachetable
 python manage.py check --deploy --fail-level ERROR
 
 # --- Offre gratuite (pas de Shell) : initialisation automatique, sans écraser les données existantes ---
-# Contenu de départ : seulement si la base est vide.
-python manage.py shell -c "
+# Contenu de départ, selon SEED_MODE :
+#   demo (défaut)  : contenu de démonstration complet, chargé seulement si la base est vide ;
+#   production     : seulement les données vérifiables (19 formations réelles) ; aucune donnée inventée ;
+#   none           : ne charge rien.
+SEED_MODE="${SEED_MODE:-demo}"
+echo "SEED_MODE=$SEED_MODE"
+if [ "$SEED_MODE" = "production" ]; then
+  python manage.py seed_production
+elif [ "$SEED_MODE" = "demo" ]; then
+  python manage.py shell -c "
 from apps.filieres.models import Filiere
 from django.core.management import call_command
 if not Filiere.objects.exists():
     call_command('seed_uic')
-    print('Contenu initial chargé.')
+    print('Contenu de démonstration chargé.')
 else:
     print('Contenu déjà présent : seed ignoré.')
 "
+fi
+# Nouvelles licences / masters professionnels (rentrée 2026-2027) : chargés une seule fois, jamais écrasés ensuite.
+if [ "$SEED_MODE" != "none" ]; then
+  python manage.py shell -c "
+from apps.filieres.models import Filiere
+from django.core.management import call_command
+if not Filiere.objects.filter(nouveau=True).exists():
+    call_command('charger_nouvelles_formations')
+else:
+    print('Nouvelles formations déjà présentes : chargement ignoré.')
+" || echo "Nouvelles formations ignorées."
+fi
+# Corrections de contenu demandées par l'UIC (fichier apps/core/data/corrections.csv) : chaque ligne s'applique une seule fois.
+python manage.py appliquer_corrections || echo "Corrections ignorées (voir message ci-dessus)."
+
 # Images du site (static/img) : associées sans écraser les choix faits dans l'administration.
 python manage.py seed_images
 

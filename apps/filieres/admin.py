@@ -26,7 +26,7 @@ class PoleAdmin(admin.ModelAdmin):
 class FiliereAdmin(admin.ModelAdmin):
     list_display = ('nom', 'pole', 'niveaux_label', 'duree', 'en_avant', 'ordre', 'actif')
     list_editable = ('en_avant', 'ordre', 'actif')
-    list_filter = ('pole', 'niveaux', 'actif', 'en_avant')
+    list_filter = ('pole', 'niveaux', 'actif', 'en_avant', 'nouveau')
     search_fields = ('nom', 'resume')
     filter_horizontal = ('niveaux',)
     prepopulated_fields = {'slug': ('nom',)}
@@ -34,8 +34,11 @@ class FiliereAdmin(admin.ModelAdmin):
     fieldsets = (
         ('Identité', {'fields': ('nom', 'slug', 'icone', 'pole', 'niveaux', 'resume', 'sous_titre', 'description')}),
         ('Informations pratiques', {'fields': ('duree', 'niveau_requis', 'mode', 'langue', 'debouches')}),
+        ('Fiche détaillée (facultative)', {'classes': ('collapse',), 'fields': (
+            'objectif', 'public_cible', 'organisation', 'programme', 'competences', 'atouts', 'admission', 'frais',
+            'repere_salaire', 'accroche', 'licence_associee')}),
         ('Image', {'fields': ('image_statique', 'image', 'image_url')}),
-        ('Affichage', {'fields': ('couleur_badge', 'en_avant', 'ordre', 'actif')}),
+        ('Affichage', {'fields': ('couleur_badge', 'nouveau', 'en_avant', 'ordre', 'actif')}),
     )
 
     def get_queryset(self, request):

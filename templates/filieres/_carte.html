@@ -1,6 +1,6 @@
 <a class="fcard" href="{{ f.get_absolute_url }}" data-lv="{{ f.niveaux_data }}" data-nom="{{ f.nom|lower }} {{ f.resume|lower }}">
   <div class="fcard-img" style="background-image:url('{{ f.image_src }}')">
-    <div class="fcard-badges">{% for n in f.niveaux.all %}<span>{{ n.nom }}</span>{% endfor %}</div>
+    <div class="fcard-badges">{% if f.nouveau %}<span class="fcard-new">Nouveau</span>{% endif %}{% for n in f.niveaux.all %}<span>{{ n.nom }}</span>{% endfor %}</div>
     {% if f.icone %}<div class="fcard-ico" aria-hidden="true">{{ f.icone }}</div>{% endif %}
   </div>
   <div class="fcard-body">

@@ -131,7 +131,8 @@
     function apply() {
       var q = norm(search ? search.value.trim() : ''), n = 0;
       cards.forEach(function (c) {
-        var okLv = level === 'all' || (c.dataset.lv || '').split(' ').indexOf(level) !== -1;
+        var lv = (c.dataset.lv || '').split(' ');
+        var okLv = level === 'all' || level.split(',').some(function (l) { return lv.indexOf(l) !== -1; });
         var okP = pole === 'all' || c.dataset.pole === pole;
         var okQ = !q || norm(c.dataset.nom).indexOf(q) !== -1;
         c.hidden = !(okLv && okP && okQ); if (!c.hidden) n++;
@@ -151,6 +152,36 @@
     bind('.flt[data-f]', 'f', function (v) { level = v; });
     bind('.flt[data-p]', 'p', function (v) { pole = v; });
     if (search) search.addEventListener('input', apply);
+    var param = (new URLSearchParams(window.location.search).get('niveau') || '').replace(/[^a-z0-9,-]/g, '');
+    if (param) {
+      level = param;
+      $$('.flt[data-f]').forEach(function (b) { b.classList.toggle('on', b.dataset.f === param.split(',')[0]); });
+      apply();
+    }
+  })();
+
+  /* ── Onglets Actualités / Galerie ── */
+  (function () {
+    var tabs = $$('.tab[data-tab]'); if (!tabs.length) return;
+    function show(name) {
+      if (!document.getElementById('panel-' + name)) name = 'actualites';
+      tabs.forEach(function (t) {
+        var on = t.dataset.tab === name;
+        t.classList.toggle('on', on); t.setAttribute('aria-selected', on ? 'true' : 'false');
+        var p = document.getElementById('panel-' + t.dataset.tab); if (p) p.hidden = !on;
+      });
+    }
+    tabs.forEach(function (t) {
+      t.addEventListener('click', function () {
+        show(t.dataset.tab);
+        if (history.replaceState) history.replaceState(null, '', t.dataset.tab === 'galerie' ? '#galerie' : window.location.pathname + window.location.search);
+      });
+    });
+    function fromHash() {
+      var h = window.location.hash.replace('#', '');
+      if (h === 'galerie' || h.indexOf('album-') === 0) { show('galerie'); if (h.indexOf('album-') === 0) { var el = document.getElementById(h); if (el) el.scrollIntoView(); } }
+    }
+    fromHash(); window.addEventListener('hashchange', fromHash);
   })();
 
   /* ── Admission : accordéon 3 étapes ── */

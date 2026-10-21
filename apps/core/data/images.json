@@ -234,26 +234,35 @@
   }
  ],
  "partenaires": [
+    {
+   "nom": "université alassane ouattara",
+   "pays": "Côte D'ivoire, Bouaké",
+   "logo": "img/partenaires/ouattara.jpg",
+   "ordre": 1
+  },
+  {
+   "nom": "Ensiate",
+   "pays": "France,  Rungis",
+   "logo": "img/partenaires/ensiate.jpg",
+   "ordre": 2
+  },
   {
    "nom": "Université Laval",
    "pays": "Québec, Canada",
    "logo": "img/partenaires/universite-laval.webp",
-   "site_web": "https://www.ulaval.ca",
-   "ordre": 1
+   "ordre": 3
   },
   {
    "nom": "RUDN University",
    "pays": "Moscou, Russie",
-   "logo": "img/partenaires/rudn-university.webp",
-   "site_web": "https://eng.rudn.ru",
-   "ordre": 2
+   "logo": "img/partenaires/rudn-university.jpg",
+   "ordre": 4
   },
   {
    "nom": "Université Laurentienne",
    "pays": "Ontario, Canada",
-   "logo": "img/partenaires/universite-laurentienne.webp",
-   "site_web": "https://laurentian.ca",
-   "ordre": 3
+   "logo": "img/partenaires/Laurentian_Logo.jpg",
+   "ordre": 5
   }
  ]
 }

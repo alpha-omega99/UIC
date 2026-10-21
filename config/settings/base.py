@@ -140,7 +140,8 @@ EMAIL_PORT = env.int('EMAIL_PORT', default=587)
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = env('EMAIL_HOST_USER', default='')
 EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD', default='')
-DEFAULT_FROM_EMAIL = 'UIC <uicinfos@gmail.com>'
+DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL', default='UIC <uicinfos@gmail.com>')
+BREVO_API_KEY = env('BREVO_API_KEY', default='')   # option HTTPS (hébergement gratuit Render)
 NOTIFY_EMAIL = env('NOTIFY_EMAIL', default='uicinfos@gmail.com')
 EMAIL_TIMEOUT = 10
 

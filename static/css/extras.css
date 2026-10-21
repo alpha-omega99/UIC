@@ -366,3 +366,83 @@ html.lb-open{overflow:hidden;}
 /* Actualités : bouton « Voir la photo » (visionneuse) */
 .actu-zoom{margin-top:14px;display:inline-flex;align-items:center;gap:8px;padding:9px 16px;border-radius:999px;border:1px solid rgba(255,255,255,.55);background:rgba(10,21,32,.45);color:#fff;font:600 .85rem Inter,sans-serif;cursor:pointer;backdrop-filter:blur(4px);transition:background .2s}
 .actu-zoom:hover,.actu-zoom:focus-visible{background:rgba(201,151,43,.9);border-color:transparent}
+
+/* ── Fiches détaillées & nouveautés ── */
+.fiche-liste{list-style:none;padding:0;margin:0;display:grid;gap:.5rem;}
+.fiche-liste li{padding-left:1.1rem;position:relative;color:var(--g600);line-height:1.55;}
+.fiche-liste li::before{content:"";position:absolute;left:0;top:.65em;width:6px;height:6px;border-radius:50%;background:var(--gold,#C8922A);}
+.fiche-check li::before{content:"✓";background:none;width:auto;height:auto;top:0;color:var(--gold,#C8922A);font-weight:700;}
+.fiche-intro{color:var(--g600);margin-bottom:.75rem;}
+.fiche-lien{background:var(--g50);border-left:3px solid var(--gold,#C8922A);padding:.8rem 1rem;margin-bottom:2rem;border-radius:0 8px 8px 0;}
+.fiche-note{font-size:.75rem;color:var(--g500,#6b7280);margin-top:.75rem;}
+.fiche-ligne{font-size:.88rem;color:var(--g600);margin-bottom:.5rem;}
+.fiche-accroche{font-family:var(--serif);font-size:1.25rem;line-height:1.5;color:var(--primary);border-left:3px solid var(--gold,#C8922A);padding:.5rem 0 .5rem 1.25rem;margin:0 0 2.5rem;}
+.atouts-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+.atout{background:var(--g50);border:1px solid var(--g200);border-radius:10px;padding:1rem;display:flex;flex-direction:column;gap:.25rem;font-size:.9rem;color:var(--g600);}
+.atout strong{color:var(--primary);}
+.fcard-new{display:inline-block;background:#fff;color:var(--primary);font-size:.62rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:.2rem .55rem;border-radius:100px;vertical-align:middle;}
+h3 .fcard-new{background:var(--gold,#C8922A);color:#fff;margin-left:.4rem;}
+@media(max-width:900px){.atouts-grid{grid-template-columns:1fr;}}
+
+/* ── Accueil : cycles de formation ── */
+.cycles-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1.25rem;}
+.cycle-card{position:relative;display:flex;min-height:300px;border-radius:14px;overflow:hidden;background-size:cover;background-position:center;text-decoration:none;color:#fff;border:1px solid rgba(255,255,255,.12);transition:transform .25s,border-color .25s;}
+.cycle-card:hover{transform:translateY(-4px);border-color:var(--gold-light,#E3B65B);}
+.cycle-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,30,53,.55) 0%,rgba(11,30,53,.92) 100%);}
+.cycle-body{position:relative;display:flex;flex-direction:column;justify-content:flex-end;gap:.5rem;padding:1.5rem;width:100%;}
+.cycle-ico{font-size:1.8rem;}
+.cycle-titre{font-family:var(--serif);font-size:1.5rem;font-weight:600;}
+.cycle-desc{font-size:.88rem;line-height:1.5;color:rgba(255,255,255,.8);}
+.cycle-nb{font-size:.78rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--gold-light,#E3B65B);margin-top:.4rem;}
+
+/* ── Onglets actualités / galerie ── */
+.tabs{display:flex;gap:.5rem;margin-top:2rem;flex-wrap:wrap;}
+.tab{font:inherit;font-weight:600;font-size:.92rem;padding:.7rem 1.6rem;border-radius:100px;border:1px solid rgba(255,255,255,.35);background:transparent;color:#fff;cursor:pointer;transition:background .2s,color .2s;}
+.tab:hover{background:rgba(255,255,255,.12);}
+.tab.on{background:var(--gold,#C8922A);border-color:var(--gold,#C8922A);color:#fff;}
+.tab-panel[hidden]{display:none;}
+
+/* Fiche formation : le style global « section{padding} » créait de grands vides entre les rubriques */
+.fil-page-main .fil-section{padding:0;margin-bottom:2.25rem;}
+.fil-page-main .fil-section h2{margin-bottom:.75rem;}
+.fil-page-body{padding:3rem 0;}
+
+/* ── Accueil : reconnaissance (CAMES…) et bandeau d'appel à la pré-inscription ── */
+.reconnaissance{background:var(--navy);color:#fff;}
+.reconnaissance .eyebrow{color:var(--gold-light,#E3B65B);}
+.reconnaissance .stitle{color:#fff;}
+.reconnaissance .sbody{color:rgba(255,255,255,.75);}
+.reco-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));margin-top:3rem;}
+.reco-item{padding:0 2rem;border-left:1px solid rgba(255,255,255,.14);display:flex;flex-direction:column;gap:.6rem;}
+.reco-item:first-child{border-left:0;padding-left:0;}
+.reco-sigle{font-family:var(--serif);font-size:clamp(2rem,4vw,2.8rem);font-weight:600;color:var(--gold-light,#E3B65B);line-height:1.1;}
+.reco-item strong{font-size:1rem;}
+.reco-item p{font-size:.88rem;line-height:1.6;color:rgba(255,255,255,.7);}
+.reco-item a{font-size:.85rem;font-weight:600;color:#fff;text-decoration:none;margin-top:auto;}
+.reco-item a:hover{color:var(--gold-light,#E3B65B);}
+@media(max-width:700px){.reco-item{border-left:0;padding:1.25rem 0;border-top:1px solid rgba(255,255,255,.14);}.reco-item:first-child{border-top:0;}}
+.cta-promo{position:relative;background-size:cover;background-position:center;color:#fff;text-align:center;}
+.cta-promo-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,30,53,.82),rgba(11,30,53,.92));}
+.cta-promo-body{position:relative;max-width:760px;display:flex;flex-direction:column;align-items:center;gap:1.25rem;}
+.cta-bar{display:block;width:56px;height:3px;background:var(--gold,#C8922A);}
+.cta-promo h2{font-family:var(--serif);font-size:clamp(2rem,5vw,3.2rem);line-height:1.15;color:#fff;}
+.cta-promo h2 em{font-style:normal;color:var(--gold-light,#E3B65B);}
+.cta-promo p{color:rgba(255,255,255,.82);font-size:1.05rem;line-height:1.7;}
+.cta-btns{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;margin-top:.5rem;}
+
+/* ── Accueil : grille des cycles (cartes blanches, photo en haut) ── */
+.filieres.filieres-clair{background:var(--g50,#f7f6f2);}
+.filieres-clair .eyebrow{color:var(--gold,#C8922A);}
+.filieres-clair .stitle{color:var(--primary);}
+.filieres-clair .sbody{max-width:560px;}
+.filieres-clair .cycles-grid{display:flex;flex-wrap:wrap;justify-content:center;gap:1.5rem;}
+.filieres-clair .cycle-card{flex:0 0 calc((100% - 3rem) / 3);min-height:0;flex-direction:column;background:#fff;color:var(--g700,#374151);border:1px solid var(--g200,#e5e7eb);border-radius:14px;box-shadow:0 2px 12px rgba(11,30,53,.06);overflow:hidden;}
+.filieres-clair .cycle-card:hover{transform:translateY(-4px);box-shadow:0 10px 28px rgba(11,30,53,.14);border-color:var(--gold,#C8922A);}
+.cycle-photo{display:block;aspect-ratio:16/10;background-size:cover;background-position:center;}
+.filieres-clair .cycle-body{justify-content:flex-start;gap:.6rem;padding:1.4rem 1.5rem 1.6rem;}
+.filieres-clair .cycle-titre{font-family:var(--serif);font-size:1.15rem;color:var(--primary);text-transform:uppercase;letter-spacing:.03em;}
+.filieres-clair .cycle-desc{font-size:.88rem;line-height:1.65;color:var(--g600,#4b5563);}
+.cycle-lien{margin-top:.4rem;font-size:.85rem;font-weight:700;color:var(--primary);}
+.filieres-clair .cycle-card:hover .cycle-lien{color:var(--gold,#C8922A);}
+@media(max-width:900px){.filieres-clair .cycle-card{flex-basis:calc((100% - 1.5rem) / 2);}}
+@media(max-width:600px){.filieres-clair .cycle-card{flex-basis:100%;}}

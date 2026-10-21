@@ -39,6 +39,7 @@
   </div>
 </section>
 
+{% if stats_barre %}
 <div class="statsbar">
   <div class="statsbar-inner">
     {% for s in stats_barre %}
@@ -46,13 +47,14 @@
     {% endfor %}
   </div>
 </div>
+{% endif %}
 
 <section class="presentation" id="presentation">
   <div class="container">
     <div class="pres-grid">
       <div class="pres-visual reveal">
         <div class="pres-img"><img src="{% static 'img/accueil/formations.webp' %}" alt="UIC Formations"></div>
-        <div class="pres-badge"><div class="badge-num">20</div><div class="badge-lbl">ans d'excellence</div></div>
+        {% if site.annees_existence %}<div class="pres-badge"><div class="badge-num">{{ site.annees_existence }}</div><div class="badge-lbl">ans d'existence</div></div>{% endif %}
       </div>
       <div class="pres-body">
         <span class="eyebrow reveal">Bienvenue à l'UIC</span>
@@ -69,6 +71,7 @@
   </div>
 </section>
 
+{% if site.president_citation or site.president_texte %}
 <section class="president" id="president">
   <div class="container">
     <div class="pres-p-grid">
@@ -79,7 +82,7 @@
       <div class="reveal d1" style="padding-left:1rem">
         <span class="eyebrow">Mot du Président</span>
         <h2 class="stitle">Un message de notre fondateur</h2>
-        <blockquote>« {{ site.president_citation }} »</blockquote>
+        {% if site.president_citation %}<blockquote>« {{ site.president_citation }} »</blockquote>{% endif %}
         <p class="sbody" style="max-width:100%">{{ site.president_texte }}</p>
         <div style="margin-top:2rem">
           <strong style="display:block;font-family:var(--serif);font-size:1.1rem;font-weight:700;color:var(--primary)">{{ site.president_nom }}</strong>
@@ -89,33 +92,60 @@
     </div>
   </div>
 </section>
+{% endif %}
 
-<section class="filieres" id="filieres">
+<section class="filieres filieres-clair" id="filieres">
   <div class="container">
     <div class="fil-head">
-      <div><span class="eyebrow">Nos programmes</span><h2 class="stitle" style="margin-bottom:0">Filières d'excellence</h2></div>
-      {% if niveaux|length > 1 %}
-      <div class="filters" role="group" aria-label="Filtrer par niveau">
-        <button type="button" class="flt on" data-f="all">Tous</button>
-        {% for n in niveaux %}<button type="button" class="flt" data-f="{{ n.slug }}">{{ n.nom }}</button>{% endfor %}
+      <div>
+        <span class="eyebrow">Nos programmes</span>
+        <h2 class="stitle" style="margin-bottom:.75rem">Filières d'excellence</h2>
+        <p class="sbody">Découvrez nos formations de haut niveau, adaptées au monde professionnel ivoirien et africain.</p>
       </div>
-      {% endif %}
     </div>
-    <div class="fgrid" id="fgrid">
-      {% for f in filieres %}{% include 'filieres/_carte.html' %}{% endfor %}
+    <div class="cycles-grid">
+      {% for c in cycles %}
+      <a class="cycle-card" href="{% url 'filieres:liste' %}?niveau={{ c.slugs }}">
+        <span class="cycle-photo" style="background-image:url('{% static c.image %}')"></span>
+        <span class="cycle-body">
+          <strong class="cycle-titre">{{ c.titre }}</strong>
+          <span class="cycle-desc">{{ c.description }} {{ c.nb }} formation{{ c.nb|pluralize }} proposée{{ c.nb|pluralize }}.</span>
+          <span class="cycle-lien">Découvrir <i aria-hidden="true">↗</i></span>
+        </span>
+      </a>
+      {% endfor %}
     </div>
     <div class="fil-more">
-      <a class="btn-accent" href="{% url 'filieres:liste' %}">Voir toutes les formations{% if total_filieres > filieres|length %} ({{ total_filieres }}){% endif %}</a>
+      <a class="btn-accent" href="{% url 'filieres:liste' %}">Voir toutes les formations{% if total_filieres %} ({{ total_filieres }}){% endif %}</a>
     </div>
   </div>
 </section>
 
-<section class="chiffres">
+<section class="reconnaissance" id="reconnaissance">
   <div class="container">
-    <div class="chiffres-grid">
-      {% for s in stats_section %}
-      <div class="ch-item reveal {% if forloop.counter0 %}d{{ forloop.counter0 }}{% endif %}"><div class="ch-num" data-target="{{ s.valeur }}" data-suffix="{{ s.suffixe }}">0{{ s.suffixe }}</div><div class="ch-lbl">{{ s.libelle }}</div></div>
-      {% endfor %}
+    <span class="eyebrow">Reconnaissance et réseaux</span>
+    <h2 class="stitle">Un établissement reconnu et engagé</h2>
+    <p class="sbody">L'UIC inscrit son action dans le cadre officiel de l'enseignement supérieur africain et francophone.</p>
+    <div class="reco-grid">
+      <div class="reco-item reveal">
+        <span class="reco-sigle">CAMES</span>
+        <strong>Homologué et reconnu par le CAMES</strong>
+        <p>Conseil africain et malgache pour l'enseignement supérieur</p>
+        <a href="https://www.lecames.org" target="_blank" rel="noopener noreferrer">lecames.org</a>
+      </div>
+      <div class="reco-item reveal d1">
+        <span class="reco-sigle">État</span>
+        <strong>{{ site.agrement }}</strong>
+        <p>Des diplômes reconnus, délivrés dans le cadre du système LMD.</p>
+      </div>
+      {% if partenaires %}
+      <div class="reco-item reveal d2">
+        <span class="reco-sigle">International</span>
+        <strong>Partenaires internationaux</strong>
+        <p>{% for p in partenaires %}{{ p.nom }}{% if not forloop.last %} · {% endif %}{% endfor %}</p>
+        <a href="#partenaires">Voir nos partenaires</a>
+      </div>
+      {% endif %}
     </div>
   </div>
 </section>
@@ -125,21 +155,23 @@
   <div class="container">
     <div class="gal-home-head">
       <div><span class="eyebrow">Vie du campus</span><h2 class="stitle" style="margin-bottom:0">La vie à l'UIC</h2></div>
-      <a class="link-arrow" href="{% url 'galerie:liste' %}">Toute la galerie</a>
+      <a class="link-arrow" href="{% url 'actualites:liste' %}#galerie">Toute la galerie</a>
     </div>
     {% include 'galerie/_carrousel.html' with groupe='accueil' photos=photos_campus titre="Vie du campus" %}
   </div>
 </section>
 {% endif %}
 
-<section class="admission" id="admission">
-  <div class="container">
-    <div style="text-align:center;margin-bottom:3rem">
-      <span class="eyebrow reveal">Admission en ligne</span>
-      <h2 class="stitle reveal d1">Commencez votre candidature</h2>
-      <p class="sbody reveal d2" style="margin:0 auto">Déroulez chaque étape, complétez vos informations et soumettez votre dossier en quelques minutes.</p>
+<section class="cta-promo" id="admission" style="background-image:url('{% static 'img/campus/vie-etudiante-09.webp' %}')">
+  <div class="cta-promo-overlay"></div>
+  <div class="container cta-promo-body">
+    <span class="cta-bar" aria-hidden="true"></span>
+    <h2>Rejoignez la prochaine promotion <em>de l'UIC</em></h2>
+    <p>Pré-inscription en ligne ouverte. Un accompagnement personnalisé, de la candidature à la rentrée.</p>
+    <div class="cta-btns">
+      <a class="btn-accent" href="{% url 'admissions:formulaire' %}">Faire ma pré-inscription <i aria-hidden="true">→</i></a>
+      <a class="btn-ghost" href="{% url 'contact:contact' %}">Contact</a>
     </div>
-    {% include 'partials/admission.html' %}
   </div>
 </section>
 
@@ -179,6 +211,7 @@
 </section>
 {% endif %}
 
+{% if avantages %}
 <section class="pourquoi">
   <div class="container">
     <div class="pq-head"><span class="eyebrow reveal" style="color:var(--gold-light)">Pourquoi nous choisir</span><h2 class="stitle reveal d1">L'UIC, un cadre d'excellence</h2><p class="sbody reveal d2">Des ressources modernes pour votre réussite.</p></div>
@@ -189,6 +222,7 @@
     </div>
   </div>
 </section>
+{% endif %}
 
 {% if partenaires %}
 <section class="partenaires" id="partenaires">

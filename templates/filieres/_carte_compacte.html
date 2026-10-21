@@ -3,7 +3,7 @@
     <span class="ccard-lv">{% for n in f.niveaux.all %}{{ n.nom }}{% if not forloop.last %} · {% endif %}{% endfor %}</span>
     <span class="ccard-dur">⏱ {{ f.duree }}</span>
   </div>
-  <h3>{{ f.nom }}</h3>
+  <h3>{{ f.nom }}{% if f.nouveau %} <span class="fcard-new">Nouveau</span>{% endif %}</h3>
   <p>{{ f.resume }}</p>
   <span class="fcard-link">Voir le programme <i aria-hidden="true">→</i></span>
 </a>

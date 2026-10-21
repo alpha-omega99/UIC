@@ -22,11 +22,31 @@ def photos_accueil(max_total=12, par_album=3):
     return photos[:max_total]
 
 
+CYCLES = [
+    ('Classes préparatoires', '🎓', ['classe-preparatoire'], "Préparation aux grandes écoles et aux cycles sélectifs.", 'img/campus/salle-de-cours-03.webp'),
+    ('BTS', '📘', ['bts'], "Des formations de niveau Bac +2, tournées vers l'emploi.", 'img/campus/travail-en-groupe-01.webp'),
+    ('Licences', '🏛️', ['licence', 'licence-professionnelle'], "Licences LMD et licences professionnelles.", 'img/campus/salle-de-cours-01.webp'),
+    ('Masters', '🎯', ['master', 'master-professionnel'], "Masters LMD et masters professionnels.", 'img/campus/vie-etudiante-05.webp'),
+    ('Formations continues', '💼', ['formation-continue'], "Pour les professionnels : management, MBA et certifications.", 'img/campus/salle-de-cours-05.webp'),
+]
+
+
+def cycles_accueil():
+    """Un bloc par cycle (classes prépas, BTS, licences, masters, formation continue) avec le nombre de formations."""
+    out = []
+    for titre, icone, slugs, desc, image in CYCLES:
+        nb = Filiere.objects.filter(actif=True, niveaux__slug__in=slugs).distinct().count()
+        if nb:
+            out.append({'titre': titre, 'icone': icone, 'slugs': ','.join(slugs), 'description': desc, 'image': image, 'nb': nb})
+    return out
+
+
 def home(request):
     articles = list(Article.objects.filter(publie=True).select_related('categorie')[:3])
     return render(request, 'core/home.html', {
         'filieres': Filiere.objects.filter(actif=True, en_avant=True).prefetch_related('niveaux')[:6],
         'niveaux': niveaux_utilises_accueil(),
+        'cycles': cycles_accueil(),
         'total_filieres': Filiere.objects.filter(actif=True).count(),
         'stats_barre': Chiffre.objects.filter(emplacement=Chiffre.BARRE),
         'stats_section': Chiffre.objects.filter(emplacement=Chiffre.SECTION),

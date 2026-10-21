@@ -2,7 +2,7 @@
 {% block title %}{{ album.titre }} – Galerie UIC{% endblock %}
 {% block content %}
 <div class="page">
-  <div class="page-topbar"><div class="container"><a href="{% url 'galerie:liste' %}" class="back-link">← Retour à la galerie</a><span class="breadcrumb-sep">/</span><span class="breadcrumb-cur">{{ album.titre }}</span></div></div>
+  <div class="page-topbar"><div class="container"><a href="{% url 'actualites:liste' %}#galerie" class="back-link">← Retour à la galerie</a><span class="breadcrumb-sep">/</span><span class="breadcrumb-cur">{{ album.titre }}</span></div></div>
   <div class="list-hero"><div class="container"><span class="eyebrow">Album</span><h1 class="stitle">{{ album.titre }}</h1>{% if album.description %}<p class="sbody">{{ album.description }}</p>{% endif %}</div></div>
   <div class="list-body"><div class="container"><div class="photo-grid" data-gal="album">
     {% for p in photos %}<figure><button type="button" class="gal-open" data-full="{{ p.image_src }}" data-cap="{{ p.legende }}" aria-label="Agrandir la photo{% if p.legende %} : {{ p.legende }}{% endif %}"><img src="{{ p.image_src }}" alt="{{ p.legende|default:album.titre }}" loading="lazy" decoding="async"><span class="gal-zoom" aria-hidden="true">⤢</span></button>{% if p.legende %}<figcaption>{{ p.legende }}</figcaption>{% endif %}</figure>

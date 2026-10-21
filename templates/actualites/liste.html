@@ -1,12 +1,18 @@
 {% extends 'base.html' %}
-{% block title %}Actualités – UIC{% endblock %}
+{% block title %}Actualités & galerie – UIC{% endblock %}
+{% block meta_desc %}Actualités de l'UIC et vie du campus en images : événements, partenariats, résultats, cérémonies.{% endblock %}
 {% block content %}
 <div class="page">
   <div class="list-hero"><div class="container">
-    <span class="eyebrow">Actualités</span><h1 class="stitle">À la une</h1>
-    <p class="sbody">Événements, partenariats, résultats : ce qui se passe à l'UIC.</p>
+    <span class="eyebrow">Vie de l'UIC</span><h1 class="stitle">Actualités &amp; galerie</h1>
+    <p class="sbody">Événements, partenariats, résultats et moments forts du campus, en articles et en images.</p>
+    <div class="tabs" role="tablist" aria-label="Actualités ou galerie">
+      <button type="button" class="tab on" role="tab" id="tab-actualites" data-tab="actualites" aria-selected="true" aria-controls="panel-actualites">Actualités</button>
+      <button type="button" class="tab" role="tab" id="tab-galerie" data-tab="galerie" aria-selected="false" aria-controls="panel-galerie">Galerie photos</button>
+    </div>
   </div></div>
-  <section class="actualites list-body"><div class="container">
+
+  <section class="tab-panel actualites list-body" id="panel-actualites" role="tabpanel" aria-labelledby="tab-actualites"><div class="container">
     <div class="actu-grid actu-grid-liste">
       {% for a in page %}
       <a class="actu-card" href="{{ a.get_absolute_url }}">
@@ -22,5 +28,27 @@
     </div>
     {% endif %}
   </div></section>
+
+  <section class="tab-panel" id="panel-galerie" role="tabpanel" aria-labelledby="tab-galerie" hidden>
+  {% if albums %}
+  <div class="gal-chips-wrap"><div class="container">
+    <nav class="gal-chips" aria-label="Aller à une section">
+      {% for a in albums %}<a href="#album-{{ a.slug }}">{{ a.titre }} <small>{{ a.photos.all|length }}</small></a>{% endfor %}
+    </nav>
+  </div></div>
+  {% endif %}
+
+  <div class="list-body"><div class="container">
+    {% for a in albums %}
+    <div class="gal-section" id="album-{{ a.slug }}">
+      <header class="gal-head">
+        <div><h2>{{ a.titre }}</h2>{% if a.description %}<p>{{ a.description }}</p>{% endif %}</div>
+        <a class="gal-all" href="{% url 'galerie:detail' a.slug %}">Voir tout l'album ({{ a.photos.all|length }}) →</a>
+      </header>
+      {% include 'galerie/_carrousel.html' with groupe=a.slug photos=a.photos.all titre=a.titre %}
+    </div>
+    {% empty %}<p class="empty">Aucun album pour le moment.</p>{% endfor %}
+  </div></div>
+  </section>
 </div>
 {% endblock %}

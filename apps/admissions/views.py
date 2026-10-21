@@ -1,15 +1,11 @@
 from django.conf import settings
 from django.contrib import messages
-from django.core.mail import send_mail
 from django.shortcuts import redirect, render
 from django_ratelimit.decorators import ratelimit
+from apps.core.notify import notifier
 from apps.core.utils import client_ip
 from .forms import DemandeAdmissionForm, SuiviForm
 from .models import DemandeAdmission
-
-
-def _clean(s):
-    return ' '.join(str(s).split())          # supprime les retours à la ligne (anti-injection d'en-têtes)
 
 
 @ratelimit(key=client_ip, rate='6/h', method='POST', block=True)
@@ -18,11 +14,15 @@ def formulaire(request):
         form = DemandeAdmissionForm(request.POST)
         if form.is_valid():
             d = form.save()
-            send_mail(
-                subject=_clean(f'[UIC] Nouvelle candidature {d.numero_dossier} — {d.prenom} {d.nom}'),
-                message=(f"Dossier : {d.numero_dossier}\nCandidat : {d.prenom} {d.nom}\nEmail : {d.email}\n"
-                         f"Téléphone : {d.telephone or '—'}\nFilière : {d.filiere}\nNiveau : {d.get_niveau_entree_display()}\n"),
-                from_email=settings.DEFAULT_FROM_EMAIL, recipient_list=[settings.NOTIFY_EMAIL], fail_silently=True)
+            notifier(
+                f'[UIC] Nouvelle candidature {d.numero_dossier} — {d.prenom} {d.nom}',
+                (f"Nouvelle demande d'admission reçue sur le site.\n\n"
+                 f"Dossier : {d.numero_dossier}\nDate : {d.created_at:%d/%m/%Y %H:%M}\n"
+                 f"Prénom : {d.prenom}\nNom : {d.nom}\nEmail : {d.email}\n"
+                 f"Téléphone : {d.telephone or '—'}\nFilière : {d.filiere}\n"
+                 f"Niveau d'entrée : {d.get_niveau_entree_display()}\n\n"
+                 f"Statut : {d.get_statut_display()} — à traiter dans l'administration du site."),
+                reply_to=d.email)
             request.session['dernier_dossier'] = d.numero_dossier
             return redirect('admissions:merci')
         messages.error(request, 'Veuillez corriger les champs signalés.')

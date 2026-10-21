@@ -33,7 +33,7 @@ class Base(TestCase):
 
 class PagesPubliques(Base):
     def test_toutes_les_pages_repondent(self):
-        urls = ['/', '/a-propos/', '/faq/', '/filieres/', '/actualites/', '/galerie/', '/enseignants/', '/contact/',
+        urls = ['/', '/a-propos/', '/faq/', '/filieres/', '/actualites/', '/enseignants/', '/contact/',
                 '/admission/', '/admission/suivi/', '/portail/connexion/', '/portail/mot-de-passe-oublie/']
         urls += [f.get_absolute_url() for f in Filiere.objects.all()]
         from apps.actualites.models import Article
@@ -44,10 +44,10 @@ class PagesPubliques(Base):
 
     def test_accueil_contient_le_contenu_de_la_maquette(self):
         html = self.client.get('/').content.decode()
-        for txt in ['font bouger', 'BTS Gestion Commerciale (GEC)', "Filières d'excellence", 'Commencez votre candidature',
-                    'Vie du campus', "L'UIC, un cadre d'excellence", 'Mot du Président']:
+        for txt in ['font bouger', 'BTS Gestion Commerciale (GEC)', "Filières d'excellence", 'Rejoignez la prochaine promotion',
+                    'À la une', "L'UIC, un cadre d'excellence", 'Mot du Président']:
             self.assertIn(txt, html)
-        self.assertEqual(html.count('class="fcard"'), 6)
+        self.assertIn('class="cycle-card"', html)
         self.assertNotIn('alumni', html)
 
     def test_404_personnalise_et_admin_par_defaut_cache(self):
@@ -262,14 +262,14 @@ class FilieresExtensibles(Base):
         self._ajouter(10, 'BTS')
         self.assertEqual(self.client.get('/filieres/').content.decode().count('class="ccard"'), 29)
         accueil = self.client.get('/').content.decode()
-        self.assertEqual(accueil.count('class="fcard"'), 6)
+        self.assertIn('class="cycle-card"', accueil)
         self.assertIn('Voir toutes les formations (29)', accueil)
 
-    def test_en_avant_decoche_masque_de_laccueil(self):
-        Filiere.objects.update(en_avant=False)
+    def test_accueil_montre_un_bloc_par_cycle_present(self):
+        Filiere.objects.update(actif=False)
         self._ajouter(1, 'Master', en_avant=True)
-        self.assertEqual(self.client.get('/').content.decode().count('class="fcard"'), 1)
-        self.assertEqual(self.client.get('/filieres/').content.decode().count('class="ccard"'), 20)
+        self.assertEqual(self.client.get('/').content.decode().count('class="cycle-card"'), 1)
+        self.assertEqual(self.client.get('/filieres/').content.decode().count('class="ccard"'), 1)
 
     def test_detail_propose_dautres_formations(self):
         html = self.client.get(self.filiere.get_absolute_url()).content.decode()
@@ -326,3 +326,215 @@ class PagesLegales(TestCase):
 
     def test_temoignages_supprimes(self):
         self.assertNotIn('alumni', self.client.get('/').content.decode())
+
+
+class GalerieCarrousel(TestCase):
+    @classmethod
+    def setUpTestData(cls):
+        from apps.galerie.models import Album, Photo
+        for n in ('Alpha', 'Beta'):
+            a = Album.objects.create(titre=f"Album {n}")
+            for i in range(3):
+                Photo.objects.create(album=a, image_statique=f"img/campus/vie-etudiante-0{i+1}.webp", legende=f"Légende {n} {i}", ordre=i)
+
+    def test_page_galerie_une_section_par_album_avec_carrousel(self):
+        html = self.client.get('/actualites/').content.decode()
+        self.assertEqual(html.count('class="gal-section"'), 2)
+        self.assertEqual(html.count('class="gal-open"'), 6)
+        self.assertIn('data-gal="album-alpha"', html)
+        self.assertIn('data-cap="Légende Beta 1"', html)
+
+    def test_detail_album_images_agrandissables(self):
+        html = self.client.get('/galerie/album-alpha/').content.decode()
+        self.assertEqual(html.count('class="gal-open"'), 3)
+
+    def test_accueil_section_vie_du_campus(self):
+        html = self.client.get('/').content.decode()
+        self.assertIn('id="vie-du-campus"', html)
+        self.assertEqual(html.count('class="gal-open"'), 6)
+
+    def test_accueil_sans_photos_pas_de_section(self):
+        from apps.galerie.models import Album
+        Album.objects.all().delete()
+        self.assertNotIn('vie-du-campus', self.client.get('/').content.decode())
+
+
+class SeedProduction(TestCase):
+    """Le site réel ne contient aucune donnée de démonstration non vérifiée."""
+
+    @classmethod
+    def setUpTestData(cls):
+        from django.core.management import call_command
+        call_command('seed_production')
+
+    def test_seulement_les_formations_reelles(self):
+        from apps.actualites.models import Article
+        from apps.core.models import FAQ, Chiffre, JalonHistoire, Valeur
+        self.assertEqual(Filiere.objects.filter(actif=True).count(), 19)
+        self.assertEqual(Article.objects.count(), 0)
+        for m in (Chiffre, Valeur, JalonHistoire, FAQ):
+            self.assertEqual(m.objects.count(), 0, m.__name__)
+
+    def test_idempotent_et_respecte_les_modifications(self):
+        from django.core.management import call_command
+        Filiere.objects.filter(slug='bts-ida').update(duree='Durée modifiée')
+        call_command('seed_production')
+        self.assertEqual(Filiere.objects.filter(actif=True).count(), 19)
+        self.assertTrue(Filiere.objects.filter(duree='Durée modifiée').exists())
+
+    def test_pages_sans_sections_vides_ni_chiffres_inventes(self):
+        html = self.client.get('/').content.decode()
+        self.assertEqual(self.client.get('/').status_code, 200)
+        for absent in ('id="president"', 'class="statsbar"', 'class="chiffres"', 'class="pourquoi"', "20 ans d'excellence"):
+            self.assertNotIn(absent, html, absent)
+        a = self.client.get('/a-propos/').content.decode()
+        for faux in ('45 étudiants', '1 200', 'milliers de réussites'):
+            self.assertNotIn(faux, a, faux)
+        for u in ('/filieres/', '/actualites/', '/faq/', '/mentions-legales/'):
+            self.assertEqual(self.client.get(u).status_code, 200, u)
+
+
+class CorrectionsContenu(TestCase):
+    """Le fichier corrections.csv applique les demandes de l'UIC, une seule fois par ligne."""
+
+    @classmethod
+    def setUpTestData(cls):
+        from apps.core.models import Chiffre, JalonHistoire
+        Chiffre.objects.create(emplacement='section', valeur=1200, suffixe='+', libelle='Étudiants inscrits')
+        Chiffre.objects.create(emplacement='barre', valeur=95, suffixe='%', libelle='Taux de réussite')
+        Chiffre.objects.create(emplacement='section', valeur=95, suffixe='%', libelle='Taux de réussite')
+        JalonHistoire.objects.create(annee='2004', titre='Fondation', texte='Ancien texte')
+
+    def _appliquer(self, contenu, *args):
+        import tempfile
+        with tempfile.NamedTemporaryFile('w', suffix='.csv', delete=False, encoding='utf-8') as f:
+            f.write(contenu)
+        out = StringIO()
+        call_command('appliquer_corrections', '--fichier', f.name, *args, stdout=out)
+        return out.getvalue()
+
+    ENTETE = 'cible;repere;action;champ;nouvelle_valeur\n'
+
+    def test_modifier_ajouter_supprimer_et_idempotence(self):
+        from apps.core.models import FAQ, Chiffre, InfoEtablissement, JalonHistoire
+        csv_ = (self.ENTETE + "chiffre;Étudiants inscrits;modifier;valeur;1 500\n"
+                "jalon;2004;modifier;texte;Texte validé\n"
+                "info;;modifier;directeur_publication;M. Exemple\n"
+                "faq;Nouvelle question ?;ajouter;reponse;La réponse\n")
+        out = self._appliquer(csv_)
+        self.assertIn('4 appliquées', out)
+        self.assertEqual(Chiffre.objects.get(libelle='Étudiants inscrits').valeur, 1500)
+        self.assertEqual(JalonHistoire.objects.get(annee='2004').texte, 'Texte validé')
+        self.assertEqual(InfoEtablissement.get().directeur_publication, 'M. Exemple')
+        self.assertTrue(FAQ.objects.filter(question='Nouvelle question ?').exists())
+        # Modification manuelle ensuite dans l'administration : une relance ne l'écrase pas
+        Chiffre.objects.filter(libelle='Étudiants inscrits').update(valeur=1600)
+        out = self._appliquer(csv_)
+        self.assertIn('0 appliquées, 4 déjà faites', out)
+        self.assertEqual(Chiffre.objects.get(libelle='Étudiants inscrits').valeur, 1600)
+
+    def test_lignes_invalides_ignorees_sans_bloquer_le_reste(self):
+        from apps.core.models import JalonHistoire
+        out = self._appliquer(self.ENTETE + "chiffre;Taux de réussite;modifier;valeur;80\n"      # ambigu
+                              "info;;modifier;champ_inconnu;x\n"                               # champ inconnu
+                              "chiffre;Inexistant;modifier;valeur;3\n"                         # introuvable
+                              "jalon;2004;modifier;titre;Fondation officielle\n")
+        self.assertIn('1 appliquées', out)
+        self.assertIn('3 ignorées', out)
+        self.assertEqual(JalonHistoire.objects.get(annee='2004').titre, 'Fondation officielle')
+
+    def test_simulation_ne_modifie_rien(self):
+        from apps.core.models import Chiffre
+        out = self._appliquer(self.ENTETE + "chiffre;Étudiants inscrits;modifier;valeur;2000\n", '--simuler')
+        self.assertIn('seraient appliquées', out)
+        self.assertEqual(Chiffre.objects.get(libelle='Étudiants inscrits').valeur, 1200)
+
+    def test_ancre_precise_et_fichier_sans_en_tete_valide(self):
+        from apps.core.models import Chiffre
+        self._appliquer(self.ENTETE + "chiffre;Taux de réussite @ barre;modifier;valeur;88\n")
+        self.assertEqual(Chiffre.objects.get(libelle='Taux de réussite', emplacement='barre').valeur, 88)
+        self.assertEqual(Chiffre.objects.get(libelle='Taux de réussite', emplacement='section').valeur, 95)
+        out = self._appliquer("a;b;c\n1;2;3\n")
+        self.assertIn('illisible', out)
+
+
+class NotificationsEmail(TestCase):
+    """Les formulaires enregistrent en base ET envoient un e-mail complet à NOTIFY_EMAIL."""
+
+    def setUp(self):
+        cache.clear()
+
+    def test_contact_envoie_mail_complet_a_plusieurs_destinataires(self):
+        from django.core import mail
+        with self.settings(NOTIFY_EMAIL='a@uic.ci, b@uic.ci'):
+            self.client.post('/contact/', dict(prenom='Awa', nom='Koné', email='awa@x.com', telephone='0102030405',
+                                               sujet='autre', message='Bonjour tout le monde'))
+        self.assertEqual(len(mail.outbox), 1)
+        m = mail.outbox[0]
+        self.assertEqual(m.to, ['a@uic.ci', 'b@uic.ci'])
+        self.assertIn('Bonjour tout le monde', m.body)
+        self.assertIn('0102030405', m.body)
+        self.assertEqual(m.reply_to, ['awa@x.com'])
+
+    def test_echec_envoi_ne_perd_pas_la_soumission(self):
+        from unittest import mock
+        from apps.contact.models import MessageContact as Message
+        with mock.patch('django.core.mail.EmailMessage.send', side_effect=OSError('smtp bloqué')):
+            with self.assertLogs('apps.core.notify', level='ERROR'):
+                r = self.client.post('/contact/', dict(prenom='A', nom='B', email='a@b.com', sujet='autre', message='m'))
+        self.assertRedirects(r, '/contact/')
+        self.assertEqual(Message.objects.count(), 1)
+
+
+class NouvellesFormations(TestCase):
+    def setUp(self):
+        from django.core.management import call_command
+        call_command('charger_nouvelles_formations', stdout=StringIO())
+
+    def test_vingt_formations_et_idempotence(self):
+        from django.core.management import call_command
+        from apps.filieres.models import Filiere
+        self.assertEqual(Filiere.objects.filter(nouveau=True).count(), 20)
+        call_command('charger_nouvelles_formations', stdout=StringIO())
+        self.assertEqual(Filiere.objects.filter(nouveau=True).count(), 20)
+
+    def test_modification_admin_conservee(self):
+        from django.core.management import call_command
+        from apps.filieres.models import Filiere
+        Filiere.objects.filter(slug='licence-grh').update(frais='Scolarité: 700.000 FCFA')
+        call_command('charger_nouvelles_formations', stdout=StringIO())
+        self.assertEqual(Filiere.objects.get(slug='licence-grh').frais, 'Scolarité: 700.000 FCFA')
+
+    def test_pages_detail_et_accueil(self):
+        r = self.client.get('/filieres/licence-qhse/')
+        self.assertContains(r, 'Programme détaillé')
+        self.assertContains(r, 'Compétences acquises')
+        self.assertContains(r, 'Poursuite d')
+        self.assertNotContains(r, '[')
+        m = self.client.get('/filieres/master-qhse-rse/')
+        self.assertContains(m, 'prolonge la')
+        self.assertNotContains(self.client.get('/'), 'Nouvelles licences et masters')
+
+    def test_aucun_placeholder_dans_les_donnees(self):
+        from apps.filieres.models import Filiere
+        for f in Filiere.objects.filter(nouveau=True):
+            for champ in ('frais', 'admission', 'organisation', 'objectif'):
+                self.assertNotIn('[', getattr(f, champ), f.slug)
+                self.assertNotIn('à compléter', getattr(f, champ), f.slug)
+
+
+class AccueilCyclesEtOnglets(TestCase):
+    def test_accueil_affiche_les_cycles_sans_la_section_nouveautes(self):
+        from django.core.management import call_command
+        call_command('seed_formations', stdout=StringIO()); call_command('charger_nouvelles_formations', stdout=StringIO())
+        html = self.client.get('/').content.decode()
+        for t in ('Classes préparatoires', 'BTS', 'Licences', 'Masters', 'Formations continues'):
+            self.assertIn(t, html)
+        self.assertNotIn('Nouvelles licences et masters', html)
+        self.assertIn('?niveau=licence,licence-professionnelle', html)
+
+    def test_galerie_redirige_vers_onglet_et_page_fusionnee(self):
+        self.assertRedirects(self.client.get('/galerie/'), '/actualites/#galerie', fetch_redirect_response=False)
+        html = self.client.get('/actualites/').content.decode()
+        self.assertIn('id="panel-galerie"', html)
+        self.assertIn('id="panel-actualites"', html)
