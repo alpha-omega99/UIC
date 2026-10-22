@@ -234,10 +234,10 @@
   }
  ],
  "partenaires": [
-    {
+   {
    "nom": "université alassane ouattara",
    "pays": "Côte D'ivoire, Bouaké",
-   "logo": "img/partenaires/ouattara.jpg",
+   "logo": "img/partenaires/ouattara.png",
    "ordre": 1
   },
   {
@@ -255,7 +255,7 @@
   {
    "nom": "RUDN University",
    "pays": "Moscou, Russie",
-   "logo": "img/partenaires/rudn-university.jpg",
+   "logo": "img/partenaires/rundn-university.jpg",
    "ordre": 4
   },
   {

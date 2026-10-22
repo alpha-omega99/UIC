@@ -57,7 +57,7 @@ class Command(BaseCommand):
         for p in d['partenaires']:
             if verifier(p['logo']):
                 Partenaire.objects.get_or_create(nom=p['nom'], defaults=dict(
-                    pays=p['pays'], logo_statique=p['logo'], site_web=p['site_web'], ordre=p['ordre']))
+                    pays=p.get('pays', ''), logo_statique=p['logo'], ordre=p['ordre']))
 
         for m in manquants:
             self.stderr.write(f"Image introuvable : static/{m}")
