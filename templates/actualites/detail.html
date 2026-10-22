@@ -34,6 +34,12 @@
         </div>
       </aside>
     </div>
+    {% if moments %}
+    <section class="moments-bloc moments-article"><span class="eyebrow">Galerie</span><h2 class="moments-titre">Moments forts</h2>
+      {% include 'actualites/_moments.html' with groupe='moments' titre=article.titre %}
+      {% if article.album %}<p style="margin-top:1.25rem"><a class="link-arrow" href="{% url 'galerie:detail' article.album.slug %}">Voir tout l'album →</a></p>{% endif %}
+    </section>
+    {% endif %}
   </div>
 </div>
 {% endblock %}

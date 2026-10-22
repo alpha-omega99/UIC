@@ -12,22 +12,46 @@
     </div>
   </div></div>
 
-  <section class="tab-panel actualites list-body" id="panel-actualites" role="tabpanel" aria-labelledby="tab-actualites"><div class="container">
-    <div class="actu-grid actu-grid-liste">
-      {% for a in page %}
-      <a class="actu-card" href="{{ a.get_absolute_url }}">
-        <div class="actu-img wide" style="background-image:url('{{ a.image_src }}');background-size:cover;background-position:center;"><span class="actu-cat">{{ a.categorie.nom }}</span></div>
-        <div class="actu-body"><p class="actu-date">{{ a.date_publication|date:"j F Y" }}</p><h3 class="actu-title">{{ a.titre }}</h3><span class="actu-link">Lire la suite →</span></div>
-      </a>
-      {% empty %}<p class="empty" style="grid-column:1/-1">Aucune actualité publiée pour le moment.</p>{% endfor %}
+  <section class="tab-panel actualites list-body" id="panel-actualites" role="tabpanel" aria-labelledby="tab-actualites">
+    {% if vedette %}
+    <div class="container">
+      <div class="vedette">
+        <div class="vedette-texte">
+          <span class="actu-cat-pill">{{ vedette.categorie.nom }}</span>
+          <h2>{{ vedette.titre }}</h2>
+          {% if vedette.chapeau %}<p>{{ vedette.chapeau }}</p>{% endif %}
+          <p class="vedette-date">📅 {{ vedette.date_publication|date:"j F Y" }}</p>
+          <a class="btn-accent" href="{{ vedette.get_absolute_url }}">Voir l'événement <i aria-hidden="true">→</i></a>
+        </div>
+        <a class="vedette-photo" href="{{ vedette.get_absolute_url }}" style="background-image:url('{{ vedette.image_src }}')" aria-label="{{ vedette.titre }}"></a>
+      </div>
     </div>
-    {% if page.has_other_pages %}
-    <div class="pager">
-      {% if page.has_previous %}<a class="btn-outline" href="?page={{ page.previous_page_number }}">← Précédent</a>{% endif %}
-      {% if page.has_next %}<a class="btn-outline" href="?page={{ page.next_page_number }}">Suivant →</a>{% endif %}
-    </div>
+    {% if moments %}
+    <div class="moments-bloc"><div class="container">
+      <span class="eyebrow">Galerie</span>
+      <div class="moments-tete"><h2 class="moments-titre">Moments forts</h2>{% if vedette.album %}<a class="link-arrow" href="{% url 'galerie:detail' vedette.album.slug %}">Voir tout l'album →</a>{% endif %}</div>
+      {% include 'actualites/_moments.html' with groupe='vedette' titre=vedette.titre %}
+    </div></div>
     {% endif %}
-  </div></section>
+    {% endif %}
+    <div class="container">
+      {% if vedette and archives %}<span class="eyebrow" style="margin-top:3rem">Autres actualités</span><h2 class="moments-titre">Archives</h2>{% endif %}
+      <div class="actu-grid actu-grid-liste">
+        {% for a in archives %}
+        <a class="actu-card" href="{{ a.get_absolute_url }}">
+          <div class="actu-img wide" style="background-image:url('{{ a.image_src }}');background-size:cover;background-position:center;"><span class="actu-cat">{{ a.categorie.nom }}</span></div>
+          <div class="actu-body"><p class="actu-date">{{ a.date_publication|date:"j F Y" }}</p><h3 class="actu-title">{{ a.titre }}</h3><span class="actu-link">Lire la suite →</span></div>
+        </a>
+        {% empty %}{% if not vedette %}<p class="empty" style="grid-column:1/-1">Aucune actualité publiée pour le moment.</p>{% endif %}{% endfor %}
+      </div>
+      {% if page.has_other_pages %}
+      <div class="pager">
+        {% if page.has_previous %}<a class="btn-outline" href="?page={{ page.previous_page_number }}">← Précédent</a>{% endif %}
+        {% if page.has_next %}<a class="btn-outline" href="?page={{ page.next_page_number }}">Suivant →</a>{% endif %}
+      </div>
+      {% endif %}
+    </div>
+  </section>
 
   <section class="tab-panel" id="panel-galerie" role="tabpanel" aria-labelledby="tab-galerie" hidden>
   {% if albums %}

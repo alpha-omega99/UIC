@@ -26,6 +26,8 @@ class Article(models.Model):
     image_statique = models.CharField("Image du site", max_length=200, blank=True, help_text="Chemin dans static/, ex : img/evenements/remise-diplomes-01.webp")
     image_url = models.URLField(blank=True)
     temps_lecture = models.PositiveSmallIntegerField(default=3, help_text="minutes")
+    album = models.ForeignKey('galerie.Album', null=True, blank=True, on_delete=models.SET_NULL, related_name='articles',
+                              verbose_name="Album photos lié", help_text="Facultatif : affiche les « Moments forts » de cet album sous l'article.")
     publie = models.BooleanField(default=False)
     date_publication = models.DateTimeField(default=timezone.now)
 

@@ -1,0 +1,8 @@
+{# Mosaïque « Moments forts » : un clic ouvre la visionneuse plein écran. Variables : moments (photos), groupe, titre #}
+<div class="moments" data-gal="{{ groupe }}">
+  {% for p in moments %}
+  <button type="button" class="gal-open mo-item" data-full="{{ p.image_src }}" data-cap="{{ p.legende }}" aria-label="Agrandir la photo{% if p.legende %} : {{ p.legende }}{% endif %}">
+    <img src="{{ p.image_src }}" alt="{{ p.legende|default:titre }}" loading="lazy" decoding="async">
+  </button>
+  {% endfor %}
+</div>

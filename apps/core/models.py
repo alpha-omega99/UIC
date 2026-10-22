@@ -63,6 +63,13 @@ class InfoEtablissement(models.Model):
         pass
 
     @property
+    def annees_existence(self):
+        """Nombre d'années depuis la fondation (calculé : jamais écrit en dur)."""
+        from django.utils import timezone
+        n = timezone.now().year - (self.annee_fondation or timezone.now().year)
+        return n if n > 0 else 0
+
+    @property
     def telephone_lien(self):
         return '+' + ''.join(c for c in self.telephone if c.isdigit())
 
@@ -157,3 +164,18 @@ class Partenaire(models.Model):
     @property
     def logo_src(self):
         return image_source(self.logo, self.logo_statique)
+
+
+class CorrectionAppliquee(models.Model):
+    """Mémorise les lignes du fichier de corrections déjà appliquées (chaque ligne ne s'applique qu'une fois)."""
+    empreinte = models.CharField(max_length=64, unique=True)
+    resume = models.CharField(max_length=300, blank=True)
+    date = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name = "Correction appliquée"
+        verbose_name_plural = "Corrections appliquées"
+        ordering = ['-date']
+
+    def __str__(self):
+        return self.resume or self.empreinte[:12]

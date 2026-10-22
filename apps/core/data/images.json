@@ -1,7 +1,7 @@
 {
  "filieres": {},
  "articles": {
-  "rentree-2026": "img/campus/salle-de-cours-01.webp",
+  "rentree-2025": "img/campus/salle-de-cours-01.webp",
   "partenariat-entreprises": "img/campus/vie-etudiante-01.webp",
   "resultats-master": "img/evenements/remise-diplomes-02.webp"
  },
@@ -215,6 +215,10 @@
     [
      "img/campus/batiment-02.webp",
      "Entrée de l'UIC"
+    ],
+    [
+     "img/campus/batiment-03.webp",
+     "Façade et jardin du campus"
     ]
    ],
    "ordre": 1
@@ -231,6 +235,63 @@
     ]
    ],
    "ordre": 3
+  },
+  {
+   "slug": "ceremonie-diplomes",
+   "titre": "Cérémonie de remise des diplômes",
+   "description": "Les diplômés, leurs familles et la direction de l'UIC en images.",
+   "date": null,
+   "photos": [
+    [
+     "img/evenements/ceremonie-diplomes-01.webp",
+     "Cérémonie de remise des diplômes"
+    ],
+    [
+     "img/evenements/ceremonie-diplomes-02.webp",
+     "Cérémonie de remise des diplômes"
+    ],
+    [
+     "img/evenements/ceremonie-diplomes-03.webp",
+     "Cérémonie de remise des diplômes"
+    ],
+    [
+     "img/evenements/ceremonie-diplomes-04.webp",
+     "Cérémonie de remise des diplômes"
+    ],
+    [
+     "img/evenements/ceremonie-diplomes-05.webp",
+     "Cérémonie de remise des diplômes"
+    ],
+    [
+     "img/evenements/ceremonie-diplomes-06.webp",
+     "Cérémonie de remise des diplômes"
+    ],
+    [
+     "img/evenements/ceremonie-diplomes-07.webp",
+     "Cérémonie de remise des diplômes"
+    ],
+    [
+     "img/evenements/ceremonie-diplomes-08.webp",
+     "Cérémonie de remise des diplômes"
+    ],
+    [
+     "img/evenements/ceremonie-diplomes-09.webp",
+     "Cérémonie de remise des diplômes"
+    ],
+    [
+     "img/evenements/ceremonie-diplomes-10.webp",
+     "Cérémonie de remise des diplômes"
+    ],
+    [
+     "img/evenements/ceremonie-diplomes-11.webp",
+     "Cérémonie de remise des diplômes"
+    ],
+    [
+     "img/evenements/ceremonie-diplomes-12.webp",
+     "Cérémonie de remise des diplômes"
+    ]
+   ],
+   "ordre": 0
   }
  ],
  "partenaires": [

@@ -38,7 +38,7 @@ class Command(BaseCommand):
 
         for a in d['albums']:
             album, cree = Album.objects.get_or_create(slug=a['slug'], defaults=dict(
-                titre=a['titre'], description=a['description'], date=date.fromisoformat(a['date']), ordre=a.get('ordre', 0)))
+                titre=a['titre'], description=a['description'], date=date.fromisoformat(a['date']) if a.get('date') else None, ordre=a.get('ordre', 0)))
             if not cree and album.ordre == 0 and a.get('ordre', 0):
                 Album.objects.filter(pk=album.pk, ordre=0).update(ordre=a['ordre'])   # n'écrase jamais un ordre déjà choisi
             # Ajoute les photos manquantes (sans toucher à celles déjà présentes ni à l'ordre choisi dans l'admin)
@@ -57,7 +57,7 @@ class Command(BaseCommand):
         for p in d['partenaires']:
             if verifier(p['logo']):
                 Partenaire.objects.get_or_create(nom=p['nom'], defaults=dict(
-                    pays=p.get('pays', ''), logo_statique=p['logo'], ordre=p['ordre']))
+                    pays=p.get('pays', ''), logo_statique=p['logo'], site_web=p.get('site_web', ''), ordre=p.get('ordre', 0)))
 
         for m in manquants:
             self.stderr.write(f"Image introuvable : static/{m}")
