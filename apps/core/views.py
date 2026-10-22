@@ -41,6 +41,15 @@ def cycles_accueil():
     return out
 
 
+def partenaires_defilants():
+    """Liste répétée pour que la bande défilante soit toujours assez longue (même avec 2-3 partenaires)."""
+    base = list(Partenaire.objects.filter(actif=True))
+    if not base:
+        return [], 0
+    rep = -(-8 // len(base))                      # au moins ~8 logos par groupe
+    return base * rep, len(base) * rep
+
+
 def home(request):
     articles = list(Article.objects.filter(publie=True).select_related('categorie')[:3])
     return render(request, 'core/home.html', {
@@ -53,6 +62,8 @@ def home(request):
         'valeurs': Valeur.objects.filter(zone=Valeur.ACCUEIL),
         'avantages': Valeur.objects.filter(zone=Valeur.POURQUOI),
         'partenaires': Partenaire.objects.filter(actif=True),
+        'partenaires_boucle': partenaires_defilants()[0],
+        'partenaires_duree': partenaires_defilants()[1] * 5,
         'article_une': articles[0] if articles else None,
         'articles_autres': articles[1:],
         'photos_campus': photos_accueil(),

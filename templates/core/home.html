@@ -228,13 +228,21 @@
 <section class="partenaires" id="partenaires">
   <div class="container">
     <div class="part-head"><span class="eyebrow reveal">Ouverture internationale</span><h2 class="stitle reveal d1">Nos partenaires</h2><p class="sbody reveal d2">Des universités de référence avec lesquelles l'UIC collabore.</p></div>
-    <div class="part-grid">
-      {% for p in partenaires %}
-      {% if p.site_web %}<a class="part-card reveal" href="{{ p.site_web }}" target="_blank" rel="noopener noreferrer" aria-label="{{ p.nom }}">{% else %}<div class="part-card reveal">{% endif %}
-        <div class="part-logo"><img src="{{ p.logo_src }}" alt="Logo {{ p.nom }}" loading="lazy"></div>
-        <strong>{{ p.nom }}</strong>{% if p.pays %}<span>{{ p.pays }}</span>{% endif %}
-      {% if p.site_web %}</a>{% else %}</div>{% endif %}
-      {% endfor %}
+    <div class="part-marquee" style="--dur:{{ partenaires_duree }}s" aria-label="Nos partenaires">
+      <div class="part-track">
+        {% for g in '12' %}
+        <ul class="part-group"{% if forloop.counter == 2 %} aria-hidden="true"{% endif %}>
+          {% for p in partenaires_boucle %}
+          <li class="part-item">
+            {% if p.site_web %}<a href="{{ p.site_web }}" target="_blank" rel="noopener noreferrer" aria-label="{{ p.nom }}"{% if forloop.parentloop.counter == 2 %} tabindex="-1"{% endif %}>{% endif %}
+              <img src="{{ p.logo_src }}" alt="{% if forloop.parentloop.counter == 1 %}Logo {{ p.nom }}{% endif %}" loading="lazy">
+              <span>{{ p.nom }}</span>
+            {% if p.site_web %}</a>{% endif %}
+          </li>
+          {% endfor %}
+        </ul>
+        {% endfor %}
+      </div>
     </div>
   </div>
 </section>
