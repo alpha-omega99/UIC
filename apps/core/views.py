@@ -71,10 +71,17 @@ def home(request):
     })
 
 
+def rencontres_photos():
+    album = Album.objects.filter(slug='rencontres-institutionnelles', actif=True).first()
+    return list(album.photos.all()) if album else []
+
+
 def apropos(request):
     return render(request, 'core/apropos.html', {
         'jalons': JalonHistoire.objects.all(),
         'valeurs': Valeur.objects.filter(zone=Valeur.APROPOS),
+        'cycles': cycles_accueil(),
+        'rencontres': rencontres_photos(),
     })
 
 

@@ -13,36 +13,36 @@
   </div></div>
 
   <section class="tab-panel actualites list-body" id="panel-actualites" role="tabpanel" aria-labelledby="tab-actualites">
-    {% if vedette %}
+    {% for e in evenements %}
     <div class="container">
-      <div class="vedette">
+      <div class="vedette{% if forloop.counter0|divisibleby:2 %}{% else %} vedette-inverse{% endif %}">
         <div class="vedette-texte">
-          <span class="actu-cat-pill">{{ vedette.categorie.nom }}</span>
-          <h2>{{ vedette.titre }}</h2>
-          {% if vedette.chapeau %}<p>{{ vedette.chapeau }}</p>{% endif %}
-          <p class="vedette-date">📅 {{ vedette.date_publication|date:"j F Y" }}</p>
-          <a class="btn-accent" href="{{ vedette.get_absolute_url }}">Voir l'événement <i aria-hidden="true">→</i></a>
+          <span class="actu-cat-pill">{{ e.article.categorie.nom }}</span>
+          <h2>{{ e.article.titre }}</h2>
+          {% if e.article.chapeau %}<p>{{ e.article.chapeau }}</p>{% endif %}
+          <p class="vedette-date">📅 {{ e.article.date_publication|date:"j F Y" }}</p>
+          <a class="btn-accent" href="{{ e.article.get_absolute_url }}">Voir l'événement <i aria-hidden="true">→</i></a>
         </div>
-        <a class="vedette-photo" href="{{ vedette.get_absolute_url }}" style="background-image:url('{{ vedette.image_src }}')" aria-label="{{ vedette.titre }}"></a>
+        <a class="vedette-photo" href="{{ e.article.get_absolute_url }}" style="background-image:url('{{ e.article.image_src }}')" aria-label="{{ e.article.titre }}"></a>
       </div>
     </div>
-    {% if moments %}
+    {% if e.moments %}
     <div class="moments-bloc"><div class="container">
       <span class="eyebrow">Galerie</span>
-      <div class="moments-tete"><h2 class="moments-titre">Moments forts</h2>{% if vedette.album %}<a class="link-arrow" href="{% url 'galerie:detail' vedette.album.slug %}">Voir tout l'album →</a>{% endif %}</div>
-      {% include 'actualites/_moments.html' with groupe='vedette' titre=vedette.titre %}
+      <div class="moments-tete"><h2 class="moments-titre">Moments forts · {{ e.article.titre }}</h2><a class="link-arrow" href="{% url 'galerie:detail' e.article.album.slug %}">Voir tout l'album →</a></div>
+      {% include 'actualites/_moments.html' with moments=e.moments groupe=e.article.slug titre=e.article.titre %}
     </div></div>
     {% endif %}
-    {% endif %}
+    {% endfor %}
     <div class="container">
-      {% if vedette and archives %}<span class="eyebrow" style="margin-top:3rem">Autres actualités</span><h2 class="moments-titre">Archives</h2>{% endif %}
+      {% if evenements and archives %}<span class="eyebrow" style="margin-top:3rem">Autres actualités</span><h2 class="moments-titre">Archives</h2>{% endif %}
       <div class="actu-grid actu-grid-liste">
         {% for a in archives %}
         <a class="actu-card" href="{{ a.get_absolute_url }}">
           <div class="actu-img wide" style="background-image:url('{{ a.image_src }}');background-size:cover;background-position:center;"><span class="actu-cat">{{ a.categorie.nom }}</span></div>
           <div class="actu-body"><p class="actu-date">{{ a.date_publication|date:"j F Y" }}</p><h3 class="actu-title">{{ a.titre }}</h3><span class="actu-link">Lire la suite →</span></div>
         </a>
-        {% empty %}{% if not vedette %}<p class="empty" style="grid-column:1/-1">Aucune actualité publiée pour le moment.</p>{% endif %}{% endfor %}
+        {% empty %}{% if not evenements %}<p class="empty" style="grid-column:1/-1">Aucune actualité publiée pour le moment.</p>{% endif %}{% endfor %}
       </div>
       {% if page.has_other_pages %}
       <div class="pager">

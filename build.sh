@@ -41,8 +41,17 @@ fi
 # Corrections de contenu demandées par l'UIC (fichier apps/core/data/corrections.csv) : chaque ligne s'applique une seule fois.
 python manage.py appliquer_corrections || echo "Corrections ignorées (voir message ci-dessus)."
 
+# Ancien espace étudiant : retire ses tables si elles existent encore (sans effet sinon).
+python manage.py supprimer_espace_etudiant || echo "Nettoyage espace étudiant ignoré."
+
 # Images du site (static/img) : associées sans écraser les choix faits dans l'administration.
 python manage.py seed_images
+
+# Actualité de la cérémonie de remise des diplômes (créée une seule fois ; ignorée si SEED_MODE=none).
+if [ "${SEED_MODE:-}" != "none" ]; then
+  python manage.py ajouter_ceremonie_diplomes || echo "Actualité cérémonie ignorée (voir message ci-dessus)."
+  python manage.py ajouter_journee_culturelle || echo "Actualité journée culturelle ignorée (voir message ci-dessus)."
+fi
 
 # Administrateur : créé seulement si les 3 variables existent et que le compte n'existe pas encore.
 if [ -n "${DJANGO_SUPERUSER_USERNAME:-}" ] && [ -n "${DJANGO_SUPERUSER_PASSWORD:-}" ] && [ -n "${DJANGO_SUPERUSER_EMAIL:-}" ]; then

@@ -20,7 +20,7 @@ INSTALLED_APPS = [
     'django.contrib.admin', 'django.contrib.auth', 'django.contrib.contenttypes',
     'django.contrib.sessions', 'django.contrib.messages', 'django.contrib.staticfiles',
     'apps.core', 'apps.filieres', 'apps.actualites', 'apps.admissions',
-    'apps.galerie', 'apps.professeurs', 'apps.contact', 'apps.portail',
+    'apps.galerie', 'apps.professeurs', 'apps.contact',
 ]
 
 MIDDLEWARE = [
@@ -94,7 +94,6 @@ STATICFILES_DIRS = [BASE_DIR / 'static']
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 MEDIA_URL = '/media/'                                              # images publiques (filières, articles, galerie…)
 MEDIA_ROOT = env('MEDIA_ROOT', default=str(BASE_DIR / 'media'))
-PRIVATE_MEDIA_ROOT = env('PRIVATE_MEDIA_ROOT', default=str(BASE_DIR / 'private_media'))  # documents étudiants : JAMAIS publics
 STORAGES = {
     'default': {'BACKEND': 'django.core.files.storage.FileSystemStorage'},
     'staticfiles': {'BACKEND': 'whitenoise.storage.CompressedManifestStaticFilesStorage'},
@@ -103,9 +102,6 @@ DATA_UPLOAD_MAX_MEMORY_SIZE = 1 * 1024 * 1024        # 1 Mo pour les formulaires
 FILE_UPLOAD_MAX_MEMORY_SIZE = 5 * 1024 * 1024
 DATA_UPLOAD_MAX_NUMBER_FIELDS = 200
 
-# ── Auth / portail ───────────────────────────────────────────────────────────
-LOGIN_URL = '/portail/connexion/'
-LOGIN_REDIRECT_URL = '/portail/tableau-de-bord/'
 LOGOUT_REDIRECT_URL = '/'
 SESSION_COOKIE_HTTPONLY = True
 SESSION_COOKIE_SAMESITE = 'Lax'

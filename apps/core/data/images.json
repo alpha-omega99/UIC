@@ -292,38 +292,54 @@
     ]
    ],
    "ordre": 0
+  },
+  {
+   "slug": "rencontres-institutionnelles",
+   "titre": "Rencontres institutionnelles",
+   "description": "Visites et rencontres de la direction de l'UIC avec ses partenaires et responsables.",
+   "date": null,
+   "ordre": 0,
+   "photos": [
+    [
+     "img/evenements/rencontres-uic-01.webp",
+     "Rencontre institutionnelle à l'UIC"
+    ],
+    [
+     "img/evenements/rencontres-uic-02.webp",
+     "Rencontre institutionnelle à l'UIC"
+    ],
+    [
+     "img/evenements/rencontres-uic-03.webp",
+     "Rencontre institutionnelle à l'UIC"
+    ],
+    [
+     "img/evenements/rencontres-uic-04.webp",
+     "Rencontre institutionnelle à l'UIC"
+    ]
+   ]
   }
  ],
  "partenaires": [
-   {
-   "nom": "université alassane ouattara",
-   "pays": "Côte D'ivoire, Bouaké",
-   "logo": "img/partenaires/ouattara.png",
-   "ordre": 1
-  },
-  {
-   "nom": "Ensiate",
-   "pays": "France,  Rungis",
-   "logo": "img/partenaires/ensiate.jpg",
-   "ordre": 2
-  },
   {
    "nom": "Université Laval",
    "pays": "Québec, Canada",
    "logo": "img/partenaires/universite-laval.webp",
-   "ordre": 3
+   "site_web": "https://www.ulaval.ca",
+   "ordre": 1
   },
   {
    "nom": "RUDN University",
    "pays": "Moscou, Russie",
-   "logo": "img/partenaires/rundn-university.jpg",
-   "ordre": 4
+   "logo": "img/partenaires/rudn-university.webp",
+   "site_web": "https://eng.rudn.ru",
+   "ordre": 2
   },
   {
    "nom": "Université Laurentienne",
    "pays": "Ontario, Canada",
-   "logo": "img/partenaires/Laurentian_Logo.jpg",
-   "ordre": 5
+   "logo": "img/partenaires/universite-laurentienne.webp",
+   "site_web": "https://laurentian.ca",
+   "ordre": 3
   }
  ]
 }

@@ -16,8 +16,7 @@ urlpatterns = [
     path('galerie/', include('apps.galerie.urls')),
     path('enseignants/', include('apps.professeurs.urls')),
     path('contact/', include('apps.contact.urls')),
-    path('portail/', include('apps.portail.urls')),
-    # Images publiques uniquement (MEDIA_ROOT). Les documents étudiants sont dans PRIVATE_MEDIA_ROOT, jamais servis ici.
+    # Images publiques uniquement (MEDIA_ROOT). Aucun document privé n'est servi par le site.
     re_path(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),
 ]
 

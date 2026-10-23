@@ -11,3 +11,10 @@ staticfiles/
 .idea/
 .DS_Store
 *.log
+
+# Sauvegardes de base de données (contiennent des données personnelles)
+*.sql
+*.dump
+
+# Sauvegardes JSON de la commande sauvegarder_donnees
+sauvegardes/

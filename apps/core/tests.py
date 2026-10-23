@@ -10,7 +10,6 @@ from django.urls import reverse
 
 from apps.admissions.models import DemandeAdmission
 from apps.filieres.models import Filiere
-from apps.portail.models import CarteAdmission, Certificat, ProfilEtudiant, Resultat
 
 User = get_user_model()
 PWD = 'Sup3r-Secret-Passw0rd!'
@@ -21,11 +20,6 @@ class Base(TestCase):
     def setUpTestData(cls):
         call_command('seed_uic', stdout=StringIO())
         cls.filiere = Filiere.objects.first()
-        cls.u1 = User.objects.create_user('E001', 'a@x.com', PWD, first_name='Awa')
-        cls.u2 = User.objects.create_user('E002', 'b@x.com', PWD, first_name='Koffi')
-        cls.p1 = ProfilEtudiant.objects.create(user=cls.u1, matricule='E001', filiere=cls.filiere, annee_inscription=2024)
-        cls.p2 = ProfilEtudiant.objects.create(user=cls.u2, matricule='E002', filiere=cls.filiere, annee_inscription=2024)
-        cls.staff = User.objects.create_user('staff', 's@x.com', PWD, is_staff=True)  # personnel SANS profil étudiant
 
     def setUp(self):
         cache.clear()
@@ -34,7 +28,7 @@ class Base(TestCase):
 class PagesPubliques(Base):
     def test_toutes_les_pages_repondent(self):
         urls = ['/', '/a-propos/', '/faq/', '/filieres/', '/actualites/', '/enseignants/', '/contact/',
-                '/admission/', '/admission/suivi/', '/portail/connexion/', '/portail/mot-de-passe-oublie/']
+                '/admission/', '/admission/suivi/']
         urls += [f.get_absolute_url() for f in Filiere.objects.all()]
         from apps.actualites.models import Article
         urls += [a.get_absolute_url() for a in Article.objects.all()]
@@ -44,7 +38,7 @@ class PagesPubliques(Base):
 
     def test_accueil_contient_le_contenu_de_la_maquette(self):
         html = self.client.get('/').content.decode()
-        for txt in ['font bouger', 'BTS Gestion Commerciale (GEC)', "Filières d'excellence", 'Rejoignez la prochaine promotion',
+        for txt in ['font bouger', 'BTS Gestion Commerciale (GEC)', "Filières d'excellence", 'Commencez votre candidature',
                     'À la une', "L'UIC, un cadre d'excellence", 'Mot du Président']:
             self.assertIn(txt, html)
         self.assertIn('class="cycle-card"', html)
@@ -73,7 +67,7 @@ class EnTetesSecurite(Base):
 
     def test_aucun_script_inline_dans_les_pages(self):
         import re
-        for u in ['/', '/contact/', '/admission/', '/portail/connexion/']:
+        for u in ['/', '/contact/', '/admission/']:
             html = self.client.get(u).content.decode()
             for m in re.finditer(r'<script([^>]*)>', html):
                 self.assertIn('src=', m.group(1), f'script inline sur {u}')
@@ -149,87 +143,6 @@ class Contact(Base):
         for m in mail.outbox:
             self.assertNotIn('\n', m.subject)
             self.assertNotIn('x@evil.com', ''.join(m.bcc))
-
-
-class Portail(Base):
-    def login(self, u='E001'):
-        self.assertTrue(self.client.login(username=u, password=PWD))
-
-    def test_pages_privees_exigent_connexion(self):
-        for u in ['/portail/tableau-de-bord/', '/portail/resultats/', '/portail/cartes-admission/', '/portail/certificats/',
-                  '/portail/document/carte/1/', '/portail/mot-de-passe/']:
-            r = self.client.get(u)
-            self.assertEqual(r.status_code, 302, u)
-            self.assertIn('/portail/connexion/', r['Location'])
-
-    def test_connexion_et_message_generique(self):
-        bad_user = self.client.post('/portail/connexion/', {'username': 'inconnu', 'password': 'x'})
-        bad_pwd = self.client.post('/portail/connexion/', {'username': 'E001', 'password': 'x'})
-        self.assertEqual(bad_user.context['form'].non_field_errors(), bad_pwd.context['form'].non_field_errors())
-        ok = self.client.post('/portail/connexion/', {'username': 'E001', 'password': PWD})
-        self.assertRedirects(ok, '/portail/tableau-de-bord/')
-
-    def test_personnel_sans_profil_ne_peut_pas_entrer(self):
-        r = self.client.post('/portail/connexion/', {'username': 'staff', 'password': PWD})
-        self.assertEqual(r.status_code, 200)
-        self.assertNotIn('_auth_user_id', self.client.session)
-
-    def test_open_redirect_bloque(self):
-        for nxt in ('https://evil.com', '//evil.com', 'javascript:alert(1)'):
-            r = self.client.post('/portail/connexion/?next=' + nxt, {'username': 'E001', 'password': PWD, 'next': nxt})
-            self.assertNotIn('evil', r['Location'], nxt)
-            self.client.logout()
-
-    def test_brute_force_bloque(self):
-        for _ in range(6):
-            self.client.post('/portail/connexion/', {'username': 'E001', 'password': 'faux'})
-        r = self.client.post('/portail/connexion/', {'username': 'E001', 'password': PWD})   # même le bon mot de passe est refusé
-        self.assertEqual(r.status_code, 403)
-
-    def test_deconnexion_post_uniquement(self):
-        self.login()
-        self.assertEqual(self.client.get('/portail/deconnexion/').status_code, 405)
-        self.assertEqual(self.client.post('/portail/deconnexion/').status_code, 302)
-        self.assertEqual(self.client.get('/portail/tableau-de-bord/').status_code, 302)
-
-    def test_isolation_des_resultats(self):
-        Resultat.objects.create(etudiant=self.p1, matiere='SECRET-DE-AWA', note=15, semestre=1, annee_academique='2025-2026', publie=True)
-        Resultat.objects.create(etudiant=self.p1, matiere='BROUILLON-NON-PUBLIE', note=3, semestre=1, annee_academique='2025-2026', publie=False)
-        self.login('E002')
-        html = self.client.get('/portail/resultats/').content.decode()
-        self.assertNotIn('SECRET-DE-AWA', html)
-        self.client.logout(); self.login('E001')
-        html = self.client.get('/portail/resultats/').content.decode()
-        self.assertIn('SECRET-DE-AWA', html)
-        self.assertNotIn('BROUILLON-NON-PUBLIE', html)
-
-    def test_telechargement_prive(self):
-        carte = CarteAdmission.objects.create(etudiant=self.p1, titre='Examens S1', annee_academique='2025-2026', publie=True,
-                                              fichier=SimpleUploadedFile('carte.pdf', b'%PDF-1.4 test'))
-        cert = Certificat.objects.create(etudiant=self.p1, type_document='scolarite', annee_academique='2025-2026', publie=False,
-                                         fichier=SimpleUploadedFile('c.pdf', b'%PDF-1.4 test'))
-        self.addCleanup(carte.fichier.delete, False); self.addCleanup(cert.fichier.delete, False)
-        url = f'/portail/document/carte/{carte.pk}/'
-        # anonyme → connexion ; autre étudiant → 404 ; propriétaire → fichier ; non publié → 404
-        self.assertEqual(self.client.get(url).status_code, 302)
-        self.login('E002'); self.assertEqual(self.client.get(url).status_code, 404)
-        self.client.logout(); self.login('E001')
-        r = self.client.get(url)
-        self.assertEqual(r.status_code, 200)
-        self.assertEqual(b''.join(r.streaming_content), b'%PDF-1.4 test')
-        self.assertEqual(r['X-Content-Type-Options'], 'nosniff')
-        self.assertEqual(self.client.get(f'/portail/document/certificat/{cert.pk}/').status_code, 404)
-        self.assertEqual(self.client.get('/portail/document/autre/1/').status_code, 404)
-
-    def test_fichiers_prives_jamais_servis_par_media(self):
-        carte = CarteAdmission.objects.create(etudiant=self.p1, titre='x', annee_academique='2025-2026', publie=True,
-                                              fichier=SimpleUploadedFile('carte.pdf', b'x'))
-        self.addCleanup(carte.fichier.delete, False)
-        self.assertEqual(self.client.get('/media/' + carte.fichier.name).status_code, 404)
-
-    def test_mention(self):
-        r = Resultat(etudiant=self.p1, matiere='m', note=14, note_max=20, semestre=1, annee_academique='2025-2026')
-        self.assertEqual(r.mention, 'Bien')
 
 
 class Config(TestCase):
@@ -538,3 +451,70 @@ class AccueilCyclesEtOnglets(TestCase):
         html = self.client.get('/actualites/').content.decode()
         self.assertIn('id="panel-galerie"', html)
         self.assertIn('id="panel-actualites"', html)
+
+
+class CeremonieDiplomes(TestCase):
+    def setUp(self):
+        from django.core.management import call_command
+        call_command('seed_images', verbosity=0)
+        call_command('ajouter_ceremonie_diplomes', verbosity=0)
+        call_command('ajouter_journee_culturelle', verbosity=0)
+
+    def test_article_cree_une_seule_fois(self):
+        from django.core.management import call_command
+        from apps.actualites.models import Article
+        call_command('ajouter_ceremonie_diplomes', verbosity=0)
+        self.assertEqual(Article.objects.filter(album__slug='ceremonie-diplomes').count(), 1)
+
+    def test_liste_affiche_vedette_et_moments(self):
+        r = self.client.get('/actualites/')
+        self.assertEqual(r.status_code, 200)
+        self.assertContains(r, 'class="vedette"')
+        self.assertContains(r, 'Moments forts · Journée culturelle')
+        self.assertContains(r, 'Moments forts · Cérémonie')
+        self.assertContains(r, 'Moments forts')
+        self.assertContains(r, 'gal-open')
+
+    def test_detail_affiche_la_mosaique(self):
+        from apps.actualites.models import Article
+        a = Article.objects.get(album__slug='ceremonie-diplomes')
+        r = self.client.get(a.get_absolute_url())
+        self.assertContains(r, 'Moments forts')
+        self.assertContains(r, 'mo-item')
+
+
+class PageAPropos(TestCase):
+    def test_menu_pointe_vers_la_page_et_page_complete(self):
+        from django.core.management import call_command
+        call_command('seed_images', verbosity=0)
+        r = self.client.get('/')
+        self.assertContains(r, 'href="/a-propos/"')
+        self.assertNotContains(r, '#presentation">À propos')
+        r = self.client.get('/a-propos/')
+        self.assertEqual(r.status_code, 200)
+        self.assertContains(r, '<video')
+        self.assertContains(r, 'presentation-uic.mp4')
+        self.assertContains(r, 'Rencontres institutionnelles')
+
+
+class EspaceEtudiantSupprime(TestCase):
+    def test_les_anciennes_urls_n_existent_plus(self):
+        for u in ['/portail/connexion/', '/portail/tableau-de-bord/', '/portail/resultats/']:
+            self.assertEqual(self.client.get(u).status_code, 404, u)
+
+    def test_plus_de_lien_espace_etudiant(self):
+        html = self.client.get('/').content.decode()
+        self.assertNotIn('Espace étudiant', html)
+        self.assertNotIn('/portail/', html)
+
+
+class SuppressionEspaceEtudiant(TestCase):
+    def test_commande_idempotente_et_comptes_admin_proteges(self):
+        from django.contrib.auth import get_user_model
+        U = get_user_model()
+        U.objects.create_user('etu', password='x')
+        U.objects.create_superuser('boss', 'b@x.com', 'x')
+        call_command('supprimer_espace_etudiant', '--comptes', stdout=StringIO())
+        call_command('supprimer_espace_etudiant', stdout=StringIO())
+        self.assertFalse(U.objects.filter(username='etu').exists())
+        self.assertTrue(U.objects.filter(username='boss').exists())

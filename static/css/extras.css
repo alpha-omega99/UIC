@@ -493,3 +493,24 @@ h3 .fcard-new{background:var(--gold,#3A82C4);color:#fff;margin-left:.4rem;}
 .mo-item:nth-child(7n+1){grid-column:span 2;grid-row:span 2;}
 .mo-item:nth-child(7n+4){grid-row:span 2;}
 @media(max-width:900px){.vedette{grid-template-columns:1fr;gap:1.5rem;}.vedette-photo{order:-1;}.moments{grid-template-columns:repeat(2,1fr);grid-auto-rows:150px;}.mo-item:nth-child(7n+1){grid-column:span 2;}}
+
+.vedette-inverse .vedette-photo{order:-1;}
+@media(max-width:900px){.vedette-inverse .vedette-photo{order:-1;}}
+
+/* Admission en ligne : portrait d'étudiant, cadré sur le bas du bloc */
+.adm-hero-etudiant{justify-self:center;max-width:260px;width:100%;}
+.adm-hero-etudiant img{height:auto;aspect-ratio:400/770;max-height:430px;object-fit:cover;object-position:top;}
+
+/* Page À propos : vidéo, filières, rencontres */
+.apropos-video-sec,.apropos-filieres{padding-top:4rem;}
+.apropos-video-tete{text-align:center;margin-bottom:2rem;}
+.apropos-video{max-width:900px;margin:0 auto;border-radius:16px;overflow:hidden;box-shadow:0 18px 50px rgba(37,48,93,.22);background:#000;}
+.apropos-video video{display:block;width:100%;height:auto;aspect-ratio:16/9;}
+.apropos-filieres{padding-bottom:4rem;}
+.moments.rencontres{grid-template-columns:repeat(2,1fr);grid-auto-rows:260px;}
+.moments.rencontres .mo-item:nth-child(n){grid-column:auto;grid-row:auto;}
+@media(max-width:600px){.moments.rencontres{grid-auto-rows:190px;}}
+
+.apropos-cycles{background:none!important;padding:0!important;}
+.moments.rencontres{grid-auto-rows:340px;}
+.moments.rencontres img{object-position:center 20%;}

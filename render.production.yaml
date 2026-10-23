@@ -1,0 +1,48 @@
+# Blueprint Render — PRODUCTION (branche "production").
+# À copier en `render.yaml` sur la branche production (voir LANCEMENT.md). La branche main garde le render.yaml de démonstration.
+# Service PAYANT (plan starter) + disque persistant : les fichiers ajoutés depuis l'administration sont conservés.
+# La base PostgreSQL PAYANT se crée dans Render (New > PostgreSQL) ; son « Internal Database URL » se saisit ici (DATABASE_URL).
+services:
+  - type: web
+    name: uic-site-prod
+    runtime: python
+    plan: starter
+    branch: production
+    buildCommand: bash build.sh
+    startCommand: gunicorn config.wsgi:application --workers 2 --timeout 60
+    healthCheckPath: /
+    envVars:
+      - key: DJANGO_SETTINGS_MODULE
+        value: config.settings.prod
+      - key: SECRET_KEY
+        generateValue: true
+      - key: SEED_MODE
+        value: demo                    # contenu de démonstration au départ ; passer à "production" pour ne charger que les 19 formations réelles
+      # Domaine officiel (sans https://), séparés par des virgules. Le domaine *.onrender.com reste accepté automatiquement.
+      - key: ALLOWED_HOSTS
+        value: uic-ci.org,www.uic-ci.org
+      # Adresse secrète de l'administration (à changer, finit par /).
+      - key: ADMIN_URL
+        sync: false
+      - key: DATABASE_URL
+        sync: false
+      - key: DJANGO_SUPERUSER_USERNAME
+        sync: false
+      - key: DJANGO_SUPERUSER_EMAIL
+        sync: false
+      - key: DJANGO_SUPERUSER_PASSWORD
+        sync: false
+      - key: EMAIL_HOST_USER
+        sync: false
+      - key: EMAIL_HOST_PASSWORD
+        sync: false
+      - key: NOTIFY_EMAIL
+        sync: false
+      - key: BREVO_API_KEY
+        sync: false
+      - key: MEDIA_ROOT
+        value: /var/data/media
+    disk:
+      name: uic-data
+      mountPath: /var/data
+      sizeGB: 1

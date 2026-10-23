@@ -1,18 +1,15 @@
 """Charge dans la base le contenu EXACT de la maquette d'origine (idempotent).
-Usage : python manage.py seed_uic [--demo-etudiant]"""
+Usage : python manage.py seed_uic"""
 import json
-import secrets
 from datetime import datetime
 from pathlib import Path
 
-from django.contrib.auth import get_user_model
 from django.core.management.base import BaseCommand
 from django.utils import timezone
 
 from apps.actualites.models import Article, Categorie
 from apps.core.models import FAQ, Chiffre, InfoEtablissement, JalonHistoire, Valeur
 from apps.filieres.models import Filiere, Module, NiveauFormation, Pole
-from apps.portail.models import ProfilEtudiant, Resultat
 
 MOIS = {m: i for i, m in enumerate(['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août',
                                     'septembre', 'octobre', 'novembre', 'décembre'], 1)}
@@ -54,9 +51,6 @@ def charger_formations(d):
 
 class Command(BaseCommand):
     help = "Charge le contenu de la maquette UIC"
-
-    def add_arguments(self, parser):
-        parser.add_argument('--demo-etudiant', action='store_true', help="Crée un étudiant de démonstration (DEV uniquement)")
 
     def handle(self, *args, **opts):
         d = json.loads((Path(__file__).resolve().parents[2] / 'data' / 'maquette.json').read_text(encoding='utf-8'))
@@ -103,14 +97,3 @@ class Command(BaseCommand):
             f"Contenu chargé : {Filiere.objects.count()} filières, {Article.objects.count()} actualités, "
             f"{FAQ.objects.count()} FAQ."))
 
-        if opts['demo_etudiant']:
-            U = get_user_model()
-            pwd = secrets.token_urlsafe(12)
-            u, created = U.objects.get_or_create(username='UIC-DEMO-001', defaults=dict(first_name='Awa', last_name='Démo', email='demo@example.com'))
-            u.set_password(pwd); u.save()
-            p, _ = ProfilEtudiant.objects.get_or_create(user=u, defaults=dict(
-                matricule='UIC-DEMO-001', filiere=Filiere.objects.first(), niveau='Licence 2', annee_inscription=2024))
-            if not p.resultats.exists():
-                for m, n in (('Comptabilité générale', 14.5), ('Droit des affaires', 11), ('Économie générale', 9)):
-                    Resultat.objects.create(etudiant=p, matiere=m, note=n, semestre=1, annee_academique='2025-2026', publie=True)
-            self.stdout.write(self.style.WARNING(f"Étudiant démo → identifiant : UIC-DEMO-001 | mot de passe : {pwd}  (à supprimer avant la mise en ligne)"))

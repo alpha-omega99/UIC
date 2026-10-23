@@ -1,24 +1,61 @@
 {% extends 'base.html' %}
-{% block title %}Histoire &amp; Valeurs – UIC{% endblock %}
+{% load static %}
+{% block title %}À propos – UIC{% endblock %}
 {% block content %}
 <div class="page">
   <div class="page-topbar"><div class="container">
     <a href="{% url 'core:home' %}" class="back-link">← Retour à l'accueil</a><span class="breadcrumb-sep">/</span><span class="breadcrumb-cur">À propos</span>
   </div></div>
   <div class="apropos-hero"><div class="container">
-    <span class="eyebrow" style="color:var(--gold-light)">Notre histoire</span>
-    <h1 style="font-family:var(--serif);font-size:clamp(2.5rem,5vw,4rem);color:white;line-height:1.1;margin-bottom:1rem;">20 ans de formation,<br>des milliers de réussites</h1>
-    <p style="color:rgba(255,255,255,.6);font-size:1rem;max-width:540px;line-height:1.75;">En {{ site.annee_fondation }}, l'UIC a ouvert avec 45 étudiants dans un campus de Cocody. Aujourd'hui, plus de 1 200 personnes y étudient. Ce document raconte comment on en est arrivé là.</p>
+    <span class="eyebrow" style="color:var(--gold-light)">À propos</span>
+    <h1 style="font-family:var(--serif);font-size:clamp(2.5rem,5vw,4rem);color:white;line-height:1.1;margin-bottom:1rem;">Découvrir l'UIC</h1>
+    <p style="color:rgba(255,255,255,.6);font-size:1rem;max-width:540px;line-height:1.75;">L'Université Internationale de Cocody, fondée en {{ site.annee_fondation }}, forme ses étudiants à Abidjan. Voici son parcours et les valeurs qui guident son enseignement.</p>
   </div></div>
+  <section class="container apropos-video-sec">
+    <div class="apropos-video-tete"><span class="eyebrow">Présentation</span><h2 class="stitle">Visite de l'UIC en vidéo</h2></div>
+    <div class="apropos-video">
+      <video controls preload="none" playsinline poster="{% static 'video/presentation-uic.jpg' %}" aria-label="Présentation de l'Université Internationale de Cocody">
+        <source src="{% static 'video/presentation-uic.mp4' %}" type="video/mp4">
+        Votre navigateur ne peut pas lire cette vidéo.
+      </video>
+    </div>
+  </section>
+  {% if cycles %}
+  <section class="container apropos-filieres">
+    <div class="apropos-video-tete"><span class="eyebrow">Formations</span><h2 class="stitle">Nos filières</h2></div>
+    <div class="filieres-clair apropos-cycles"><div class="cycles-grid">
+      {% for c in cycles %}
+      <a class="cycle-card" href="{% url 'filieres:liste' %}?niveau={{ c.slugs }}">
+        <span class="cycle-photo" style="background-image:url('{% static c.image %}')"></span>
+        <span class="cycle-body">
+          <strong class="cycle-titre">{{ c.titre }}</strong>
+          <span class="cycle-desc">{{ c.description }} {{ c.nb }} formation{{ c.nb|pluralize }} proposée{{ c.nb|pluralize }}.</span>
+          <span class="cycle-lien">Découvrir <i aria-hidden="true">↗</i></span>
+        </span>
+      </a>
+      {% endfor %}
+    </div></div>
+  </section>
+  {% endif %}
+  {% if rencontres %}
+  <section class="moments-bloc"><div class="container">
+    <span class="eyebrow">Direction &amp; partenaires</span><h2 class="moments-titre">Rencontres institutionnelles</h2>
+    <div class="moments rencontres" data-gal="rencontres">
+      {% for p in rencontres %}
+      <button type="button" class="gal-open mo-item" data-full="{{ p.image_src }}" data-cap="{{ p.legende }}" aria-label="Agrandir la photo"><img src="{{ p.image_src }}" alt="{{ p.legende }}" loading="lazy" decoding="async"></button>
+      {% endfor %}
+    </div>
+  </div></section>
+  {% endif %}
   <div class="container" style="padding:5rem 2rem;">
-    <div style="text-align:center;margin-bottom:3.5rem;"><span class="eyebrow">Notre parcours</span><h2 class="stitle">Histoire de l'UIC</h2></div>
+    {% if jalons %}<div style="text-align:center;margin-bottom:3.5rem;"><span class="eyebrow">Notre parcours</span><h2 class="stitle">Histoire de l'UIC</h2></div>
     <div class="timeline-apropos">
       {% for j in jalons %}<div class="ta-item"><div class="ta-year">{{ j.annee }}</div><div class="ta-content"><h4>{{ j.titre }}</h4><p>{{ j.texte }}</p></div></div>{% endfor %}
-    </div>
-    <div style="margin-top:5rem;text-align:center;margin-bottom:3rem;"><span class="eyebrow">Ce qui nous définit</span><h2 class="stitle">Nos valeurs fondatrices</h2></div>
+    </div>{% endif %}
+    {% if valeurs %}<div style="margin-top:5rem;text-align:center;margin-bottom:3rem;"><span class="eyebrow">Ce qui nous définit</span><h2 class="stitle">Nos valeurs fondatrices</h2></div>
     <div class="values-grid">
       {% for v in valeurs %}<div class="value-card"><span class="val-icon">{{ v.icone }}</span><h3>{{ v.titre }}</h3><p>{{ v.texte }}</p></div>{% endfor %}
-    </div>
+    </div>{% endif %}
   </div>
 </div>
 {% endblock %}

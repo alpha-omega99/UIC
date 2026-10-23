@@ -16,6 +16,26 @@
 {% block splash %}{% endblock %}
 <div id="pbar"></div>
 
+<!-- TOPBAR -->
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="tb-l">
+      <span>📅 {{ site.horaires_court }}</span><span class="tb-sep">|</span>
+      <a href="tel:{{ site.telephone_lien }}">{{ site.telephone }}</a><span class="tb-sep">|</span>
+      <a href="mailto:{{ site.email }}">{{ site.email }}</a>
+    </div>
+    <div class="tb-r">
+      <div class="tb-social">
+        <a href="{{ site.facebook|default:'#' }}" {% if site.facebook %}target="_blank" rel="noopener noreferrer"{% endif %} aria-label="Facebook">f</a>
+        <a href="{{ site.linkedin|default:'#' }}" {% if site.linkedin %}target="_blank" rel="noopener noreferrer"{% endif %} aria-label="LinkedIn">in</a>
+        <a href="{{ site.x_twitter|default:'#' }}" {% if site.x_twitter %}target="_blank" rel="noopener noreferrer"{% endif %} aria-label="X">𝕏</a>
+      </div>
+      <span class="tb-sep">|</span>
+        <a href="{% url 'contact:contact' %}">Contact</a>
+    </div>
+  </div>
+</div>
+
 <!-- HEADER -->
 <header id="site-header">
   <div class="nav-wrap">
@@ -25,9 +45,9 @@
     </a>
     <ul class="nav-menu" id="nav-menu">
       <li><a href="{% url 'core:home' %}" {% if request.resolver_match.view_name == 'core:home' %}class="active"{% endif %}>Accueil</a></li>
-      <li><a href="{% url 'filieres:liste' %}" {% if request.resolver_match.app_name == 'filieres' %}class="active"{% endif %}>Formations</a></li>
-      <li><a href="{% url 'core:apropos' %}" {% if request.resolver_match.view_name == 'core:apropos' %}class="active"{% endif %}>Histoire &amp; Valeurs</a></li>
-      <li><a href="{% url 'actualites:liste' %}" {% if request.resolver_match.app_name == 'actualites' or request.resolver_match.app_name == 'galerie' %}class="active"{% endif %}>Actualités</a></li>
+      <li><a href="{% url 'core:apropos' %}" {% if request.resolver_match.view_name == 'core:apropos' %}class="active"{% endif %}>À propos</a></li>
+      <li><a href="{% url 'filieres:liste' %}" {% if request.resolver_match.app_name == 'filieres' %}class="active"{% endif %}>Filières</a></li>
+      <li><a href="{% url 'actualites:liste' %}" {% if request.resolver_match.app_name == 'actualites' or request.resolver_match.app_name == 'galerie' %}class="active"{% endif %}>Actualités &amp; galerie</a></li>
       <li><a href="{% url 'contact:contact' %}" {% if request.resolver_match.app_name == 'contact' %}class="active"{% endif %}>Contact</a></li>
       <li><a href="{% url 'admissions:formulaire' %}" class="nav-cta">Pré-inscription</a></li>
     </ul>
@@ -44,7 +64,7 @@
       <defs><path id="ft-vague" d="M-160 44c30 0 58-18 88-18s58 18 88 18 58-18 88-18 58 18 88 18v44h-352z"/></defs>
       <g class="ft-parallax">
         <use href="#ft-vague" x="48" y="0" fill="#7FB2E5" fill-opacity=".45"/>
-        <use href="#ft-vague" x="48" y="3" fill="#D8102F" fill-opacity=".6"/>
+        <use href="#ft-vague" x="48" y="3" fill="#D8102F" fill-opacity=".28"/>
         <use href="#ft-vague" x="48" y="5" fill="#25305D" fill-opacity=".85"/>
         <use href="#ft-vague" x="48" y="7" fill="#0E1430"/>
       </g>
@@ -69,9 +89,9 @@
     <div class="ft-col"><h4>Navigation</h4><ul>
       <li><a href="{% url 'core:home' %}">Accueil</a></li>
       <li><a href="{% url 'core:apropos' %}">Notre histoire</a></li>
-      <li><a href="{% url 'filieres:liste' %}">Formations</a></li>
+      <li><a href="{% url 'filieres:liste' %}">Filières</a></li>
       <li><a href="{% url 'admissions:formulaire' %}">Admission</a></li>
-      <li><a href="{% url 'actualites:liste' %}">Actualités</a></li>
+      <li><a href="{% url 'actualites:liste' %}">Actualités &amp; galerie</a></li>
       <li><a href="{% url 'professeurs:liste' %}">Enseignants</a></li>
       <li><a href="{% url 'core:faq' %}">FAQ</a></li>
       <li><a href="{% url 'contact:contact' %}">Contact</a></li>
@@ -88,7 +108,11 @@
   </div></div></div>
   <div class="ft-bottom"><div class="container"><div class="ft-bi">
     <span>© {% now "Y" %} {{ site.nom_court }} – {{ site.nom }}. Tous droits réservés.</span>
-    <div class="ft-bi-links"><a href="{% url 'portail:connexion' %}">Espace étudiant</a><a href="{% url 'core:faq' %}">FAQ</a><a href="{% url 'core:mentions' %}">Mentions légales</a><a href="{% url 'core:confidentialite' %}">Confidentialité</a><a href="{% url 'core:conditions' %}">Conditions</a></div>
+    <div class="ft-bi-sig">
+      <span class="sig-made">Site conçu &amp; développé par</span>
+      <span class="sig-name">⚡ L'unique Dev Alpha</span>
+    </div>
+    <div class="ft-bi-links"><a href="{% url 'core:faq' %}">FAQ</a><a href="{% url 'core:mentions' %}">Mentions légales</a><a href="{% url 'core:confidentialite' %}">Confidentialité</a><a href="{% url 'core:conditions' %}">Conditions</a></div>
   </div></div></div>
 </footer>
 

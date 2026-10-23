@@ -1,0 +1,11 @@
+# FICHIER DES CORRECTIONS — une ligne = une modification demandée par l'UIC.
+# Les lignes qui commencent par # sont ignorées. Colonnes séparées par ; (ouvrir avec Excel ou Google Sheets, enregistrer en CSV UTF-8).
+# cible : info, chiffre, valeur, jalon, faq, article, filiere, partenaire
+# repere : le texte actuel qui identifie la ligne à changer (voir : python manage.py lister_contenu)
+# action : modifier (par défaut), ajouter ou supprimer
+# Exemples (retirer le # pour les utiliser) :
+# chiffre;Étudiants;modifier;valeur;1500
+# jalon;2004;modifier;texte;Texte validé par le fondateur.
+# info;;modifier;directeur_publication;Nom du directeur
+# faq;Nouvelle question ?;ajouter;reponse;La réponse.
+cible;repere;action;champ;nouvelle_valeur

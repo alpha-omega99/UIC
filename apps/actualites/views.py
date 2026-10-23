@@ -8,13 +8,12 @@ def liste(request):
     qs = Article.objects.filter(publie=True).select_related('categorie', 'album')
     page = Paginator(qs, 9).get_page(request.GET.get('page'))
     objets = list(page.object_list)
-    # Page 1 : le dernier article est mis en avant (avec ses « Moments forts »), les autres vont dans les archives
-    vedette = objets[0] if page.number == 1 and objets else None
-    archives = objets[1:] if vedette else objets
-    moments = list(vedette.album.photos.all()[:10]) if vedette and vedette.album_id else []
-    return render(request, 'actualites/liste.html', {
-        'page': page, 'vedette': vedette, 'archives': archives, 'moments': moments,
-        'albums': Album.objects.filter(actif=True).prefetch_related('photos')})
+    # Chaque actualité liée à un album devient un « événement » avec sa mosaïque de photos ; les autres vont aux archives.
+    evenements = [{'article': a, 'moments': list(a.album.photos.all()[:10])} for a in objets if a.album_id][:3]
+    ids = {e['article'].pk for e in evenements}
+    archives = [a for a in objets if a.pk not in ids]
+    return render(request, 'actualites/liste.html', {'page': page, 'evenements': evenements, 'archives': archives,
+                  'albums': Album.objects.filter(actif=True).prefetch_related('photos')})
 
 
 def detail(request, slug):
