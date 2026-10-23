@@ -127,12 +127,6 @@
     <h2 class="stitle">Un établissement reconnu et engagé</h2>
     <p class="sbody">L'UIC inscrit son action dans le cadre officiel de l'enseignement supérieur africain et francophone.</p>
     <div class="reco-grid">
-      <div class="reco-item reveal">
-        <span class="reco-sigle">CAMES</span>
-        <strong>Homologué et reconnu par le CAMES</strong>
-        <p>Conseil africain et malgache pour l'enseignement supérieur</p>
-        <a href="https://www.lecames.org" target="_blank" rel="noopener noreferrer">lecames.org</a>
-      </div>
       <div class="reco-item reveal d1">
         <span class="reco-sigle">État</span>
         <strong>{{ site.agrement }}</strong>
@@ -162,14 +156,16 @@
 </section>
 {% endif %}
 
-<section class="admission" id="admission">
-  <div class="container">
-    <div style="text-align:center;margin-bottom:3rem">
-      <span class="eyebrow reveal">Admission en ligne</span>
-      <h2 class="stitle reveal d1">Commencez votre candidature</h2>
-      <p class="sbody reveal d2" style="margin:0 auto">Déroulez chaque étape, complétez vos informations et soumettez votre dossier en quelques minutes.</p>
+<section class="cta-promo" id="admission" style="background-image:url('{% static 'img/campus/vie-etudiante-09.webp' %}')">
+  <div class="cta-promo-overlay"></div>
+  <div class="container cta-promo-body">
+    <span class="cta-bar" aria-hidden="true"></span>
+    <h2>Rejoignez la prochaine promotion <em>de l'UIC</em></h2>
+    <p>Pré-inscription en ligne ouverte. Un accompagnement personnalisé, de la candidature à la rentrée.</p>
+    <div class="cta-btns">
+      <a class="btn-accent" href="{% url 'admissions:formulaire' %}">Faire ma pré-inscription <i aria-hidden="true">→</i></a>
+      <a class="btn-ghost" href="{% url 'contact:contact' %}">Contact</a>
     </div>
-    {% include 'partials/admission.html' %}
   </div>
 </section>
 
