@@ -96,8 +96,10 @@ MEDIA_URL = '/media/'                                              # images publ
 MEDIA_ROOT = env('MEDIA_ROOT', default=str(BASE_DIR / 'media'))
 STORAGES = {
     'default': {'BACKEND': 'django.core.files.storage.FileSystemStorage'},
-    'staticfiles': {'BACKEND': 'whitenoise.storage.CompressedManifestStaticFilesStorage'},
+    'staticfiles': {'BACKEND': 'apps.core.storage.TolerantManifestStorage'},
 }
+# Un fichier statique manquant (ex : logo oublié dans Git) ne doit jamais provoquer une erreur 500 sur toute la page.
+WHITENOISE_MANIFEST_STRICT = False
 DATA_UPLOAD_MAX_MEMORY_SIZE = 1 * 1024 * 1024        # 1 Mo pour les formulaires publics (aucun upload public)
 FILE_UPLOAD_MAX_MEMORY_SIZE = 5 * 1024 * 1024
 DATA_UPLOAD_MAX_NUMBER_FIELDS = 200

@@ -518,3 +518,28 @@ class SuppressionEspaceEtudiant(TestCase):
         call_command('supprimer_espace_etudiant', stdout=StringIO())
         self.assertFalse(U.objects.filter(username='etu').exists())
         self.assertTrue(U.objects.filter(username='boss').exists())
+
+
+class StatiqueManquant(TestCase):
+    def test_fichier_statique_absent_ne_provoque_pas_de_500(self):
+        from django.conf import settings
+        self.assertFalse(settings.WHITENOISE_MANIFEST_STRICT)
+
+    def test_image_source_tolere_un_fichier_absent(self):
+        from unittest import mock
+        from apps.core.utils import image_source
+        with mock.patch('apps.core.utils.static', side_effect=ValueError('absent')):
+            self.assertEqual(image_source('', 'img/partenaires/absent.webp'), '')
+            self.assertEqual(image_source('', 'img/x.webp', 'https://exemple.org/a.jpg'), 'https://exemple.org/a.jpg')
+
+class VerifierStatiques(TestCase):
+    def test_tous_les_statiques_references_existent(self):
+        out = StringIO()
+        call_command('verifier_statiques', '--strict', stdout=out)
+        self.assertIn('0 manquant', out.getvalue())
+
+class StockageStatiqueTolerant(TestCase):
+    def test_url_d_un_fichier_absent_ne_plante_pas(self):
+        from apps.core.storage import TolerantManifestStorage
+        s = TolerantManifestStorage()
+        self.assertTrue(s.url('img/introuvable.webp').endswith('img/introuvable.webp'))

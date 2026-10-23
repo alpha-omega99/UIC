@@ -26,5 +26,10 @@ def image_source(upload, statique='', url=''):
     if upload:
         return upload.url
     if statique:
-        return static(statique)
+        try:
+            return static(statique)
+        except ValueError:      # fichier absent du dossier static (ex : oublié dans Git) : on n'affiche pas d'image plutôt que de planter la page
+            import logging
+            logging.getLogger(__name__).warning("Image statique introuvable : %s", statique)
+            return url or ''
     return url or ''

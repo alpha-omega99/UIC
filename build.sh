@@ -2,6 +2,8 @@
 # Build Render : installe, collecte les statiques, migre, crée la table de cache
 set -o errexit
 pip install -r requirements.txt
+# Signale dans les logs toute image/logo absent de Git (le site reste en ligne, l'image manquante s'affiche simplement vide).
+python manage.py verifier_statiques
 python manage.py collectstatic --no-input
 python manage.py migrate --no-input
 python manage.py createcachetable
